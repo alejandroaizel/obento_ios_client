@@ -30,12 +30,6 @@ class OnboardingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        if UserDefaults.standard.bool(forKey: "completedOnboarding") {
-            let controller = storyboard?.instantiateViewController(withIdentifier: "TabBarController") as! UITabBarController
-            controller.modalPresentationStyle = .fullScreen
-            present(controller, animated: false, completion: nil)
-        }
 
         slides = [
         OnboardingSlide(
@@ -62,13 +56,11 @@ class OnboardingViewController: UIViewController {
     }
     
     @IBAction func nextButtonClick(_ sender: Any) {
-        if currentPage == slides.count - 1 {
-            UserDefaults.standard.set(true, forKey: "completedOnboarding")
-            UserDefaults.standard.synchronize()
-            
+        if currentPage == slides.count - 1 {            
             let controller = storyboard?.instantiateViewController(withIdentifier: "TabBarController") as! UITabBarController
             controller.modalPresentationStyle = .fullScreen
             controller.modalTransitionStyle = .flipHorizontal
+            UserDefaults.standard.hasOnboarded = true
             present(controller, animated: true, completion: nil)
         } else {
             currentPage += 1
@@ -107,18 +99,5 @@ extension OnboardingViewController: UICollectionViewDelegate, UICollectionViewDa
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         let width = scrollView.frame.width
         currentPage = Int(scrollView.contentOffset.x / width)
-    }
-}
-
-extension UIApplication {
-    class func isFirstLaunch() -> Bool {
-        if !UserDefaults.standard.bool(forKey: "completedOnboarding") {
-            UserDefaults.standard.set(true, forKey: "completedOnboarding")
-            UserDefaults.standard.synchronize()
-            
-            return true
-        }
-        
-        return false
     }
 }
