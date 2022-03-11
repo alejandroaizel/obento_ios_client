@@ -16,10 +16,13 @@ class TabBarController: UITabBarController {
         super.viewDidLoad()
 
         addButton.frame = CGRect (x: 100, y: 0, width: 44, height: 44)
-        //addButton.addTarget(self, action:#selector(self.buttonClicked), for: .touchUpInside)
-        self.view.insertSubview(addButton, aboveSubview: self.tabBar)
-        
         addButton.addTarget(self, action: #selector(handlePresentingVC(_:)), for: .touchUpInside)
+        self.view.insertSubview(addButton, aboveSubview: self.tabBar)
+
+        if (UserDefaults.standard.bool(forKey: "notFirstInApp") == false){
+            UserDefaults.standard.set(true, forKey: "notFirstInApp")
+            //Here you can show storyboard that you have to launch at first launch
+        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -33,9 +36,8 @@ class TabBarController: UITabBarController {
     }
     
     @objc func handlePresentingVC(_ sender: UIButton) {
-            let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
-            let addVC = storyboard.instantiateViewController(withIdentifier: "AddViewController") as! AddViewController
+        let vc = storyboard?.instantiateViewController(withIdentifier: "AddViewController") as! AddViewController
 
-        present(addVC, animated: true, completion: nil)
-      }
+        present(vc, animated: true, completion: nil)
+    }
 }

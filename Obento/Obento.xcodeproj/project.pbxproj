@@ -12,6 +12,10 @@
 		5327055E27D39B5A00394FFB /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5327055D27D39B5A00394FFB /* AddViewController.swift */; };
 		5327056027D39B6700394FFB /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5327055F27D39B6700394FFB /* CartViewController.swift */; };
 		5327056227D39B8B00394FFB /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5327056127D39B8B00394FFB /* ProfileViewController.swift */; };
+		535E94DA27D453EC00C1A713 /* UIViex+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535E94D927D453EC00C1A713 /* UIViex+Extension.swift */; };
+		535E94DD27D454AB00C1A713 /* OnboardingSlide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535E94DC27D454AB00C1A713 /* OnboardingSlide.swift */; };
+		535E94E827D4ECB700C1A713 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535E94E727D4ECB700C1A713 /* OnboardingViewController.swift */; };
+		535E94EA27D4F32300C1A713 /* OnboardingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535E94E927D4F32300C1A713 /* OnboardingCollectionViewCell.swift */; };
 		53ACED7827D417DF00C0FBF3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 53ACED7727D417DF00C0FBF3 /* Main.storyboard */; };
 		53E50C6827C017FF000AA45F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E50C6727C017FF000AA45F /* AppDelegate.swift */; };
 		53E50C6A27C017FF000AA45F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E50C6927C017FF000AA45F /* SceneDelegate.swift */; };
@@ -46,6 +50,10 @@
 		5327055D27D39B5A00394FFB /* AddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
 		5327055F27D39B6700394FFB /* CartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
 		5327056127D39B8B00394FFB /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		535E94D927D453EC00C1A713 /* UIViex+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViex+Extension.swift"; sourceTree = "<group>"; };
+		535E94DC27D454AB00C1A713 /* OnboardingSlide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingSlide.swift; sourceTree = "<group>"; };
+		535E94E727D4ECB700C1A713 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
+		535E94E927D4F32300C1A713 /* OnboardingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCollectionViewCell.swift; sourceTree = "<group>"; };
 		53ACED7727D417DF00C0FBF3 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		53E50C6427C017FF000AA45F /* Obento.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Obento.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		53E50C6727C017FF000AA45F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -86,16 +94,42 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		532C8D9527D3B95A005E05F8 /* ViewControllers */ = {
+		535E94D827D453D800C1A713 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				535E94D927D453EC00C1A713 /* UIViex+Extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		535E94DB27D4549500C1A713 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				535E94DC27D454AB00C1A713 /* OnboardingSlide.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		535E94E127D45DBD00C1A713 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				535E94E627D4E9E700C1A713 /* Onboarding */,
 				53E50C6B27C017FF000AA45F /* TodayViewController.swift */,
 				5327055B27D39B5100394FFB /* MenuViewController.swift */,
 				5327055D27D39B5A00394FFB /* AddViewController.swift */,
 				5327055F27D39B6700394FFB /* CartViewController.swift */,
 				5327056127D39B8B00394FFB /* ProfileViewController.swift */,
 			);
-			path = ViewControllers;
+			path = Views;
+			sourceTree = "<group>";
+		};
+		535E94E627D4E9E700C1A713 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				535E94E727D4ECB700C1A713 /* OnboardingViewController.swift */,
+				535E94E927D4F32300C1A713 /* OnboardingCollectionViewCell.swift */,
+			);
+			path = Onboarding;
 			sourceTree = "<group>";
 		};
 		53E50C5B27C017FF000AA45F = {
@@ -121,14 +155,16 @@
 		53E50C6627C017FF000AA45F /* Obento */ = {
 			isa = PBXGroup;
 			children = (
-				532C8D9527D3B95A005E05F8 /* ViewControllers */,
+				535E94D827D453D800C1A713 /* Extensions */,
+				535E94E127D45DBD00C1A713 /* Views */,
+				535E94DB27D4549500C1A713 /* Models */,
 				53E50C6727C017FF000AA45F /* AppDelegate.swift */,
 				53E50C6927C017FF000AA45F /* SceneDelegate.swift */,
-				53ACED7727D417DF00C0FBF3 /* Main.storyboard */,
-				53E50C7027C01800000AA45F /* Assets.xcassets */,
-				53E50C7227C01800000AA45F /* LaunchScreen.storyboard */,
-				53E50C7527C01800000AA45F /* Info.plist */,
 				5327055927D3988300394FFB /* TabBarController.swift */,
+				53ACED7727D417DF00C0FBF3 /* Main.storyboard */,
+				53E50C7227C01800000AA45F /* LaunchScreen.storyboard */,
+				53E50C7027C01800000AA45F /* Assets.xcassets */,
+				53E50C7527C01800000AA45F /* Info.plist */,
 			);
 			path = Obento;
 			sourceTree = "<group>";
@@ -281,14 +317,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				535E94E827D4ECB700C1A713 /* OnboardingViewController.swift in Sources */,
 				53E50C6C27C017FF000AA45F /* TodayViewController.swift in Sources */,
 				5327055C27D39B5100394FFB /* MenuViewController.swift in Sources */,
 				5327056027D39B6700394FFB /* CartViewController.swift in Sources */,
+				535E94EA27D4F32300C1A713 /* OnboardingCollectionViewCell.swift in Sources */,
 				5327055E27D39B5A00394FFB /* AddViewController.swift in Sources */,
 				5327055A27D3988300394FFB /* TabBarController.swift in Sources */,
 				53E50C6827C017FF000AA45F /* AppDelegate.swift in Sources */,
 				5327056227D39B8B00394FFB /* ProfileViewController.swift in Sources */,
+				535E94DA27D453EC00C1A713 /* UIViex+Extension.swift in Sources */,
 				53E50C6A27C017FF000AA45F /* SceneDelegate.swift in Sources */,
+				535E94DD27D454AB00C1A713 /* OnboardingSlide.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

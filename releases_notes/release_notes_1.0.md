@@ -4,6 +4,7 @@
 <!--List of new features !-->
 - [Added a launch screen to display Obento's logo while the app is loading.](https://github.com/alejandroaizel/obento_ios_client/issues/1)
 - [Added the overall design for the app and the app icons for all resolutions.](https://github.com/alejandroaizel/obento_ios_client/issues/5)
+- [Added the onboarding to tell the user about Obento.](https://github.com/alejandroaizel/obento_ios_client/issues/2)
   
 ### Issues solved in 1.0:
 <!--List of bugs and errors solved !-->
