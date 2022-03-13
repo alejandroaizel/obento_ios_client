@@ -10,7 +10,6 @@ import UIKit
 /// The view controller for the today tab
 class TodayViewController: UIViewController, UIGestureRecognizerDelegate {
     // Feature recipe
-    @IBOutlet weak var featuredRecipePuntuaction: UILabel!
     @IBOutlet weak var featuredRecipeTitle: UILabel!
     @IBOutlet weak var featuredRecipekcal: UILabel!
     @IBOutlet weak var featuredRecipeTime: UILabel!
@@ -26,8 +25,19 @@ class TodayViewController: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet weak var meatCategory: UIView!
     @IBOutlet weak var fishCategory: UIView!
     
+    // Popular Recipes
+    @IBOutlet weak var popularCollectionView: UICollectionView!
     
+    var featuredRecipe = Recipe(id: 0, userId: 0, name: "Sopa de çorba con chuletillas de cordero", description: "", puntuaction: 4.7, kcal: 350, time: 140, price: 6.5, isLaunch: true, imagePath: "recipe_6", ingredients: [], steps: [])
     var categories: [UIView] = []
+    var recipes: [Recipe] = [ // TODO: ELIMINAR, PRUEBAS
+        .init(id: 0, userId: 0, name: "Salmorejo con picatostes y jamón", description: "", puntuaction: 3.3, kcal: 0, time: 0, price: 0, isLaunch: true, imagePath: "recipe_1", ingredients: [], steps: []),
+        .init(id: 0, userId: 0, name: "Sopa de pescado", description: "", puntuaction: 4.9, kcal: 0, time: 0, price: 0, isLaunch: true, imagePath: "recipe_2", ingredients: [], steps: []),
+        .init(id: 0, userId: 0, name: "Ajoblanco malagueño con ahumados", description: "", puntuaction: 5.1, kcal: 0, time: 0, price: 0, isLaunch: true, imagePath: "recipe_3", ingredients: [], steps: []),
+        .init(id: 0, userId: 0, name: "Arroz con marisco y verduras", description: "", puntuaction: 2.6, kcal: 0, time: 0, price: 0, isLaunch: true, imagePath: "recipe_4", ingredients: [], steps: []),
+        .init(id: 0, userId: 0, name: "Ensalada japonesa", description: "", puntuaction: 4.3, kcal: 0, time: 0, price: 0, isLaunch: true, imagePath: "recipe_5", ingredients: [], steps: [])
+    ]
+    
     var currentSelectedCategory = 0;
     
     override func viewDidLoad() {
@@ -40,19 +50,17 @@ class TodayViewController: UIViewController, UIGestureRecognizerDelegate {
         
         featuredRecipeView.addGestureRecognizer(tapGesture)
         
-        let exampleRecipe = Recipe(id: 0, userId: 0, name: "Sopa caliente de çorba", description: "", puntuaction: 4.7, kcal: 350, time: 40, price: 6.5, isLaunch: true, imagePath: "recipe_1", ingredients: [], steps: [])
-        
-        loadFeatureRecipe(exampleRecipe)
+        loadFeatureRecipe()
         loadCategories()
+        registerCells()
     }
     
-    func loadFeatureRecipe(_ recipe: Recipe) {
-        featuredRecipePuntuaction.text = String(recipe.puntuaction)
-        featuredRecipeTitle.text = recipe.name
-        featuredRecipekcal.text = String(recipe.kcal) + " kcal"
-        featuredRecipeTime.text = String(recipe.time) + " min"
-        featuredRecipePrice.text = String(recipe.price) + " €"
-        featuredRecipeImage.image = UIImage(named: recipe.imagePath) // FIXME: Change this
+    func loadFeatureRecipe() {
+        featuredRecipeTitle.text = featuredRecipe.name
+        featuredRecipekcal.text = String(featuredRecipe.kcal) + " kcal"
+        featuredRecipeTime.text = String(featuredRecipe.time) + " min"
+        featuredRecipePrice.text = String(featuredRecipe.price) + " €"
+        featuredRecipeImage.image = UIImage(named: featuredRecipe.imagePath) // FIXME: Change this
     }
     
     func loadCategories() {
@@ -66,15 +74,21 @@ class TodayViewController: UIViewController, UIGestureRecognizerDelegate {
         }
     }
     
-    func changeCategory(_ selection: Int) {
-        for i in 0..<categories.count {
-            categories[i].backgroundColor = .black
-            
-        }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let controller = RecipeViewController.instantiate()
+        controller.recipeInformation = recipes[indexPath.row]
+        
+        present(controller, animated: true, completion: nil)
+    }
+    
+    private func registerCells() {
+        popularCollectionView.register(UINib(nibName: PopularRecipesCollectionViewCell.identifier, bundle: nil), forCellWithReuseIdentifier: PopularRecipesCollectionViewCell.identifier)
     }
     
     @objc func clickView(_ sender: UIView) {
-        let controller = (storyboard?.instantiateViewController(withIdentifier: "RecipeViewController"))!
+        let controller = (storyboard?.instantiateViewController(withIdentifier: "RecipeViewController")) as! RecipeViewController
+        
+        controller.recipeInformation = featuredRecipe
         
         present(controller, animated: true, completion: nil)
     }
@@ -94,6 +108,21 @@ class TodayViewController: UIViewController, UIGestureRecognizerDelegate {
         currentSelectedCategory = viewTag
         
         // TODO: Aqui modificar la vista de recetas populares
+    }
+}
+
+extension TodayViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return recipes.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PopularRecipesCollectionViewCell.identifier, for: indexPath) as! PopularRecipesCollectionViewCell
+        
+        cell.setup(recipes[indexPath.row])
+        
+        return cell
     }
 }
 

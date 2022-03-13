@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "obento_logo.svg",
+      "filename" : "obento_icon_Mesa de trabajo 1.svg",
       "idiom" : "universal"
     },
     {
@@ -11,7 +11,7 @@
           "value" : "dark"
         }
       ],
-      "filename" : "obento_logo_dark.svg",
+      "filename" : "obento_icon_dark.svg",
       "idiom" : "universal"
     }
   ],
