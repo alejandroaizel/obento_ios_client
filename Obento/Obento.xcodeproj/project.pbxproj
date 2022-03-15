@@ -17,6 +17,9 @@
 		532B6A9927DBDB9500277BF4 /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532B6A9827DBDB9500277BF4 /* Recipe.swift */; };
 		532B6A9B27DBDBF700277BF4 /* Ingredient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532B6A9A27DBDBF700277BF4 /* Ingredient.swift */; };
 		532B6A9D27DBE3FA00277BF4 /* RecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532B6A9C27DBE3FA00277BF4 /* RecipeViewController.swift */; };
+		534032B427DD84DC00D67625 /* CartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534032B227DD84DC00D67625 /* CartTableViewCell.swift */; };
+		534032B527DD84DC00D67625 /* CartTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 534032B327DD84DC00D67625 /* CartTableViewCell.xib */; };
+		534032B727DE1C0100D67625 /* HTTPRequest-example.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534032B627DE1C0100D67625 /* HTTPRequest-example.swift */; };
 		535A5C5D27DCF3CA00D52BDB /* PopularRecipesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535A5C5B27DCF3CA00D52BDB /* PopularRecipesCollectionViewCell.swift */; };
 		535A5C5E27DCF3CA00D52BDB /* PopularRecipesCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 535A5C5C27DCF3CA00D52BDB /* PopularRecipesCollectionViewCell.xib */; };
 		535E94DA27D453EC00C1A713 /* UIViex+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535E94D927D453EC00C1A713 /* UIViex+Extension.swift */; };
@@ -62,6 +65,9 @@
 		532B6A9827DBDB9500277BF4 /* Recipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipe.swift; sourceTree = "<group>"; };
 		532B6A9A27DBDBF700277BF4 /* Ingredient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ingredient.swift; sourceTree = "<group>"; };
 		532B6A9C27DBE3FA00277BF4 /* RecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeViewController.swift; sourceTree = "<group>"; };
+		534032B227DD84DC00D67625 /* CartTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartTableViewCell.swift; sourceTree = "<group>"; };
+		534032B327DD84DC00D67625 /* CartTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CartTableViewCell.xib; sourceTree = "<group>"; };
+		534032B627DE1C0100D67625 /* HTTPRequest-example.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HTTPRequest-example.swift"; sourceTree = "<group>"; };
 		535A5C5B27DCF3CA00D52BDB /* PopularRecipesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularRecipesCollectionViewCell.swift; sourceTree = "<group>"; };
 		535A5C5C27DCF3CA00D52BDB /* PopularRecipesCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PopularRecipesCollectionViewCell.xib; sourceTree = "<group>"; };
 		535E94D927D453EC00C1A713 /* UIViex+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViex+Extension.swift"; sourceTree = "<group>"; };
@@ -111,9 +117,31 @@
 		532B6A9E27DCB12200277BF4 /* CollectionViewCells */ = {
 			isa = PBXGroup;
 			children = (
+				534032AA27DD80D500D67625 /* CartTableViewCell */,
 				535A5C5A27DCF39400D52BDB /* PopularRecipesViewCell */,
 			);
 			path = CollectionViewCells;
+			sourceTree = "<group>";
+		};
+		534032AA27DD80D500D67625 /* CartTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				534032B227DD84DC00D67625 /* CartTableViewCell.swift */,
+				534032B327DD84DC00D67625 /* CartTableViewCell.xib */,
+			);
+			path = CartTableViewCell;
+			sourceTree = "<group>";
+		};
+		534032AF27DD817400D67625 /* MainViews */ = {
+			isa = PBXGroup;
+			children = (
+				53E50C6B27C017FF000AA45F /* TodayViewController.swift */,
+				5327055B27D39B5100394FFB /* MenuViewController.swift */,
+				5327055D27D39B5A00394FFB /* AddViewController.swift */,
+				5327055F27D39B6700394FFB /* CartViewController.swift */,
+				5327056127D39B8B00394FFB /* ProfileViewController.swift */,
+			);
+			path = MainViews;
 			sourceTree = "<group>";
 		};
 		535A5C5A27DCF39400D52BDB /* PopularRecipesViewCell */ = {
@@ -148,13 +176,9 @@
 		535E94E127D45DBD00C1A713 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				534032AF27DD817400D67625 /* MainViews */,
 				532B6A9E27DCB12200277BF4 /* CollectionViewCells */,
 				535E94E627D4E9E700C1A713 /* Onboarding */,
-				53E50C6B27C017FF000AA45F /* TodayViewController.swift */,
-				5327055B27D39B5100394FFB /* MenuViewController.swift */,
-				5327055D27D39B5A00394FFB /* AddViewController.swift */,
-				5327055F27D39B6700394FFB /* CartViewController.swift */,
-				5327056127D39B8B00394FFB /* ProfileViewController.swift */,
 				532B6A9C27DBE3FA00277BF4 /* RecipeViewController.swift */,
 			);
 			path = Views;
@@ -202,6 +226,7 @@
 				53E50C7227C01800000AA45F /* LaunchScreen.storyboard */,
 				53E50C7027C01800000AA45F /* Assets.xcassets */,
 				53E50C7527C01800000AA45F /* Info.plist */,
+				534032B627DE1C0100D67625 /* HTTPRequest-example.swift */,
 			);
 			path = Obento;
 			sourceTree = "<group>";
@@ -330,6 +355,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				534032B527DD84DC00D67625 /* CartTableViewCell.xib in Resources */,
 				53E50C7427C01800000AA45F /* LaunchScreen.storyboard in Resources */,
 				53E50C7127C01800000AA45F /* Assets.xcassets in Resources */,
 				535A5C5E27DCF3CA00D52BDB /* PopularRecipesCollectionViewCell.xib in Resources */,
@@ -371,8 +397,10 @@
 				535A5C5D27DCF3CA00D52BDB /* PopularRecipesCollectionViewCell.swift in Sources */,
 				5327055E27D39B5A00394FFB /* AddViewController.swift in Sources */,
 				5327055A27D3988300394FFB /* TabBarController.swift in Sources */,
+				534032B427DD84DC00D67625 /* CartTableViewCell.swift in Sources */,
 				53E50C6827C017FF000AA45F /* AppDelegate.swift in Sources */,
 				5327056227D39B8B00394FFB /* ProfileViewController.swift in Sources */,
+				534032B727DE1C0100D67625 /* HTTPRequest-example.swift in Sources */,
 				535E94DA27D453EC00C1A713 /* UIViex+Extension.swift in Sources */,
 				53E50C6A27C017FF000AA45F /* SceneDelegate.swift in Sources */,
 				535E94DD27D454AB00C1A713 /* OnboardingSlide.swift in Sources */,

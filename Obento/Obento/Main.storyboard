@@ -25,16 +25,53 @@
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="773"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lista de la compra" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CGm-0M-mke">
-                                                <rect key="frame" x="20" y="75" width="293.5" height="43"/>
+                                                <rect key="frame" x="20" y="75" width="314" height="43"/>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="36"/>
                                                 <color key="textColor" name="TextColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SeZ-qf-i2H">
+                                                <rect key="frame" x="354" y="76.5" width="40" height="40"/>
+                                                <color key="backgroundColor" name="SecondaryColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="Bft-F7-YHg"/>
+                                                    <constraint firstAttribute="width" constant="40" id="xYv-qu-IqH"/>
+                                                </constraints>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" image="arrow.up.arrow.down" catalog="system" title="" buttonSize="mini">
+                                                    <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" weight="bold"/>
+                                                    <color key="baseForegroundColor" name="PrimaryColor"/>
+                                                </buttonConfiguration>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="20"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="" value="YES"/>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="closeButtonAction:" destination="Vzf-CI-Z1E" eventType="touchUpInside" id="Prq-nk-9ce"/>
+                                                </connections>
+                                            </button>
+                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="9F7-rT-BgY">
+                                                <rect key="frame" x="0.0" y="138" width="414" height="635"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <connections>
+                                                    <outlet property="dataSource" destination="DJe-r3-xyR" id="Kh2-oi-xB7"/>
+                                                    <outlet property="delegate" destination="DJe-r3-xyR" id="bsI-dh-5mK"/>
+                                                </connections>
+                                            </tableView>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstItem="CGm-0M-mke" firstAttribute="top" secondItem="ugo-hZ-Swl" secondAttribute="top" constant="75" id="6GL-h4-j92"/>
+                                            <constraint firstItem="SeZ-qf-i2H" firstAttribute="leading" secondItem="CGm-0M-mke" secondAttribute="trailing" constant="20" id="6RE-gw-9JB"/>
+                                            <constraint firstAttribute="trailing" secondItem="9F7-rT-BgY" secondAttribute="trailing" id="Bgy-Hj-APy"/>
+                                            <constraint firstItem="SeZ-qf-i2H" firstAttribute="centerY" secondItem="CGm-0M-mke" secondAttribute="centerY" id="GUp-wB-Ni0"/>
+                                            <constraint firstItem="9F7-rT-BgY" firstAttribute="leading" secondItem="ugo-hZ-Swl" secondAttribute="leading" id="HgT-Xs-xfl"/>
+                                            <constraint firstAttribute="bottom" secondItem="9F7-rT-BgY" secondAttribute="bottom" id="KSf-jd-QWy"/>
+                                            <constraint firstAttribute="trailing" secondItem="SeZ-qf-i2H" secondAttribute="trailing" constant="20" id="W45-kg-Uu9"/>
                                             <constraint firstItem="CGm-0M-mke" firstAttribute="leading" secondItem="ugo-hZ-Swl" secondAttribute="leading" constant="20" id="bCj-R9-U6D"/>
+                                            <constraint firstItem="9F7-rT-BgY" firstAttribute="top" secondItem="CGm-0M-mke" secondAttribute="bottom" constant="20" id="pju-DQ-2dS"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -59,6 +96,9 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Compra" image="cart" catalog="system" selectedImage="cart.fill" id="2ta-VB-KPi"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="cartTableView" destination="9F7-rT-BgY" id="ULk-WZ-yX4"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fil-O9-dpH" sceneMemberID="firstResponder"/>
             </objects>
@@ -282,13 +322,28 @@
                     <view key="view" contentMode="scaleToFill" id="xVv-m4-ftv">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZGM-Fm-OPR">
+                                <rect key="frame" x="148" y="138" width="118" height="70"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" name="AccentColor"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="OLA"/>
+                                <connections>
+                                    <action selector="yamadaAction:" destination="vxE-H8-wUZ" eventType="touchUpInside" id="0ZD-Iy-ArG"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="fa2-m5-MKl"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
+                    <connections>
+                        <outlet property="yamadaButton" destination="ZGM-Fm-OPR" id="Cfl-W2-PmW"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qqp-Xk-MXO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1987" y="-865"/>
+            <point key="canvasLocation" x="1986.9565217391305" y="-865.17857142857144"/>
         </scene>
         <!--Add View Controller-->
         <scene sceneID="eDS-Wz-qRa">
@@ -319,6 +374,7 @@
                                                 </constraints>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" image="xmark" catalog="system">
+                                                    <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" weight="semibold"/>
                                                     <color key="baseForegroundColor" name="PrimaryColor"/>
                                                 </buttonConfiguration>
                                                 <userDefinedRuntimeAttributes>
@@ -1030,6 +1086,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="arrow.up.arrow.down" catalog="system" width="128" height="98"/>
         <image name="cart" catalog="system" width="128" height="102"/>
         <image name="cart.fill" catalog="system" width="128" height="102"/>
         <image name="dollarsign.circle" catalog="system" width="128" height="121"/>
@@ -1045,6 +1102,9 @@
         <image name="plus.viewfinder" catalog="system" width="128" height="115"/>
         <image name="timer" catalog="system" width="128" height="121"/>
         <image name="xmark" catalog="system" width="128" height="113"/>
+        <namedColor name="AccentColor">
+            <color red="0.34901960784313724" green="0.64313725490196083" blue="0.56862745098039214" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="ObentoGreen">
             <color red="0.34901960784313724" green="0.64313725490196083" blue="0.56862745098039214" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

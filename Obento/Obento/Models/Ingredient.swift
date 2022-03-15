@@ -15,4 +15,5 @@ struct Ingredient {
     let unit: String
     let kcal: Int
     let iconPath: String
+    let quantity: Int? // Only for shopping list
 }
