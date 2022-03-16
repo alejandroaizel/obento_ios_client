@@ -17,6 +17,8 @@
 		532B6A9927DBDB9500277BF4 /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532B6A9827DBDB9500277BF4 /* Recipe.swift */; };
 		532B6A9B27DBDBF700277BF4 /* Ingredient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532B6A9A27DBDBF700277BF4 /* Ingredient.swift */; };
 		532B6A9D27DBE3FA00277BF4 /* RecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532B6A9C27DBE3FA00277BF4 /* RecipeViewController.swift */; };
+		533A0F5927E113BC007B94FE /* IngredientCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 533A0F5727E113BC007B94FE /* IngredientCollectionViewCell.swift */; };
+		533A0F5A27E113BC007B94FE /* IngredientCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 533A0F5827E113BC007B94FE /* IngredientCollectionViewCell.xib */; };
 		534032B427DD84DC00D67625 /* CartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534032B227DD84DC00D67625 /* CartTableViewCell.swift */; };
 		534032B527DD84DC00D67625 /* CartTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 534032B327DD84DC00D67625 /* CartTableViewCell.xib */; };
 		534032B727DE1C0100D67625 /* HTTPRequest-example.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534032B627DE1C0100D67625 /* HTTPRequest-example.swift */; };
@@ -27,6 +29,10 @@
 		535E94E827D4ECB700C1A713 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535E94E727D4ECB700C1A713 /* OnboardingViewController.swift */; };
 		535E94EA27D4F32300C1A713 /* OnboardingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535E94E927D4F32300C1A713 /* OnboardingCollectionViewCell.swift */; };
 		53ACED7827D417DF00C0FBF3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 53ACED7727D417DF00C0FBF3 /* Main.storyboard */; };
+		53CBA36C27E15A280080422A /* StepTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53CBA36A27E15A280080422A /* StepTableViewCell.swift */; };
+		53CBA36D27E15A280080422A /* StepTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 53CBA36B27E15A280080422A /* StepTableViewCell.xib */; };
+		53CBA36F27E172C20080422A /* Step.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53CBA36E27E172C20080422A /* Step.swift */; };
+		53CBA37227E1E2560080422A /* ContentSizedTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53CBA37127E1E2560080422A /* ContentSizedTableView.swift */; };
 		53E50C6827C017FF000AA45F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E50C6727C017FF000AA45F /* AppDelegate.swift */; };
 		53E50C6A27C017FF000AA45F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E50C6927C017FF000AA45F /* SceneDelegate.swift */; };
 		53E50C6C27C017FF000AA45F /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E50C6B27C017FF000AA45F /* TodayViewController.swift */; };
@@ -65,6 +71,8 @@
 		532B6A9827DBDB9500277BF4 /* Recipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipe.swift; sourceTree = "<group>"; };
 		532B6A9A27DBDBF700277BF4 /* Ingredient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ingredient.swift; sourceTree = "<group>"; };
 		532B6A9C27DBE3FA00277BF4 /* RecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeViewController.swift; sourceTree = "<group>"; };
+		533A0F5727E113BC007B94FE /* IngredientCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientCollectionViewCell.swift; sourceTree = "<group>"; };
+		533A0F5827E113BC007B94FE /* IngredientCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IngredientCollectionViewCell.xib; sourceTree = "<group>"; };
 		534032B227DD84DC00D67625 /* CartTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartTableViewCell.swift; sourceTree = "<group>"; };
 		534032B327DD84DC00D67625 /* CartTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CartTableViewCell.xib; sourceTree = "<group>"; };
 		534032B627DE1C0100D67625 /* HTTPRequest-example.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HTTPRequest-example.swift"; sourceTree = "<group>"; };
@@ -75,6 +83,10 @@
 		535E94E727D4ECB700C1A713 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		535E94E927D4F32300C1A713 /* OnboardingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCollectionViewCell.swift; sourceTree = "<group>"; };
 		53ACED7727D417DF00C0FBF3 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		53CBA36A27E15A280080422A /* StepTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepTableViewCell.swift; sourceTree = "<group>"; };
+		53CBA36B27E15A280080422A /* StepTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StepTableViewCell.xib; sourceTree = "<group>"; };
+		53CBA36E27E172C20080422A /* Step.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Step.swift; sourceTree = "<group>"; };
+		53CBA37127E1E2560080422A /* ContentSizedTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentSizedTableView.swift; sourceTree = "<group>"; };
 		53E50C6427C017FF000AA45F /* Obento.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Obento.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		53E50C6727C017FF000AA45F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		53E50C6927C017FF000AA45F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -117,10 +129,21 @@
 		532B6A9E27DCB12200277BF4 /* CollectionViewCells */ = {
 			isa = PBXGroup;
 			children = (
+				53CBA36927E159FB0080422A /* StepsViewCell */,
+				533A0F5627E11394007B94FE /* IngredientViewCell */,
 				534032AA27DD80D500D67625 /* CartTableViewCell */,
 				535A5C5A27DCF39400D52BDB /* PopularRecipesViewCell */,
 			);
 			path = CollectionViewCells;
+			sourceTree = "<group>";
+		};
+		533A0F5627E11394007B94FE /* IngredientViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				533A0F5727E113BC007B94FE /* IngredientCollectionViewCell.swift */,
+				533A0F5827E113BC007B94FE /* IngredientCollectionViewCell.xib */,
+			);
+			path = IngredientViewCell;
 			sourceTree = "<group>";
 		};
 		534032AA27DD80D500D67625 /* CartTableViewCell */ = {
@@ -166,9 +189,11 @@
 		535E94DB27D4549500C1A713 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				53CBA37027E1E2230080422A /* Subcrasses */,
 				535E94DC27D454AB00C1A713 /* OnboardingSlide.swift */,
 				532B6A9827DBDB9500277BF4 /* Recipe.swift */,
 				532B6A9A27DBDBF700277BF4 /* Ingredient.swift */,
+				53CBA36E27E172C20080422A /* Step.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -191,6 +216,23 @@
 				535E94E927D4F32300C1A713 /* OnboardingCollectionViewCell.swift */,
 			);
 			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		53CBA36927E159FB0080422A /* StepsViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				53CBA36A27E15A280080422A /* StepTableViewCell.swift */,
+				53CBA36B27E15A280080422A /* StepTableViewCell.xib */,
+			);
+			path = StepsViewCell;
+			sourceTree = "<group>";
+		};
+		53CBA37027E1E2230080422A /* Subcrasses */ = {
+			isa = PBXGroup;
+			children = (
+				53CBA37127E1E2560080422A /* ContentSizedTableView.swift */,
+			);
+			path = Subcrasses;
 			sourceTree = "<group>";
 		};
 		53E50C5B27C017FF000AA45F = {
@@ -355,8 +397,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				533A0F5A27E113BC007B94FE /* IngredientCollectionViewCell.xib in Resources */,
 				534032B527DD84DC00D67625 /* CartTableViewCell.xib in Resources */,
 				53E50C7427C01800000AA45F /* LaunchScreen.storyboard in Resources */,
+				53CBA36D27E15A280080422A /* StepTableViewCell.xib in Resources */,
 				53E50C7127C01800000AA45F /* Assets.xcassets in Resources */,
 				535A5C5E27DCF3CA00D52BDB /* PopularRecipesCollectionViewCell.xib in Resources */,
 				53ACED7827D417DF00C0FBF3 /* Main.storyboard in Resources */,
@@ -385,10 +429,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				535E94E827D4ECB700C1A713 /* OnboardingViewController.swift in Sources */,
+				53CBA36C27E15A280080422A /* StepTableViewCell.swift in Sources */,
 				532B6A9227DBBF6100277BF4 /* UIViewController+Extension.swift in Sources */,
+				53CBA37227E1E2560080422A /* ContentSizedTableView.swift in Sources */,
 				53E50C6C27C017FF000AA45F /* TodayViewController.swift in Sources */,
+				533A0F5927E113BC007B94FE /* IngredientCollectionViewCell.swift in Sources */,
 				532B6A9D27DBE3FA00277BF4 /* RecipeViewController.swift in Sources */,
 				5327055C27D39B5100394FFB /* MenuViewController.swift in Sources */,
+				53CBA36F27E172C20080422A /* Step.swift in Sources */,
 				532B6A9B27DBDBF700277BF4 /* Ingredient.swift in Sources */,
 				5327056027D39B6700394FFB /* CartViewController.swift in Sources */,
 				532B6A9927DBDB9500277BF4 /* Recipe.swift in Sources */,
