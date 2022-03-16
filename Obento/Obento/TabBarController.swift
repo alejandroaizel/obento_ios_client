@@ -18,6 +18,9 @@ class TabBarController: UITabBarController {
         addButton.frame = CGRect (x: 100, y: 0, width: 44, height: 44)
         addButton.addTarget(self, action: #selector(handlePresentingVC(_:)), for: .touchUpInside)
         self.view.insertSubview(addButton, aboveSubview: self.tabBar)
+
+        self.selectedIndex = 3
+        self.selectedIndex = 0
     }
     
     override func viewDidLayoutSubviews() {

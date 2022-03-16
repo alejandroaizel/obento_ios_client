@@ -18,6 +18,7 @@ struct Recipe {
     let price: Double
     let isLaunch: Bool
     let imagePath: String
+    let type: String
     let ingredients: [Ingredient]
     let steps: [String]
 }

@@ -7,7 +7,7 @@
 
 import UIKit
 
-func call-example() {
+/*func call-example() {
     var request = URLRequest(url: URL(string: "http://127.0.0.1:8000/ingredients")!)
 
     request.httpMethod = "GET"
@@ -29,4 +29,4 @@ func call-example() {
     })
 
     task.resume()
-}
+}*/

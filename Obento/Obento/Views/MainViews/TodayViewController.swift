@@ -28,14 +28,14 @@ class TodayViewController: UIViewController, UIGestureRecognizerDelegate {
     // Popular Recipes
     @IBOutlet weak var popularCollectionView: UICollectionView!
     
-    var featuredRecipe = Recipe(id: 0, userId: 0, name: "Sopa de çorba con chuletillas de cordero", description: "", puntuaction: 4.7, kcal: 350, time: 140, price: 6.5, isLaunch: true, imagePath: "recipe_6", ingredients: [], steps: [])
+    var featuredRecipe = Recipe(id: 0, userId: 0, name: "Sopa de çorba con chuletillas de cordero", description: "", puntuaction: 4.7, kcal: 350, time: 140, price: 6.5, isLaunch: true, imagePath: "recipe_6", type: "", ingredients: [], steps: [])
     var categories: [UIView] = []
     var recipes: [Recipe] = [ // TODO: ELIMINAR, PRUEBAS
-        .init(id: 0, userId: 0, name: "Salmorejo con picatostes y jamón", description: "", puntuaction: 3.3, kcal: 0, time: 0, price: 0, isLaunch: true, imagePath: "recipe_1", ingredients: [], steps: []),
-        .init(id: 0, userId: 0, name: "Sopa de pescado", description: "", puntuaction: 4.9, kcal: 0, time: 0, price: 0, isLaunch: true, imagePath: "recipe_2", ingredients: [], steps: []),
-        .init(id: 0, userId: 0, name: "Ajoblanco malagueño con ahumados", description: "", puntuaction: 5.1, kcal: 0, time: 0, price: 0, isLaunch: true, imagePath: "recipe_3", ingredients: [], steps: []),
-        .init(id: 0, userId: 0, name: "Arroz con marisco y verduras", description: "", puntuaction: 2.6, kcal: 0, time: 0, price: 0, isLaunch: true, imagePath: "recipe_4", ingredients: [], steps: []),
-        .init(id: 0, userId: 0, name: "Ensalada japonesa", description: "", puntuaction: 4.3, kcal: 0, time: 0, price: 0, isLaunch: true, imagePath: "recipe_5", ingredients: [], steps: [])
+        .init(id: 0, userId: 0, name: "Salmorejo con picatostes y jamón", description: "", puntuaction: 3.3, kcal: 0, time: 0, price: 0, isLaunch: true, imagePath: "recipe_1", type: "", ingredients: [], steps: []),
+        .init(id: 0, userId: 0, name: "Sopa de pescado", description: "", puntuaction: 4.9, kcal: 0, time: 0, price: 0, isLaunch: true, imagePath: "recipe_2", type: "", ingredients: [], steps: []),
+        .init(id: 0, userId: 0, name: "Ajoblanco malagueño con ahumados", description: "", puntuaction: 5.1, kcal: 0, time: 0, price: 0, isLaunch: true, imagePath: "recipe_3", type: "", ingredients: [], steps: []),
+        .init(id: 0, userId: 0, name: "Arroz con marisco y verduras", description: "", puntuaction: 2.6, kcal: 0, time: 0, price: 0, isLaunch: true, imagePath: "recipe_4", type: "", ingredients: [], steps: []),
+        .init(id: 0, userId: 0, name: "Ensalada japonesa", description: "", puntuaction: 4.3, kcal: 0, time: 0, price: 0, isLaunch: true, imagePath: "recipe_5", type: "", ingredients: [], steps: [])
     ]
     
     var currentSelectedCategory = 0;
