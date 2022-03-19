@@ -53,6 +53,7 @@ class TodayViewController: UIViewController, UIGestureRecognizerDelegate {
         loadFeatureRecipe()
         loadCategories()
         registerCells()
+        
     }
     
     func loadFeatureRecipe() {
