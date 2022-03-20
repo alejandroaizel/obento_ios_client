@@ -23,13 +23,25 @@
 		534032B527DD84DC00D67625 /* CartTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 534032B327DD84DC00D67625 /* CartTableViewCell.xib */; };
 		534032B727DE1C0100D67625 /* HTTPRequest-example.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534032B627DE1C0100D67625 /* HTTPRequest-example.swift */; };
 		5359C50927E6262A005A7E8C /* DateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5359C50827E6262A005A7E8C /* DateController.swift */; };
-		5359C50B27E66BAE005A7E8C /* AddMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5359C50A27E66BAE005A7E8C /* AddMenuViewController.swift */; };
 		535A5C5D27DCF3CA00D52BDB /* PopularRecipesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535A5C5B27DCF3CA00D52BDB /* PopularRecipesCollectionViewCell.swift */; };
 		535A5C5E27DCF3CA00D52BDB /* PopularRecipesCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 535A5C5C27DCF3CA00D52BDB /* PopularRecipesCollectionViewCell.xib */; };
 		535E94DA27D453EC00C1A713 /* UIViex+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535E94D927D453EC00C1A713 /* UIViex+Extension.swift */; };
 		535E94DD27D454AB00C1A713 /* OnboardingSlide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535E94DC27D454AB00C1A713 /* OnboardingSlide.swift */; };
 		535E94E827D4ECB700C1A713 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535E94E727D4ECB700C1A713 /* OnboardingViewController.swift */; };
 		535E94EA27D4F32300C1A713 /* OnboardingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535E94E927D4F32300C1A713 /* OnboardingCollectionViewCell.swift */; };
+		536A184E27E6B3A300E0614A /* RecipeNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536A184D27E6B3A300E0614A /* RecipeNavigationController.swift */; };
+		536A185027E6B6B100E0614A /* RecipeCommonStep1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536A184F27E6B6B100E0614A /* RecipeCommonStep1ViewController.swift */; };
+		536A185227E6B6C500E0614A /* RecipeCommonStep2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536A185127E6B6C500E0614A /* RecipeCommonStep2ViewController.swift */; };
+		536A185427E6B6D800E0614A /* RecipeManualStep3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536A185327E6B6D800E0614A /* RecipeManualStep3ViewController.swift */; };
+		536A185627E6B6E500E0614A /* RecipeManualStep4ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536A185527E6B6E500E0614A /* RecipeManualStep4ViewController.swift */; };
+		536A185827E6B6F000E0614A /* RecipeOCRStep3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536A185727E6B6F000E0614A /* RecipeOCRStep3ViewController.swift */; };
+		536A185A27E6B70C00E0614A /* RecipeOCRStep4ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536A185927E6B70C00E0614A /* RecipeOCRStep4ViewController.swift */; };
+		536A185C27E6B71D00E0614A /* RecipeCommonStep5ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536A185B27E6B71D00E0614A /* RecipeCommonStep5ViewController.swift */; };
+		536A185E27E6B83B00E0614A /* MenuNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536A185D27E6B83B00E0614A /* MenuNavigationController.swift */; };
+		536A186027E6B85100E0614A /* MenuCommonStep1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536A185F27E6B85100E0614A /* MenuCommonStep1ViewController.swift */; };
+		536A186227E6B86700E0614A /* MenuCustomStep2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536A186127E6B86700E0614A /* MenuCustomStep2ViewController.swift */; };
+		536A186427E6B87400E0614A /* MenuCustomStep3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536A186327E6B87400E0614A /* MenuCustomStep3ViewController.swift */; };
+		536A186627E6B87E00E0614A /* MenuCommonStep4ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536A186527E6B87E00E0614A /* MenuCommonStep4ViewController.swift */; };
 		53ACED7827D417DF00C0FBF3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 53ACED7727D417DF00C0FBF3 /* Main.storyboard */; };
 		53CBA36C27E15A280080422A /* StepTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53CBA36A27E15A280080422A /* StepTableViewCell.swift */; };
 		53CBA36D27E15A280080422A /* StepTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 53CBA36B27E15A280080422A /* StepTableViewCell.xib */; };
@@ -79,13 +91,25 @@
 		534032B327DD84DC00D67625 /* CartTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CartTableViewCell.xib; sourceTree = "<group>"; };
 		534032B627DE1C0100D67625 /* HTTPRequest-example.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HTTPRequest-example.swift"; sourceTree = "<group>"; };
 		5359C50827E6262A005A7E8C /* DateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateController.swift; sourceTree = "<group>"; };
-		5359C50A27E66BAE005A7E8C /* AddMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMenuViewController.swift; sourceTree = "<group>"; };
 		535A5C5B27DCF3CA00D52BDB /* PopularRecipesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularRecipesCollectionViewCell.swift; sourceTree = "<group>"; };
 		535A5C5C27DCF3CA00D52BDB /* PopularRecipesCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PopularRecipesCollectionViewCell.xib; sourceTree = "<group>"; };
 		535E94D927D453EC00C1A713 /* UIViex+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViex+Extension.swift"; sourceTree = "<group>"; };
 		535E94DC27D454AB00C1A713 /* OnboardingSlide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingSlide.swift; sourceTree = "<group>"; };
 		535E94E727D4ECB700C1A713 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		535E94E927D4F32300C1A713 /* OnboardingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCollectionViewCell.swift; sourceTree = "<group>"; };
+		536A184D27E6B3A300E0614A /* RecipeNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeNavigationController.swift; sourceTree = "<group>"; };
+		536A184F27E6B6B100E0614A /* RecipeCommonStep1ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeCommonStep1ViewController.swift; sourceTree = "<group>"; };
+		536A185127E6B6C500E0614A /* RecipeCommonStep2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeCommonStep2ViewController.swift; sourceTree = "<group>"; };
+		536A185327E6B6D800E0614A /* RecipeManualStep3ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeManualStep3ViewController.swift; sourceTree = "<group>"; };
+		536A185527E6B6E500E0614A /* RecipeManualStep4ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeManualStep4ViewController.swift; sourceTree = "<group>"; };
+		536A185727E6B6F000E0614A /* RecipeOCRStep3ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeOCRStep3ViewController.swift; sourceTree = "<group>"; };
+		536A185927E6B70C00E0614A /* RecipeOCRStep4ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeOCRStep4ViewController.swift; sourceTree = "<group>"; };
+		536A185B27E6B71D00E0614A /* RecipeCommonStep5ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeCommonStep5ViewController.swift; sourceTree = "<group>"; };
+		536A185D27E6B83B00E0614A /* MenuNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuNavigationController.swift; sourceTree = "<group>"; };
+		536A185F27E6B85100E0614A /* MenuCommonStep1ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCommonStep1ViewController.swift; sourceTree = "<group>"; };
+		536A186127E6B86700E0614A /* MenuCustomStep2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCustomStep2ViewController.swift; sourceTree = "<group>"; };
+		536A186327E6B87400E0614A /* MenuCustomStep3ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCustomStep3ViewController.swift; sourceTree = "<group>"; };
+		536A186527E6B87E00E0614A /* MenuCommonStep4ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCommonStep4ViewController.swift; sourceTree = "<group>"; };
 		53ACED7727D417DF00C0FBF3 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		53CBA36A27E15A280080422A /* StepTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepTableViewCell.swift; sourceTree = "<group>"; };
 		53CBA36B27E15A280080422A /* StepTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StepTableViewCell.xib; sourceTree = "<group>"; };
@@ -167,7 +191,6 @@
 				5327055D27D39B5A00394FFB /* AddViewController.swift */,
 				5327055F27D39B6700394FFB /* CartViewController.swift */,
 				5327056127D39B8B00394FFB /* ProfileViewController.swift */,
-				5359C50A27E66BAE005A7E8C /* AddMenuViewController.swift */,
 			);
 			path = MainViews;
 			sourceTree = "<group>";
@@ -215,6 +238,8 @@
 			isa = PBXGroup;
 			children = (
 				534032AF27DD817400D67625 /* MainViews */,
+				536A184227E6AC6400E0614A /* RecipeViews */,
+				536A184127E6AC5B00E0614A /* MenuViews */,
 				532B6A9E27DCB12200277BF4 /* CollectionViewCells */,
 				535E94E627D4E9E700C1A713 /* Onboarding */,
 				532B6A9C27DBE3FA00277BF4 /* RecipeViewController.swift */,
@@ -229,6 +254,33 @@
 				535E94E927D4F32300C1A713 /* OnboardingCollectionViewCell.swift */,
 			);
 			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		536A184127E6AC5B00E0614A /* MenuViews */ = {
+			isa = PBXGroup;
+			children = (
+				536A185D27E6B83B00E0614A /* MenuNavigationController.swift */,
+				536A185F27E6B85100E0614A /* MenuCommonStep1ViewController.swift */,
+				536A186127E6B86700E0614A /* MenuCustomStep2ViewController.swift */,
+				536A186327E6B87400E0614A /* MenuCustomStep3ViewController.swift */,
+				536A186527E6B87E00E0614A /* MenuCommonStep4ViewController.swift */,
+			);
+			path = MenuViews;
+			sourceTree = "<group>";
+		};
+		536A184227E6AC6400E0614A /* RecipeViews */ = {
+			isa = PBXGroup;
+			children = (
+				536A184D27E6B3A300E0614A /* RecipeNavigationController.swift */,
+				536A184F27E6B6B100E0614A /* RecipeCommonStep1ViewController.swift */,
+				536A185127E6B6C500E0614A /* RecipeCommonStep2ViewController.swift */,
+				536A185327E6B6D800E0614A /* RecipeManualStep3ViewController.swift */,
+				536A185527E6B6E500E0614A /* RecipeManualStep4ViewController.swift */,
+				536A185727E6B6F000E0614A /* RecipeOCRStep3ViewController.swift */,
+				536A185927E6B70C00E0614A /* RecipeOCRStep4ViewController.swift */,
+				536A185B27E6B71D00E0614A /* RecipeCommonStep5ViewController.swift */,
+			);
+			path = RecipeViews;
 			sourceTree = "<group>";
 		};
 		53CBA36927E159FB0080422A /* StepsViewCell */ = {
@@ -442,26 +494,38 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				536A185A27E6B70C00E0614A /* RecipeOCRStep4ViewController.swift in Sources */,
 				535E94E827D4ECB700C1A713 /* OnboardingViewController.swift in Sources */,
 				53CBA36C27E15A280080422A /* StepTableViewCell.swift in Sources */,
 				532B6A9227DBBF6100277BF4 /* UIViewController+Extension.swift in Sources */,
 				53CBA37227E1E2560080422A /* ContentSizedTableView.swift in Sources */,
+				536A185627E6B6E500E0614A /* RecipeManualStep4ViewController.swift in Sources */,
 				53E50C6C27C017FF000AA45F /* TodayViewController.swift in Sources */,
 				533A0F5927E113BC007B94FE /* IngredientCollectionViewCell.swift in Sources */,
+				536A186027E6B85100E0614A /* MenuCommonStep1ViewController.swift in Sources */,
 				532B6A9D27DBE3FA00277BF4 /* RecipeViewController.swift in Sources */,
 				5327055C27D39B5100394FFB /* MenuViewController.swift in Sources */,
+				536A186227E6B86700E0614A /* MenuCustomStep2ViewController.swift in Sources */,
 				53CBA36F27E172C20080422A /* Step.swift in Sources */,
 				532B6A9B27DBDBF700277BF4 /* Ingredient.swift in Sources */,
+				536A186427E6B87400E0614A /* MenuCustomStep3ViewController.swift in Sources */,
 				5327056027D39B6700394FFB /* CartViewController.swift in Sources */,
 				532B6A9927DBDB9500277BF4 /* Recipe.swift in Sources */,
+				536A184E27E6B3A300E0614A /* RecipeNavigationController.swift in Sources */,
+				536A185E27E6B83B00E0614A /* MenuNavigationController.swift in Sources */,
+				536A186627E6B87E00E0614A /* MenuCommonStep4ViewController.swift in Sources */,
+				536A185C27E6B71D00E0614A /* RecipeCommonStep5ViewController.swift in Sources */,
 				535E94EA27D4F32300C1A713 /* OnboardingCollectionViewCell.swift in Sources */,
 				532B6A9427DBC12200277BF4 /* UserDefaults+Extension.swift in Sources */,
 				535A5C5D27DCF3CA00D52BDB /* PopularRecipesCollectionViewCell.swift in Sources */,
-				5359C50B27E66BAE005A7E8C /* AddMenuViewController.swift in Sources */,
+				536A185027E6B6B100E0614A /* RecipeCommonStep1ViewController.swift in Sources */,
+				536A185227E6B6C500E0614A /* RecipeCommonStep2ViewController.swift in Sources */,
 				5327055E27D39B5A00394FFB /* AddViewController.swift in Sources */,
 				5327055A27D3988300394FFB /* TabBarController.swift in Sources */,
 				534032B427DD84DC00D67625 /* CartTableViewCell.swift in Sources */,
 				5359C50927E6262A005A7E8C /* DateController.swift in Sources */,
+				536A185427E6B6D800E0614A /* RecipeManualStep3ViewController.swift in Sources */,
+				536A185827E6B6F000E0614A /* RecipeOCRStep3ViewController.swift in Sources */,
 				53E50C6827C017FF000AA45F /* AppDelegate.swift in Sources */,
 				5327056227D39B8B00394FFB /* ProfileViewController.swift in Sources */,
 				534032B727DE1C0100D67625 /* HTTPRequest-example.swift in Sources */,

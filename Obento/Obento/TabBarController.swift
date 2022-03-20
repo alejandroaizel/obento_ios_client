@@ -34,8 +34,8 @@ class TabBarController: UITabBarController {
     }
     
     @objc func handlePresentingVC(_ sender: UIButton) {
-        let vc = storyboard?.instantiateViewController(withIdentifier: "AddViewController") as! AddViewController
-
+        let vc = storyboard?.instantiateViewController(withIdentifier: "RecipeNavigationController") as! RecipeNavigationController
+        
         present(vc, animated: true, completion: nil)
     }
 }

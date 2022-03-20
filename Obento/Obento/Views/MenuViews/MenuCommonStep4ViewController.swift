@@ -1,21 +1,29 @@
 //
-//  AddMenuViewController.swift
+//  MenuCommonStep4ViewController.swift
 //  Obento
 //
-//  Created by Alejandro Aizel Boto on 19/3/22.
+//  Created by Alejandro Aizel Boto on 20/3/22.
 //
 
 import UIKit
 
-class AddMenuViewController: UIViewController {
-
+class MenuCommonStep4ViewController: UIViewController {
+    @IBOutlet weak var backButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
 
+    @IBAction func backAction(_ sender: Any) {
+        _ = navigationController?.popViewController(animated: true)
+    }
     /*
     // MARK: - Navigation
 
