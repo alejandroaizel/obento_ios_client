@@ -13,6 +13,7 @@ class MenuViewController: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet weak var dinnerToggleButton: UIButton!
     @IBOutlet weak var previousWeekButton: UIButton!
     @IBOutlet weak var nextWeekButton: UIButton!
+    @IBOutlet weak var addmenuButton: UIButton!
     
     @IBOutlet weak var recipePreviewView: UIView!
     @IBOutlet weak var recipeImage: UIImageView!
@@ -36,10 +37,13 @@ class MenuViewController: UIViewController, UIGestureRecognizerDelegate {
     var dateController: DateController = DateController()
     var currentWeekNumber: Int = 0
     var currentWeek: [DateController.FormattedDate] = []
-    var currentRecipe: Recipe = Recipe(id: 0, userId: 0, name: "Sopa de çorba con chuletillas de cordero", description: "Disfruta de este exquisito plato de la cocina árabe tradicional muy ideal para estas épocas frias.", puntuaction: 4.7, kcal: 350, time: 140, price: 6.5, isLaunch: true, imagePath: "recipe_6", type: "", ingredients: [], steps: [])
+    var currentRecipe: Recipe = Recipe(id: 0, userId: 0, name: "Sopa de çorba con chuletillas de cordero", description: "Disfruta de este exquisito plato de la cocina árabe tradicional muy ideal para estas épocas frias.", puntuaction: 4.7, kcal: 350, time: 140, price: 6.5, isLaunch: true, imagePath: "recipe_6", type: "", servings: 1, ingredients: [], steps: [])
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        addmenuButton.showsMenuAsPrimaryAction = true
+        addmenuButton.menu = addMenuItems()
         
         selectedDay = dateController.currentDate()
         
@@ -165,6 +169,26 @@ class MenuViewController: UIViewController, UIGestureRecognizerDelegate {
     @IBAction func nextWeekAction(_ sender: Any) {
         currentWeekNumber += 1
         updateWeek()
+    }
+    
+    /*@IBAction func addMenuAction(_ sender: Any) {
+    }*/
+    
+    func addMenuItems() -> UIMenu {
+        let menuItems = UIMenu(title: "", options: .displayInline, children: [
+            UIAction(title: "Nuevo menú simple", image: UIImage(systemName: "menubar.rectangle"), handler: { _ in
+                let vc = self.storyboard?.instantiateViewController(withIdentifier: "MenuNavigationController") as! MenuNavigationController
+                MenuNavigationController.optionSelected = 0
+                self.present(vc, animated: true, completion: nil)
+            }),
+            UIAction(title: "Nuevo menú personalizado", image: UIImage(systemName: "filemenu.and.selection"), handler: { _ in
+                let vc = self.storyboard?.instantiateViewController(withIdentifier: "MenuNavigationController") as! MenuNavigationController
+                MenuNavigationController.optionSelected = 1
+                self.present(vc, animated: true, completion: nil)
+            })
+        ])
+        
+        return menuItems
     }
     
 }

@@ -8,17 +8,18 @@
 import UIKit
 
 struct Recipe {
-    let id: Int
-    let userId: Int
-    let name: String
-    let description: String
-    let puntuaction: Double
-    let kcal: Int
-    let time: Int
-    let price: Double
-    let isLaunch: Bool
-    let imagePath: String
-    let type: String
-    let ingredients: [Ingredient]
-    let steps: [String]
+    var id: Int
+    var userId: Int
+    var name: String
+    var description: String
+    var puntuaction: Double
+    var kcal: Int
+    var time: Int
+    var price: Double
+    var isLaunch: Bool
+    var imagePath: String
+    var type: String
+    var servings: Int
+    var ingredients: [Ingredient]
+    var steps: [String]
 }

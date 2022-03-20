@@ -35,7 +35,7 @@ class RecipeViewController: UIViewController {
     var recipeInformation: Recipe!
     var recipeStars: Int = 3 // TODO: Cambiar
     
-    let exampleRecipe: Recipe = .init(id: 8650, userId: 0, name: "Arroz con tomate", description: "Disfruta de este arroz con tomate para que comiences el día con una sonrisa que combine con todo. ¡No hay nada mejor!", puntuaction: 3.4, kcal: 235, time: 40, price: 2.5, isLaunch: true, imagePath: "recipe_1", type: "Sopas", ingredients: [
+    let exampleRecipe: Recipe = .init(id: 8650, userId: 0, name: "Arroz con tomate", description: "Disfruta de este arroz con tomate para que comiences el día con una sonrisa que combine con todo. ¡No hay nada mejor!", puntuaction: 3.4, kcal: 235, time: 40, price: 2.5, isLaunch: true, imagePath: "recipe_1", type: "Sopas", servings: 1, ingredients: [
         .init(id: 0, name: "Zanahorias", category: "", unitaryPrice: 0.32, unit: "uds", kcal: 20, iconPath: "ing_carrot", quantity: 3),
         .init(id: 1, name: "Patatas", category: "", unitaryPrice: 0.61, unit: "uds", kcal: 35, iconPath: "ing_carrot", quantity: 10),
         .init(id: 1, name: "Patatas", category: "", unitaryPrice: 0.61, unit: "uds", kcal: 35, iconPath: "ing_carrot", quantity: 10),
