@@ -8,6 +8,6 @@
 import UIKit
 
 struct Step {
-    let number: Int
-    let description: String
+    var number: Int
+    var description: String
 }

@@ -58,9 +58,6 @@ class RecipeViewController: UIViewController {
         
         recipeInformation = exampleRecipe // TODO: ELIMINAR
         
-        stepsTableView.rowHeight = UITableView.automaticDimension
-        stepsTableView.estimatedRowHeight = UITableView.automaticDimension
-        
         loadRecipeInformation()
         registerCells()
         
@@ -219,10 +216,5 @@ extension RecipeViewController: UITableViewDataSource, UITableViewDelegate {
         cell.setup(Step(number: indexPath.row + 1, description: recipeInformation.steps[indexPath.row]))
         
         return cell
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-
-        return UITableView.automaticDimension
     }
 }

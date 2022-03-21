@@ -8,12 +8,12 @@
 import UIKit
 
 struct Ingredient {
-    let id: Int
-    let name: String
-    let category: String
-    let unitaryPrice: Double
-    let unit: String
-    let kcal: Int
-    let iconPath: String
-    let quantity: Int? // Only for shopping list
+    var id: Int
+    var name: String
+    var category: String
+    var unitaryPrice: Double
+    var unit: String
+    var kcal: Int
+    var iconPath: String
+    var quantity: Int? // Only for shopping list
 }
