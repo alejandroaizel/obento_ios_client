@@ -98,4 +98,10 @@ class DateController {
         
         return week[week.count - 1].nameMonth
     }
+    
+    public func formatDay(_ day: Date) -> CustomDay {
+        let auxDate: FormattedDate = formatDay(day)
+        
+        return .init(day: auxDate.numberDay, month: auxDate.numberMonth, monthString: auxDate.nameMonth, year: auxDate.numberYear)
+    }
 }
