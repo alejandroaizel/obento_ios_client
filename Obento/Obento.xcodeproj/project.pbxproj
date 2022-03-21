@@ -35,6 +35,8 @@
 		535E94DD27D454AB00C1A713 /* OnboardingSlide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535E94DC27D454AB00C1A713 /* OnboardingSlide.swift */; };
 		535E94E827D4ECB700C1A713 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535E94E727D4ECB700C1A713 /* OnboardingViewController.swift */; };
 		535E94EA27D4F32300C1A713 /* OnboardingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535E94E927D4F32300C1A713 /* OnboardingCollectionViewCell.swift */; };
+		5364A89A27E8D03E000A8346 /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5364A89927E8D03E000A8346 /* Menu.swift */; };
+		5364A89C27E8D062000A8346 /* CustomDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5364A89B27E8D062000A8346 /* CustomDay.swift */; };
 		536A184E27E6B3A300E0614A /* RecipeNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536A184D27E6B3A300E0614A /* RecipeNavigationController.swift */; };
 		536A185027E6B6B100E0614A /* RecipeCommonStep1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536A184F27E6B6B100E0614A /* RecipeCommonStep1ViewController.swift */; };
 		536A185227E6B6C500E0614A /* RecipeCommonStep2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536A185127E6B6C500E0614A /* RecipeCommonStep2ViewController.swift */; };
@@ -109,6 +111,8 @@
 		535E94DC27D454AB00C1A713 /* OnboardingSlide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingSlide.swift; sourceTree = "<group>"; };
 		535E94E727D4ECB700C1A713 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		535E94E927D4F32300C1A713 /* OnboardingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCollectionViewCell.swift; sourceTree = "<group>"; };
+		5364A89927E8D03E000A8346 /* Menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
+		5364A89B27E8D062000A8346 /* CustomDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDay.swift; sourceTree = "<group>"; };
 		536A184D27E6B3A300E0614A /* RecipeNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeNavigationController.swift; sourceTree = "<group>"; };
 		536A184F27E6B6B100E0614A /* RecipeCommonStep1ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeCommonStep1ViewController.swift; sourceTree = "<group>"; };
 		536A185127E6B6C500E0614A /* RecipeCommonStep2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeCommonStep2ViewController.swift; sourceTree = "<group>"; };
@@ -272,6 +276,8 @@
 				532B6A9827DBDB9500277BF4 /* Recipe.swift */,
 				532B6A9A27DBDBF700277BF4 /* Ingredient.swift */,
 				53CBA36E27E172C20080422A /* Step.swift */,
+				5364A89927E8D03E000A8346 /* Menu.swift */,
+				5364A89B27E8D062000A8346 /* CustomDay.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -553,6 +559,7 @@
 				536A186227E6B86700E0614A /* MenuCustomStep2ViewController.swift in Sources */,
 				53CBA36F27E172C20080422A /* Step.swift in Sources */,
 				532B6A9B27DBDBF700277BF4 /* Ingredient.swift in Sources */,
+				5364A89C27E8D062000A8346 /* CustomDay.swift in Sources */,
 				536A186427E6B87400E0614A /* MenuCustomStep3ViewController.swift in Sources */,
 				5327056027D39B6700394FFB /* CartViewController.swift in Sources */,
 				532B6A9927DBDB9500277BF4 /* Recipe.swift in Sources */,
@@ -569,6 +576,7 @@
 				5327055E27D39B5A00394FFB /* AddViewController.swift in Sources */,
 				5327055A27D3988300394FFB /* TabBarController.swift in Sources */,
 				534032B427DD84DC00D67625 /* CartTableViewCell.swift in Sources */,
+				5364A89A27E8D03E000A8346 /* Menu.swift in Sources */,
 				5359C50927E6262A005A7E8C /* DateController.swift in Sources */,
 				536A185427E6B6D800E0614A /* RecipeManualStep3ViewController.swift in Sources */,
 				536A185827E6B6F000E0614A /* RecipeOCRStep3ViewController.swift in Sources */,

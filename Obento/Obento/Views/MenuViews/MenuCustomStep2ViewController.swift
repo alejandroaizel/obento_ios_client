@@ -10,6 +10,8 @@ import UIKit
 class MenuCustomStep2ViewController: UIViewController {
     @IBOutlet weak var backButton: UIButton!
     
+    var currentMenu: Menu!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

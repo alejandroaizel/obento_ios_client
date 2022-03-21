@@ -8,12 +8,24 @@
 import UIKit
 
 class MenuCommonStep4ViewController: UIViewController {
-    @IBOutlet weak var backButton: UIButton!
+    @IBOutlet weak var rangeDays: UILabel!
+    @IBOutlet weak var closeButton: UIButton!
+    @IBOutlet weak var okButton: UIButton!
+    @IBOutlet weak var finalImage: UIImageView!
+    
+    var currentMenu: Menu!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Do any additional setup after loading the view.
+        processMenu()
+        
+        rangeDays.text = String(currentMenu.startDay.day) + " " + currentMenu.startDay.monthString.prefix(3).lowercased() + " - " + String(currentMenu.endDay.day) + " " + currentMenu.endDay.monthString.prefix(3).lowercased()
+        finalImage.image = UIImage(named: "new_recipe_final_illustration_" + String(Int.random(in: 1...4)))
+    }
+    
+    func processMenu() {
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -21,17 +33,11 @@ class MenuCommonStep4ViewController: UIViewController {
         navigationController?.setNavigationBarHidden(true, animated: animated)
     }
 
-    @IBAction func backAction(_ sender: Any) {
-        _ = navigationController?.popViewController(animated: true)
+    @IBAction func closeButtonAction(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    
+    @IBAction func okButtonAction(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
     }
-    */
-
 }
