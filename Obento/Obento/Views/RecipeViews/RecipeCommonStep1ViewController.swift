@@ -9,6 +9,8 @@ import UIKit
 import PhotosUI
 
 class RecipeCommonStep1ViewController: UIViewController, UINavigationControllerDelegate {
+    @IBOutlet weak var categoriesCollectionView: UICollectionView!
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var nameImput: UITextField!
     @IBOutlet weak var descriptionInput: UITextView!
     @IBOutlet weak var imagePickerButton: UIButton!
@@ -24,13 +26,19 @@ class RecipeCommonStep1ViewController: UIViewController, UINavigationControllerD
     
     var imagePicker = UIImagePickerController()
     
-    var currentRecipe: Recipe = .init(id: -1, userId: -1, name: "", description: "", puntuaction: -1, kcal: -1, time: -1, price: -1, isLaunch: false, imagePath: "", type: "", servings: 1, ingredients: [], steps: [])
+    var currentRecipe: Recipe = .init(id: -1, userId: -1, name: "", description: "", puntuaction: -1, kcal: -1, time: -1, price: -1, isLaunch: true, imagePath: "", type: "", servings: 1, ingredients: [], steps: [])
     var currentImage: UIImage?
+    var categories: [String] = []
+    var currentCategory: Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         minusServing.alpha = 0.3
+        
+        categories = ["Otro", "Pasta", "Carne", "Pescado", "Arroz", "Verduras", "Hortalizas"] // TODO: CAMBIAR
+        
+        self.addDoneButtonOnKeyboard()
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard (_:)))
         self.view.addGestureRecognizer(tapGesture)
@@ -40,7 +48,58 @@ class RecipeCommonStep1ViewController: UIViewController, UINavigationControllerD
         
         descriptionInput.textContainerInset = UIEdgeInsets(top: 15, left: 10, bottom: 15, right: 10)
 
+        registerCells()
         // Do any additional setup after loading the view.
+    }
+    
+    private func registerCells() {
+        categoriesCollectionView.register(UINib(nibName: CategoryCollectionViewCell.identifier, bundle: nil), forCellWithReuseIdentifier: CategoryCollectionViewCell.identifier)
+    }
+    
+    func addDoneButtonOnKeyboard(){
+            let doneToolbar: UIToolbar = UIToolbar(frame: CGRect.init(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 50))
+        doneToolbar.barStyle = .default
+        doneToolbar.backgroundColor = .systemBackground
+
+            let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+            let done: UIBarButtonItem = UIBarButtonItem(title: "Listo", style: .done, target: self, action: #selector(self.doneButtonAction))
+
+            let items = [flexSpace, done]
+            doneToolbar.items = items
+            doneToolbar.sizeToFit()
+
+        nameImput.inputAccessoryView = doneToolbar
+        descriptionInput.inputAccessoryView = doneToolbar
+        }
+
+        @objc func doneButtonAction(){
+            nameImput.resignFirstResponder()
+            descriptionInput.resignFirstResponder()
+        }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        registerNotifications()
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        scrollView.contentInset.bottom = 0
+    }
+
+    private func registerNotifications() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+
+    @objc private func keyboardWillShow(notification: NSNotification){
+        guard let keyboardFrame = notification.userInfo![UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
+        scrollView.contentInset.bottom = view.convert(keyboardFrame.cgRectValue, from: nil).size.height
+    }
+
+    @objc private func keyboardWillHide(notification: NSNotification){
+        scrollView.contentInset.bottom = 0
     }
     
     @objc func dismissKeyboard (_ sender: UITapGestureRecognizer) {
@@ -48,10 +107,10 @@ class RecipeCommonStep1ViewController: UIViewController, UINavigationControllerD
         descriptionInput.resignFirstResponder()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
+    /*override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
-    }
+    }*/
 
     @IBAction func closeAction(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
@@ -135,7 +194,9 @@ class RecipeCommonStep1ViewController: UIViewController, UINavigationControllerD
     func storeCurrentData() {
         currentRecipe.name = nameImput.text ?? "" // TODO: no permitir
         currentRecipe.description = descriptionInput.text ?? ""
-        // currentRecipe
+        currentRecipe.imagePath = "recipe_1" // TODO: Subir imagen y guardar el id currentImage
+        currentRecipe.time = Int(timePicker.countDownDuration / 60)
+        currentRecipe.type = categories[currentCategory]
         
     }
     
@@ -204,5 +265,47 @@ extension RecipeCommonStep1ViewController: PHPickerViewControllerDelegate {
             () -> Void
             in
         })
+    }
+}
+
+extension RecipeCommonStep1ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return categories.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCollectionViewCell.identifier, for: indexPath) as! CategoryCollectionViewCell
+        
+        cell.setup(categories[indexPath.row])
+        cell.tag = indexPath.row
+        
+        if indexPath.row == currentCategory {
+            cell.categoryLabel.textColor = .white
+            cell.categoryView.backgroundColor = UIColor(named: "ObentoGreen")
+        }
+        
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        var i: Int = 1;
+        for indexPath in categoriesCollectionView.indexPathsForVisibleItems {
+            let cell = categoriesCollectionView.cellForItem(at: indexPath)
+            
+            if cell?.tag == indexPath.row {
+                (cell as! CategoryCollectionViewCell).categoryView.backgroundColor = UIColor.init(named: "ObentoGreen")
+                (cell as! CategoryCollectionViewCell).categoryLabel.textColor = .white
+                
+                currentCategory = indexPath.row
+                
+                continue
+            }
+            
+            (cell as! CategoryCollectionViewCell).categoryView.backgroundColor = UIColor.init(named: "SecondaryColor")
+            (cell as! CategoryCollectionViewCell).categoryLabel.textColor = UIColor.init(named: "TextColor")
+            
+            i += 1
+        }
     }
 }

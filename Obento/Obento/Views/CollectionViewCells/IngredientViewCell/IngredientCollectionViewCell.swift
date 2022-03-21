@@ -17,6 +17,8 @@ class IngredientCollectionViewCell: UICollectionViewCell {
     func setup(_ ingredient: Ingredient) {
         ingredientIcon.image = UIImage(named: ingredient.iconPath)
         ingredientName.text = ingredient.name
-        quantity.text = String(ingredient.quantity ?? -1) + " " + ingredient.unit
+        let quantityOptional = ingredient.quantity ?? -1 == -1 ? "" : String(ingredient.quantity!) + " "
+        
+        quantity.text = quantityOptional + ingredient.unit
     }
 }
