@@ -20,23 +20,14 @@ class RecipeManualStep3ViewController: UIViewController {
     var currentRecipe: Recipe!
     var ingredientList: [Ingredient]!
     var filteredIngredients: [Ingredient] = []
-    
-    let exampleIngredients: [Ingredient] = [
-        .init(id: 0, name: "A", category: "", unitaryPrice: 0.32, unit: "uds", kcal: 12, iconPath: "ing_carrot", quantity: nil),
-        .init(id: 1, name: "B", category: "", unitaryPrice: 0.61, unit: "uds", kcal: 35, iconPath: "ing_carrot", quantity: nil),
-        .init(id: 2, name: "C", category: "", unitaryPrice: 0.61, unit: "uds", kcal: 35, iconPath: "ing_carrot", quantity: nil),
-        .init(id: 3, name: "D", category: "", unitaryPrice: 0.61, unit: "uds", kcal: 35, iconPath: "ing_carrot", quantity: nil),
-        .init(id: 4, name: "E", category: "", unitaryPrice: 0.61, unit: "uds", kcal: 35, iconPath: "ing_carrot", quantity: nil),
-        .init(id: 5, name: "F", category: "", unitaryPrice: 0.61, unit: "uds", kcal: 35, iconPath: "ing_carrot", quantity: nil),
-        .init(id: 6, name: "G", category: "", unitaryPrice: 0.61, unit: "uds", kcal: 35, iconPath: "ing_carrot", quantity: nil),
-        .init(id: 7, name: "H", category: "", unitaryPrice: 0.002 , unit: "g", kcal: 10, iconPath: "ing_carrot", quantity: nil)
-        ]
     var currentIngredients: [Ingredient] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        ingredientList = exampleIngredients // TODO: Eliminar
+        let ingredientDAO = IngredientDAO()
+        
+        ingredientList = ingredientDAO.getAllIngredients()
         filteredIngredients = ingredientList
         
         nextButton.alpha = 0.4

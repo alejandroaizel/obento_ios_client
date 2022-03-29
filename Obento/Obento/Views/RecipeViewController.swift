@@ -35,22 +35,18 @@ class RecipeViewController: UIViewController {
     var recipeInformation: Recipe!
     var recipeStars: Int = 3 // TODO: Cambiar
     
-    let exampleRecipe: Recipe = .init(id: 8650, userId: 0, name: "Arroz con tomate", description: "Disfruta de este arroz con tomate para que comiences el día con una sonrisa que combine con todo. ¡No hay nada mejor!", puntuaction: 3.4, kcal: 235, time: 40, price: 2.5, isLaunch: true, imagePath: "recipe_1", type: "Sopas", servings: 1, ingredients: [
-        .init(id: 0, name: "Zanahorias", category: "", unitaryPrice: 0.32, unit: "uds", kcal: 20, iconPath: "ing_carrot", quantity: 3),
-        .init(id: 1, name: "Patatas", category: "", unitaryPrice: 0.61, unit: "uds", kcal: 35, iconPath: "ing_carrot", quantity: 10),
-        .init(id: 1, name: "Patatas", category: "", unitaryPrice: 0.61, unit: "uds", kcal: 35, iconPath: "ing_carrot", quantity: 10),
-        .init(id: 1, name: "Patjkkjhjkatas", category: "", unitaryPrice: 0.61, unit: "uds", kcal: 35, iconPath: "ing_carrot", quantity: 10),
-        .init(id: 1, name: "Patatas", category: "", unitaryPrice: 0.61, unit: "uds", kcal: 35, iconPath: "ing_carrot", quantity: 10),
-        .init(id: 1, name: "Patatas", category: "", unitaryPrice: 0.61, unit: "uds", kcal: 35, iconPath: "ing_carrot", quantity: 10),
-        .init(id: 1, name: "Pimentón de la Vera", category: "", unitaryPrice: 0.61, unit: "uds", kcal: 35, iconPath: "ing_carrot", quantity: 10),
-        .init(id: 2, name: "Macarrones", category: "", unitaryPrice: 0.002 , unit: "g", kcal: 10, iconPath: "ing_carrot", quantity: 100)
+    let exampleRecipe: Recipe = .init(id: 10, userId: 0, name: "Salmorejo cordobés tradicional", description: "Cuando hace unas semanas visité Córdoba, tuve el honor de ser nombrado embajador de la Cofradía del Salmorejo y no podía dejar pasar ese honor sin contaros cómo se hace la receta del salmorejo cordobés tradicional, una sopa fría con la que siempre quedo bien contento, especialmente en los días calurosos de primavera y verano.", puntuaction: 4.4, kcal: 235, time: 45, price: 2.5, isLaunch: true, imagePath: "recipe_1", type: "Sopas", servings: 1, ingredients: [
+        .init(id: 0, name: "Tomate", category: "", unitaryPrice: 0.32, unit: "g", kcal: 20, iconPath: "ing_carrot", quantity: 200),
+        .init(id: 1, name: "Pan", category: "", unitaryPrice: 0.61, unit: "uds", kcal: 35, iconPath: "ing_carrot", quantity: 10),
+        .init(id: 1, name: "Aceite de oliva", category: "", unitaryPrice: 0.61, unit: "ml", kcal: 35, iconPath: "ing_carrot", quantity: 150),
+        .init(id: 1, name: "Diente de ajo", category: "", unitaryPrice: 0.61, unit: "uds", kcal: 35, iconPath: "ing_carrot", quantity: 1),
+        .init(id: 1, name: "Sal", category: "", unitaryPrice: 0.61, unit: "g", kcal: 35, iconPath: "ing_carrot", quantity: 5)
     ], steps: [
-        "Lavamos el arroz con agua fria un par de veces.",
-        "Precalentamo el aceite con un diente de ajo hasta que coja color.",
-        "Una vez caliente el aceite, echamos el arroz una vez seco y lo removemos durante unos 30 segundos.",
-        "Echamos el agua y dejamos tapado durante 30 minutos.",
-        "Una vez pasado el tiempo, destapamos y dejamos reposar 5 minutos.",
-        "Presentamos juntos con un par de cucharadas de tomate frito."
+        "Comenzamos lavando los tomates, retirando lo verde del pedúnculo y triturándolos. No es necesario pelar ni quitar las pepitas porque después paso el puré de tomate por un colador fino donde se queda todo pasando solamente el tomate.",
+        "En un bol se coloca el pan y se cubro con el puré de tomate dejando que se impregne durante unos diez minutos. Pasado ese tiempo, se incorpora el diente de ajo y se tritura bien con la batidora para obtener una crema espesa de pan y tomate.",
+        "A continuación se incorpora el aceite de oliva virgen extra. Un buen salmorejo se debería hacer siempre con aceite de la zona de Córdoba, por lo que si podéis, cualquier variedad de la D.O. Priego de Córdoba es la idónea.",
+        "Tras echar el aceite se vuelve a triturar con paciencia hasta que el salmorejo sea uniforme, con un bonito color anaranjado y suficientemente compacto como para aguantar sobre su superficie los tradicionales tropezones de guarnición con los que se decora cada ración.",
+        "Se presenta en un plato junto con un chorrito de aceite de oliva."
     ])
 
     override func viewDidLoad() {

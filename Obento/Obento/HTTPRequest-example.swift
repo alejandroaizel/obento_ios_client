@@ -7,8 +7,10 @@
 
 import UIKit
 
-/*func call-example() {
-    var request = URLRequest(url: URL(string: "http://127.0.0.1:8000/ingredients")!)
+func callExample() {
+    var ingredientList: [Ingredient] = []
+    
+    var request = URLRequest(url: URL(string: "http://13.37.225.162:8000/ingredients")!)
 
     request.httpMethod = "GET"
     request.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -20,13 +22,15 @@ import UIKit
         do {
             let dict = try JSONSerialization.jsonObject(with: data!)  as! [Dictionary<String, AnyObject>]
             
-            // Tengo el dict
-            
-            print(dict[0]["name"] as! String)
+            for ingredient in dict {
+                ingredientList.append(Ingredient(id: ingredient["id"] as! Int, name: ingredient["name"]! as! String, category: ingredient["category"] as! String, unitaryPrice: ingredient["unitary_price"] as! Double, unit: ingredient["unit"] as! String, kcal: ingredient["kcalories"] as! Double, iconPath: ingredient["icon_name"] as! String))
+            }
         } catch {
             print("error")
         }
     })
 
     task.resume()
-}*/
+    
+    // return ingredientList
+}

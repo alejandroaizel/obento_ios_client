@@ -13,7 +13,7 @@ struct Ingredient {
     var category: String
     var unitaryPrice: Double
     var unit: String
-    var kcal: Int
+    var kcal: Double
     var iconPath: String
     var quantity: Int? // Only for shopping list
 }

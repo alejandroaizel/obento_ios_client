@@ -116,6 +116,8 @@ class MenuCommonStep1ViewController: UIViewController {
     }
     
     @IBAction func nextButtonAction(_ sender: Any) {
+        //callExample()
+        
         if !isDateCorect || currentNumDays > 14 {
             return
         }

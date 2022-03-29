@@ -18,7 +18,8 @@ struct Recipe {
     var price: Double
     var isLaunch: Bool
     var imagePath: String
-    var type: String
+    var type: String?
+    var typeInt: String?
     var servings: Int
     var ingredients: [Ingredient]
     var steps: [String]

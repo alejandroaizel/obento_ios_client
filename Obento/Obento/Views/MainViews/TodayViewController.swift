@@ -43,6 +43,13 @@ class TodayViewController: UIViewController, UIGestureRecognizerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let menuDAO = MenuDAO()
+        let dateController = DateController()
+        
+        let userId: Int = 1
+        
+        featuredRecipe = menuDAO.getMenu(from: userId, on: dateController.currentDay(), isLunch: true)
+        
         categories = [allCategory, riceCategory, pastaCategory, vegetablesCategory, meatCategory, fishCategory]
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(clickView(_:)))

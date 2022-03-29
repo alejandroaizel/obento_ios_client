@@ -37,7 +37,7 @@ class MenuViewController: UIViewController, UIGestureRecognizerDelegate {
     var dateController: DateController = DateController()
     var currentWeekNumber: Int = 0
     var currentWeek: [DateController.FormattedDate] = []
-    var currentRecipe: Recipe = Recipe(id: 0, userId: 0, name: "Sopa de çorba con chuletillas de cordero", description: "Disfruta de este exquisito plato de la cocina árabe tradicional muy ideal para estas épocas frias.", puntuaction: 4.7, kcal: 350, time: 140, price: 6.5, isLaunch: true, imagePath: "recipe_6", type: "", servings: 1, ingredients: [], steps: [])
+    var currentRecipe: Recipe = Recipe(id: 0, userId: 0, name: "Sopa de çorba con chuletillas de cordero", description: "Disfruta de este exquisito plato de la cocina árabe tradicional ideal para estas épocas frias.", puntuaction: 4.7, kcal: 350, time: 140, price: 6.5, isLaunch: true, imagePath: "recipe_6", type: "", servings: 1, ingredients: [], steps: [])
     
     override func viewDidLoad() {
         super.viewDidLoad()

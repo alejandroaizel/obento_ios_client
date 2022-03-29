@@ -104,4 +104,8 @@ class DateController {
         
         return .init(day: auxDate.numberDay, month: auxDate.numberMonth, monthString: auxDate.nameMonth, year: auxDate.numberYear)
     }
+    
+    public func currentDay() -> CustomDay {
+        return formatDay(currentDate())
+    }
 }

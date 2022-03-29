@@ -18,23 +18,26 @@ class RecipeCommonStep5ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let recipeDAO = RecipeDAO()
+        
         finalStats()
         
         finalImage.image = UIImage(named: "new_recipe_final_illustration_" + String(Int.random(in: 1...4)))
 
+        recipeDAO.createRecipe(currentRecipe)
         // TODO: GUARDAR EN BD LA RECETA
     }
     
     func finalStats() {
-        var totalKcal: Int = 0
+        var totalKcal: Double = 0
         var totalPrice: Double = 0.0
         
         for ing in currentRecipe.ingredients {
-            totalKcal += ing.kcal * ing.quantity!
+            totalKcal += ing.kcal * Double(ing.quantity!)
             totalPrice += ing.unitaryPrice * Double(ing.quantity!)
         }
         
-        currentRecipe.kcal = totalKcal
+        currentRecipe.kcal = Int(totalKcal)
         currentRecipe.price = totalPrice
         
         currentRecipe.puntuaction = 0
