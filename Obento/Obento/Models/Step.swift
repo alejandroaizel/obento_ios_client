@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct Step {
+struct Step: Codable {
     var number: Int
     var description: String
 }

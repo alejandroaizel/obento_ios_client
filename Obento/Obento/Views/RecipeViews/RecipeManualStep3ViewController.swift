@@ -25,11 +25,11 @@ class RecipeManualStep3ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let ingredientDAO = IngredientDAO()
-        
-        ingredientList = ingredientDAO.getAllIngredients()
-        filteredIngredients = ingredientList
-        
+        Task {
+            ingredientList = await ObentoApi.getIngredients()
+            filteredIngredients = ingredientList
+        }
+
         nextButton.alpha = 0.4
         
         self.addDoneButtonOnKeyboard()
@@ -95,13 +95,13 @@ class RecipeManualStep3ViewController: UIViewController {
         if currentIngredients.count == 0 {
             return
         }
+    
+        let auxIngredients: [Ingredient] = []
         
-        var auxIngredients: [Ingredient] = []
-        
-        var i: Int = 0
+        let i: Int = 0
         for rowPath in selectedIngredientsTableView.indexPathsForVisibleRows! {
             let cell = selectedIngredientsTableView.cellForRow(at: rowPath)
-            let currentIngredient: Ingredient = currentIngredients[i]
+            let _: Ingredient = currentIngredients[i]
 
             let ingredientQuantity: Int = Int((cell as! NewIngredientTableViewCellTableViewCell).ingredientInput.text ?? "-1") ?? -1
             
@@ -109,9 +109,11 @@ class RecipeManualStep3ViewController: UIViewController {
                 continue
             }
             
-            auxIngredients.append(.init(id: currentIngredient.id, name: currentIngredient.name, category: currentIngredient.category, unitaryPrice: currentIngredient.unitaryPrice, unit: currentIngredient.unit, kcal: currentIngredient.kcal, iconPath: currentIngredient.iconPath, quantity: ingredientQuantity))
+            /*
+             auxIngredients.append(.init(id: currentIngredient.id, name: currentIngredient.name, category: currentIngredient.category, unitaryPrice: currentIngredient.unitaryPrice, unit: currentIngredient.unit, kcal: currentIngredient.kcal, iconPath: currentIngredient.iconPath, quantity: ingredientQuantity))
             
             i += 1
+            */ //TODO: Use new Ingredient object
         }
         
         currentRecipe.ingredients = auxIngredients
@@ -204,7 +206,7 @@ extension RecipeManualStep3ViewController: UICollectionViewDelegate, UICollectio
 
             let ingredientQuantity: Int = Int((cell as! NewIngredientTableViewCellTableViewCell).ingredientInput.text ?? "-1") ?? -1
             
-            currentIngredients[i].quantity = ingredientQuantity
+            currentIngredients[i].quantity = Float(ingredientQuantity)
             
             i += 1
         }

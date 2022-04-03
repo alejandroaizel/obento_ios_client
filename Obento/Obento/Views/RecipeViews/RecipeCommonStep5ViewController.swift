@@ -17,30 +17,28 @@ class RecipeCommonStep5ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let recipeDAO = RecipeDAO()
-        
+    
         finalStats()
-        
         finalImage.image = UIImage(named: "new_recipe_final_illustration_" + String(Int.random(in: 1...4)))
 
-        recipeDAO.createRecipe(currentRecipe)
-        // TODO: GUARDAR EN BD LA RECETA
+        Task {
+            await ObentoApi.postRecipe(recipe: currentRecipe)
+        }
     }
     
     func finalStats() {
-        var totalKcal: Double = 0
-        var totalPrice: Double = 0.0
+        var totalKcal: Float = 0
+        var totalPrice: Float = 0.0
         
         for ing in currentRecipe.ingredients {
-            totalKcal += ing.kcal * Double(ing.quantity!)
-            totalPrice += ing.unitaryPrice * Double(ing.quantity!)
+            totalKcal += ing.kcalories * ing.quantity!
+            totalPrice += ing.unitaryPrice * ing.quantity!
         }
         
-        currentRecipe.kcal = Int(totalKcal)
-        currentRecipe.price = totalPrice
+        currentRecipe.kcalories = totalKcal.rounded()
+        currentRecipe.estimatedCost = totalPrice
         
-        currentRecipe.puntuaction = 0
+        // currentRecipe.puntuaction = 0 TODO: score
     }
     
     override func viewWillAppear(_ animated: Bool) {

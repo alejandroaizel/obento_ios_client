@@ -18,7 +18,7 @@ class PopularRecipesCollectionViewCell: UICollectionViewCell {
     func setup(_ recipe: Recipe) {
         recipeImage.image = UIImage(named: recipe.imagePath) // TODO: Cambiar a la imagen del path de la receta
         recipeTitle.text = recipe.name
-        recipePuntuaction.text = String(recipe.puntuaction)
+        recipePuntuaction.text = "0" // TODO: score String(recipe.puntuaction)
         
     }
 }

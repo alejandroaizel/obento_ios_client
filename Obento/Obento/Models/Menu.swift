@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Menu {
+struct Menu: Codable {
     var numDays: Int
     var startDay: CustomDay
     var endDay: CustomDay

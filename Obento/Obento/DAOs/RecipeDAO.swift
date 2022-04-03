@@ -8,6 +8,9 @@
 import Foundation
 
 class RecipeDAO {
+    
+    let jsonEncoder = JSONEncoder()
+    
     func createRecipe(_ recipe: Recipe) {
         let PATH: String = "/recipes"
         
@@ -34,25 +37,28 @@ class RecipeDAO {
         
         let jsonData = try? JSONSerialization.data(withJSONObject: json)
         
+        
         if let JSONString = String(data: jsonData!, encoding: String.Encoding.utf8) {
            print(JSONString)
         }
         
+        let data = try? jsonEncoder.encode(recipe)
+        
         var request = URLRequest(url: URL(string: HOST + PATH)!)
 
         request.httpMethod = "POST"
-        request.httpBody = jsonData
+        request.httpBody = data
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         // let semaphore = DispatchSemaphore(value: 0)
         
         let session = URLSession.shared
-        
+        print(data)
         let task = session.dataTask(with: request, completionHandler: { data, response, error -> Void in
             print(response!)
             do {
                 // _ = try JSONSerialization.jsonObject(with: data!)  as! [Dictionary<String, AnyObject>]
                 
-                print("ola")
+                print(data)
                 
                 //semaphore.signal()
             } catch {

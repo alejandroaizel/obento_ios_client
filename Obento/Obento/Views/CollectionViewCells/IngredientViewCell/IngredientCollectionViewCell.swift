@@ -15,7 +15,7 @@ class IngredientCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var quantity: UILabel!
     
     func setup(_ ingredient: Ingredient) {
-        ingredientIcon.image = UIImage(named: ingredient.iconPath)
+        ingredientIcon.image = UIImage(named: ingredient.iconName)
         ingredientName.text = ingredient.name
         let quantityOptional = ingredient.quantity ?? -1 == -1 ? "" : String(ingredient.quantity!) + " "
         
