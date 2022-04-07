@@ -312,7 +312,7 @@ class ObentoApi {
             let body = [
                 "user": userId,
                 "date": date,
-                "is_lunc": isLunch
+                "is_lunch": isLunch
             ] as [String : Any]
             
             // Make request

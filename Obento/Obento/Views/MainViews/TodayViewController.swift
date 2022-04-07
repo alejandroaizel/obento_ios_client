@@ -18,25 +18,19 @@ class TodayViewController: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet weak var featuredRecipeView: UIStackView!
     
     // Categories
+    @IBOutlet weak var categoryStack: UIStackView!
     @IBOutlet weak var allCategory: UIView!
-    @IBOutlet weak var riceCategory: UIView!
-    @IBOutlet weak var pastaCategory: UIView!
-    @IBOutlet weak var vegetablesCategory: UIView!
-    @IBOutlet weak var meatCategory: UIView!
-    @IBOutlet weak var fishCategory: UIView!
     
     // Popular Recipes
     @IBOutlet weak var popularCollectionView: UICollectionView!
     
-    
-    var currentSelectedCategory = 0;
+    var currentSelectedCategory: Int = 0
     
     // UI Elements
     var featuredRecipe: Recipe?
-    var categories: [UIView] = [] //TODO: Change this for the below line
-    //var categories: [String]
+    var categories: [String] = []
     var recipes: [Recipe] = []
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -51,27 +45,26 @@ class TodayViewController: UIViewController, UIGestureRecognizerDelegate {
                 date: dateController.currentDay().toString(),
                 isLunch: true
             )
-            loadFeatureRecipe()
-            
-            let tapGesture = UITapGestureRecognizer(
-                target: self,
-                action: #selector(clickView(_:))
-            )
-            tapGesture.delegate = self
-            featuredRecipeView.addGestureRecognizer(tapGesture)
+            if (featuredRecipe != nil) {
+                loadFeatureRecipe()
+                // Add listener
+                let tapGesture = UITapGestureRecognizer(
+                    target: self,
+                    action: #selector(clickView(_:))
+                )
+                tapGesture.delegate = self
+                featuredRecipeView.addGestureRecognizer(tapGesture)
+            } else {
+                // TODO: show placeholder, something like
+                // "Create your first menu to see here your recipe"
+                // For the moment load default values
+                loadFeatureRecipe()
+            }
         }
         
         // Categories
         Task {
-            //categories = await ObentoApi.getRecipesByCategory()
-            categories = [
-                allCategory,
-                riceCategory,
-                pastaCategory,
-                vegetablesCategory,
-                meatCategory,
-                fishCategory
-            ]
+            categories = await ObentoApi.getRecipeCategories()
             loadCategories()
         }
         
@@ -83,46 +76,16 @@ class TodayViewController: UIViewController, UIGestureRecognizerDelegate {
         
     }
     
+    // FEATURE RECIPE METHODS
+    
     func loadFeatureRecipe() {
-        featuredRecipeTitle.text = featuredRecipe?.name
+        featuredRecipeTitle.text = featuredRecipe?.name ?? "Receta destacada"
         featuredRecipekcal.text = "\(featuredRecipe?.kcalories ?? 0) kcal"
         featuredRecipeTime.text = "\(featuredRecipe?.cookingTime ?? 0) min"
         featuredRecipePrice.text = "\(featuredRecipe?.estimatedCost ?? 0) €"
         featuredRecipeImage.image = UIImage(
             named: "\(featuredRecipe?.imagePath ?? "recipe_1")"
         ) // FIXME: Change this
-    }
-    
-    func loadCategories() {
-        for i in 0..<categories.count {
-            categories[i].tag = i
-            
-            let tapGesture = UITapGestureRecognizer(
-                target: self,
-                action: #selector(clickCategory(_:))
-            )
-            tapGesture.delegate = self
-            categories[i].addGestureRecognizer(tapGesture)
-        }
-    }
-    
-    func collectionView(
-        _ collectionView: UICollectionView,
-        didSelectItemAt indexPath: IndexPath
-    ) {
-        let controller = RecipeViewController.instantiate()
-        controller.recipeInformation = recipes[indexPath.row]
-
-        present(controller, animated: true, completion: nil)
-    }
-    
-    private func registerCells() {
-        popularCollectionView.register(
-            UINib(nibName: PopularRecipesCollectionViewCell.identifier,
-                  bundle: nil),
-            forCellWithReuseIdentifier:
-                PopularRecipesCollectionViewCell.identifier
-        )
     }
     
     @objc func clickView(_ sender: UIView) {
@@ -135,22 +98,167 @@ class TodayViewController: UIViewController, UIGestureRecognizerDelegate {
         present(controller, animated: true, completion: nil)
     }
     
+    // CATEGORIES METHODS
+    
+    func loadCategories() {
+        // Create listener
+        let tapGesture = UITapGestureRecognizer(
+            target: self,
+            action: #selector(clickCategory(_:))
+        )
+        tapGesture.delegate = self
+
+        // Create "all" category
+        allCategory.tag = 0
+        allCategory.addGestureRecognizer(tapGesture)
+        
+        // Add rest of categories (from API) to stack
+        for i in 0..<categories.count {
+            // Use Allcategories as template
+            let labelCategory = createLabelCategory(
+                template: allCategory,
+                categoryName: categories[i]
+            )
+            labelCategory.tag = i + 1
+            
+            // Create listener
+            let tapGesture = UITapGestureRecognizer(
+                target: self,
+                action: #selector(clickCategory(_:))
+            )
+            tapGesture.delegate = self
+            labelCategory.addGestureRecognizer(tapGesture)
+            
+            // Add view to stack
+            categoryStack.addArrangedSubview(labelCategory)
+            categoryStack.addSubview(labelCategory)
+        }
+        categoryStack.sizeToFit()
+    }
+    
+    // Clone and setting a new category view
+    private func createLabelCategory(
+        template: UIView,
+        categoryName: String
+    ) -> UIView {
+        // Copy template
+        let aux: UIView = allCategory.copyView()
+        // Set corner radius and tag
+        aux.cornerRadius = 20.0
+        aux.layoutMargins = UIEdgeInsets(
+            top: 0, left: 0, bottom: 0, right: 20
+        )
+        // Set name and colors
+        let textLabel = aux.subviews[0] as! UILabel
+        textLabel.text = categoryName
+        textLabel.textColor =  UIColor(named: "TextColor")
+        aux.backgroundColor = UIColor(named: "SecondaryColor")
+        
+        return aux
+    }
+
     @objc func clickCategory(_ sender: UITapGestureRecognizer) {
         let senderView = sender.view!
         let viewTag = senderView.tag
-        
-        categories[viewTag].backgroundColor = UIColor(named: "ObentoGreen")
-        let viewLabel: UILabel = categories[viewTag].subviews[0] as! UILabel
-        viewLabel.textColor = .white
-        
-        categories[currentSelectedCategory].backgroundColor = UIColor(named: "SecondaryColor")
-        let currentViewLabel = categories[currentSelectedCategory].subviews[0] as! UILabel
-        currentViewLabel.textColor = UIColor(named: "TextColor")
-        
+
+        // Select new label
+        selectLabel(tag: viewTag)
+        // Unselect old label
+        unselectLabel(tag: currentSelectedCategory)
+        // Update selected category value
         currentSelectedCategory = viewTag
-        
-        // TODO: Aqui modificar la vista de recetas populares
+
+        updatePopularRecipesByCategory(category: currentSelectedCategory)
     }
+
+    private func selectLabel(tag: Int) {
+        for view in categoryStack.subviews {
+            if (view.tag == tag) {
+                view.backgroundColor = UIColor(named: "ObentoGreen")
+                let viewLabel: UILabel = view.subviews[0] as! UILabel
+                viewLabel.textColor = .white
+                break
+            }
+        }
+    }
+    
+    private func unselectLabel(tag: Int) {
+        for view in categoryStack.subviews {
+            if (view.tag == tag) {
+                view.backgroundColor = UIColor(named: "SecondaryColor")
+                let viewLabel: UILabel = view.subviews[0] as! UILabel
+                viewLabel.textColor = UIColor(named: "TextColor")
+                break
+            }
+        }
+    }
+    
+    // POPULAR RECIPES METHODS
+    
+    func collectionView(
+        _ collectionView: UICollectionView,
+        didSelectItemAt indexPath: IndexPath
+    ) {
+        let controller = RecipeViewController.instantiate()
+        controller.recipeInformation = recipes[indexPath.row]
+        
+        present(controller, animated: true, completion: nil)
+    }
+    
+    private func registerCells() {
+        popularCollectionView.register(
+            UINib(
+                nibName: PopularRecipesCollectionViewCell.identifier,
+                bundle: nil
+            ),
+            forCellWithReuseIdentifier: PopularRecipesCollectionViewCell.identifier
+        )
+    }
+    
+    private func updatePopularRecipesByCategory(category: Int) {
+        switch category {
+        // Arroz
+        case 1:
+            break
+        // Bocadillos
+        case 2:
+            break
+        // Carnes
+        case 3:
+            break
+        // Ensaldas y bowls
+        case 4:
+            break
+        // Guisos
+        case 5:
+            break
+        // Legumbres
+        case 6:
+            break
+        // Pastas
+        case 7:
+            break
+        // Pescado
+        case 8:
+            break
+        // Salteado
+        case 9:
+            break
+        // Sandwich
+        case 10:
+            break
+        // Sopa y crema
+        case 11:
+            break
+        // Verduras
+        case 12:
+            break
+        // Todo
+        default:
+            break
+        }
+    }
+    
 }
 
 extension TodayViewController: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -176,3 +284,11 @@ extension TodayViewController: UICollectionViewDelegate, UICollectionViewDataSou
     }
 }
 
+extension UIView
+{
+    func copyView<T: UIView>() -> T {
+        return NSKeyedUnarchiver.unarchiveObject(
+            with: NSKeyedArchiver.archivedData(withRootObject: self)
+        ) as! T
+    }
+}
