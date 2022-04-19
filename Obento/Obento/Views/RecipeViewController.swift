@@ -39,7 +39,7 @@ class RecipeViewController: UIViewController {
         super.viewDidLoad()
         
         Task {
-            recipeInformation = await ObentoApi.getRecipe(id: 1)
+            recipeInformation = await ObentoApi.getRecipe(id: 22)
             loadRecipeInformation()
             registerCells()
         }
@@ -52,7 +52,7 @@ class RecipeViewController: UIViewController {
     }
     
     func loadRecipeInformation() {
-        recipeImage.image = UIImage(named: recipeInformation?.imagePath ?? "recipe_1") //TODO: create recipe_0 image with placeholder for empty or nil cases
+        recipeImage.image = UIImage(data: recipeInformation!.image) //TODO: create recipe_0 image with placeholder for empty or nil cases
         recipeName.text = recipeInformation?.name ?? ""
         recipeType.text = recipeInformation?.category ?? ""
         recipePuntuation.text = "3" // TODO: String(recipeInformation.puntuaction)

@@ -16,7 +16,7 @@ struct Recipe: Codable {
     var steps: [String]
     var cookingTime: Int
     var isLunch: Bool
-    var imagePath: String
+    var image: Data
     var servings: Int
     var userId: Int
     var kcalories: Float
@@ -76,7 +76,10 @@ struct Recipe: Codable {
         steps = try values.decode([String].self, forKey: .steps)
         cookingTime = try values.decode(Int.self, forKey: .cookingTime)
         isLunch = try values.decode(Bool.self, forKey: .isLunch)
-        imagePath = try values.decode(String.self, forKey: .imagePath)
+        image = Recipe.getImageData(imageURL: try! values.decode(
+                String.self,
+                forKey: .imagePath)
+        )!
         servings = try values.decode(Int.self, forKey: .servings)
         userId = try values.decode(Int.self, forKey: .userId)
         kcalories = try values.decode(Float.self, forKey: .kcalories)
@@ -92,7 +95,7 @@ struct Recipe: Codable {
         try container.encode(steps, forKey: .steps)
         try container.encode(cookingTime, forKey: .cookingTime)
         try container.encode(isLunch, forKey: .isLunch)
-        try container.encode(imagePath, forKey: .imagePath)
+        try container.encode(image, forKey: .imagePath)
         try container.encode(servings, forKey: .servings)
         try container.encode(userId, forKey: .userId)
         try container.encode(ingredients, forKey: .ingredients)
@@ -127,6 +130,13 @@ struct Recipe: Codable {
         default:
             return 0
         }
+    }
+    
+    static func getImageData(imageURL: String) -> Data? {
+        let dataurl: String = "http://13.37.225.162:8000" + imageURL
+        let url = URL(string: dataurl)
+        let data = try? Data(contentsOf: url!)
+        return data
     }
 }
 

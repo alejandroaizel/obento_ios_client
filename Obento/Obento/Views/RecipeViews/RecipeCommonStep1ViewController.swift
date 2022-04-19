@@ -193,11 +193,10 @@ class RecipeCommonStep1ViewController: UIViewController, UINavigationControllerD
         self.present(pickerViewController, animated: true, completion: nil)
     }
     
-    
     func storeCurrentData() {
         currentRecipe?.name = nameImput.text ?? "" // TODO: no permitir
         currentRecipe?.description = descriptionInput.text ?? ""
-        currentRecipe?.imagePath = "recipe_1" // TODO: Subir imagen y guardar el id currentImage
+        //currentRecipe?.image = "recipe_1" // TODO: Subir imagen y guardar el id currentImage
         currentRecipe?.cookingTime = Int(timePicker.countDownDuration / 60)
         currentRecipe?.category = categories[currentCategory]
         

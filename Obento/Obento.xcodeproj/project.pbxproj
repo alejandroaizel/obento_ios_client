@@ -10,8 +10,6 @@
 		195F706B27F8DE83004F638D /* ObentoAPITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195F706A27F8DE83004F638D /* ObentoAPITests.swift */; };
 		195F706D27F8E07E004F638D /* RecipeCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195F706C27F8E07E004F638D /* RecipeCategory.swift */; };
 		1975D17127F3A7DF0015A54C /* ObentoApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1975D17027F3A7DF0015A54C /* ObentoApi.swift */; };
-		1975D17427F3AC2B0015A54C /* AnyCodable in Frameworks */ = {isa = PBXBuildFile; productRef = 1975D17327F3AC2B0015A54C /* AnyCodable */; };
-		1975D17B27F3B4AF0015A54C /* Get in Frameworks */ = {isa = PBXBuildFile; productRef = 1975D17A27F3B4AF0015A54C /* Get */; };
 		530CD30627E7DECB0042A8FD /* NewStepTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530CD30427E7DECB0042A8FD /* NewStepTableViewCell.swift */; };
 		530CD30727E7DECB0042A8FD /* NewStepTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 530CD30527E7DECB0042A8FD /* NewStepTableViewCell.xib */; };
 		530CD30E27E821FB0042A8FD /* CategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530CD30C27E821FB0042A8FD /* CategoryCollectionViewCell.swift */; };
@@ -156,8 +154,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1975D17427F3AC2B0015A54C /* AnyCodable in Frameworks */,
-				1975D17B27F3B4AF0015A54C /* Get in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -439,8 +435,6 @@
 			);
 			name = Obento;
 			packageProductDependencies = (
-				1975D17327F3AC2B0015A54C /* AnyCodable */,
-				1975D17A27F3B4AF0015A54C /* Get */,
 			);
 			productName = Obento;
 			productReference = 53E50C6427C017FF000AA45F /* Obento.app */;
@@ -972,19 +966,6 @@
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		1975D17327F3AC2B0015A54C /* AnyCodable */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 1975D17227F3AC2B0015A54C /* XCRemoteSwiftPackageReference "AnyCodable" */;
-			productName = AnyCodable;
-		};
-		1975D17A27F3B4AF0015A54C /* Get */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 1975D17927F3B4AF0015A54C /* XCRemoteSwiftPackageReference "Get" */;
-			productName = Get;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 53E50C5C27C017FF000AA45F /* Project object */;
 }

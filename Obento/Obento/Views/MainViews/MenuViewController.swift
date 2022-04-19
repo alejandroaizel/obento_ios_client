@@ -50,7 +50,7 @@ class MenuViewController: UIViewController, UIGestureRecognizerDelegate {
         // Load recipes
         Task {
             // TODO: change for selected recipe by day
-            currentRecipe = await ObentoApi.getRecipe(id: 1)
+            currentRecipe = await ObentoApi.getRecipe(id: 25)
             
             loadWeek()
             updateWeek()
@@ -106,7 +106,7 @@ class MenuViewController: UIViewController, UIGestureRecognizerDelegate {
         date.text = month.capitalizingFirstLetter() + ", " + String(year)
         
         recieTitle.text = currentRecipe?.name ?? "Null"
-        recipeImage.image = UIImage(named: currentRecipe?.imagePath ?? "recipe_1")
+        recipeImage.image = UIImage(named: "recipe_1")
         recipePuntuation.text = String(5) // TODO: score
         recipeDescription.text = currentRecipe?.description ?? "Null"
         

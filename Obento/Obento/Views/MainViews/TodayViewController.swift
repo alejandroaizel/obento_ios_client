@@ -39,12 +39,13 @@ class TodayViewController: UIViewController, UIGestureRecognizerDelegate {
         
         // Featured recipe
         Task {
-            featuredRecipe = await ObentoApi.getFeaturedRecipe(
-                id: 1,
-                userId: userId,
-                date: dateController.currentDay().toString(),
-                isLunch: true
-            )
+//            featuredRecipe = await ObentoApi.getFeaturedRecipe(
+//                id: 1,
+//                userId: userId,
+//                date: dateController.currentDay().toString(),
+//                isLunch: true
+//            )
+            featuredRecipe = await ObentoApi.getRecipe(id: 50)
             if (featuredRecipe != nil) {
                 loadFeatureRecipe()
                 // Add listener
@@ -79,13 +80,12 @@ class TodayViewController: UIViewController, UIGestureRecognizerDelegate {
     // FEATURE RECIPE METHODS
     
     func loadFeatureRecipe() {
+        
+        featuredRecipeImage.image = UIImage(data: featuredRecipe!.image) //TODO: set default value
         featuredRecipeTitle.text = featuredRecipe?.name ?? "Receta destacada"
         featuredRecipekcal.text = "\(featuredRecipe?.kcalories ?? 0) kcal"
         featuredRecipeTime.text = "\(featuredRecipe?.cookingTime ?? 0) min"
         featuredRecipePrice.text = "\(featuredRecipe?.estimatedCost ?? 0) €"
-        featuredRecipeImage.image = UIImage(
-            named: "\(featuredRecipe?.imagePath ?? "recipe_1")"
-        ) // FIXME: Change this
     }
     
     @objc func clickView(_ sender: UIView) {
@@ -279,7 +279,6 @@ extension TodayViewController: UICollectionViewDelegate, UICollectionViewDataSou
             for: indexPath
         ) as! PopularRecipesCollectionViewCell
         cell.setup(recipes[indexPath.row])
-        
         return cell
     }
 }
