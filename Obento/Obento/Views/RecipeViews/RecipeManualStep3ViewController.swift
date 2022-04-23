@@ -28,21 +28,22 @@ class RecipeManualStep3ViewController: UIViewController {
         Task {
             ingredientList = await ObentoApi.getIngredients()
             filteredIngredients = ingredientList
+            
+            nextButton.alpha = 0.4
+            
+            self.addDoneButtonOnKeyboard()
+            
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard (_:)))
+            self.view.addGestureRecognizer(tapGesture)
+            tapGesture.cancelsTouchesInView = false
+            
+            searchBar.setLeftPaddingPoints(40)
+            searchBar.setRightPaddingPoints(15)
+            searchBar.addTarget(self, action: #selector(filterIngredients), for: .editingChanged)
+            
+            registerCells()
+            ingredientsCollection.reloadData()
         }
-
-        nextButton.alpha = 0.4
-        
-        self.addDoneButtonOnKeyboard()
-        
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard (_:)))
-        self.view.addGestureRecognizer(tapGesture)
-        tapGesture.cancelsTouchesInView = false
-        
-        searchBar.setLeftPaddingPoints(40)
-        searchBar.setRightPaddingPoints(15)
-        searchBar.addTarget(self, action: #selector(filterIngredients), for: .editingChanged)
-        
-        registerCells()
 
         // Do any additional setup after loading the view.
     }

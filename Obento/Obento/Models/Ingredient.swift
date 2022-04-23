@@ -42,7 +42,7 @@ struct Ingredient: Codable {
         unit = try values.decode(String.self, forKey: .unit)
         unitaryPrice = try values.decode(Float.self, forKey: .unitaryPrice)
         kcalories = try values.decode(Float.self, forKey: .kcalories)
-        iconName = try values.decode(String.self, forKey: .iconName)
+        iconName = try values.decode(String.self, forKey: .iconName).replacingOccurrences(of: ".ico", with: "")
         // Quantity is optional
         do {
             quantity = try values.decode(Float.self, forKey: .quantity)

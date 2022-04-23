@@ -96,6 +96,13 @@ class RecipeViewController: UIViewController {
     }
     
     @IBAction func addCartAction(_ sender: Any) {
+        for ingredient in recipeInformation!.ingredients {
+            Task {
+                await ObentoApi.updateShoppingListByUser(userId: 0, ingredientId: ingredient.id, quantity: Double(ingredient.quantity!))
+            }
+        }
+        
+        // @Vic Esto se tiene que ejecutar despues del for anterior
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "updateCartTableView"), object: recipeInformation?.ingredients)
         
         addCartButton.setImage(UIImage(systemName: "cart.fill.badge.plus"), for: .normal)

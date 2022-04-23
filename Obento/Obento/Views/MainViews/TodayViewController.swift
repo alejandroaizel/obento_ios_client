@@ -73,6 +73,7 @@ class TodayViewController: UIViewController, UIGestureRecognizerDelegate {
         Task {
             recipes = await ObentoApi.getRecipes()
             registerCells()
+            popularCollectionView.reloadData()
         }
         
     }
