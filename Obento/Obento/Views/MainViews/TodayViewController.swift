@@ -30,9 +30,13 @@ class TodayViewController: UIViewController, UIGestureRecognizerDelegate {
     var featuredRecipe: Recipe?
     var categories: [String] = []
     var recipes: [Recipe] = []
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        popularCollectionView.delegate = self
+        popularCollectionView.dataSource = self
+        registerCells()
 
         let dateController = DateController()
         let userId: Int = 1
@@ -45,7 +49,7 @@ class TodayViewController: UIViewController, UIGestureRecognizerDelegate {
 //                date: dateController.currentDay().toString(),
 //                isLunch: true
 //            )
-            featuredRecipe = await ObentoApi.getRecipe(id: 50)
+            self.featuredRecipe = await ObentoApi.getRecipe(id: 50)
             if (featuredRecipe != nil) {
                 loadFeatureRecipe()
                 // Add listener
@@ -65,21 +69,24 @@ class TodayViewController: UIViewController, UIGestureRecognizerDelegate {
         
         // Categories
         Task {
-            categories = await ObentoApi.getRecipeCategories()
+            self.categories = await ObentoApi.getRecipeCategories()
             loadCategories()
         }
         
         // Recipes
         Task {
-            recipes = await ObentoApi.getRecipes()
-            registerCells()
-            popularCollectionView.reloadData()
+            self.recipes = await ObentoApi.getRecipesByUser(userId: 1)
+            //self.recipes = await ObentoApi.getRecipesByCategory(category: 2)
+            DispatchQueue.main.async {
+                self.popularCollectionView.reloadData()
+            }
+            self.popularCollectionView.reloadData()
+            
         }
-        
     }
     
     // FEATURE RECIPE METHODS
-    
+
     func loadFeatureRecipe() {
         
         featuredRecipeImage.image = UIImage(data: featuredRecipe!.image) //TODO: set default value
@@ -161,7 +168,6 @@ class TodayViewController: UIViewController, UIGestureRecognizerDelegate {
     @objc func clickCategory(_ sender: UITapGestureRecognizer) {
         let senderView = sender.view!
         let viewTag = senderView.tag
-
         // Select new label
         selectLabel(tag: viewTag)
         // Unselect old label
@@ -268,13 +274,14 @@ extension TodayViewController: UICollectionViewDelegate, UICollectionViewDataSou
         _ collectionView: UICollectionView,
         numberOfItemsInSection section: Int
     ) -> Int {
-        return recipes.count
+        return self.recipes.count
     }
     
     func collectionView(
         _ collectionView: UICollectionView,
         cellForItemAt indexPath: IndexPath
     ) -> UICollectionViewCell {
+
         let cell = collectionView.dequeueReusableCell(
             withReuseIdentifier: PopularRecipesCollectionViewCell.identifier,
             for: indexPath

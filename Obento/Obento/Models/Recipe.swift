@@ -38,34 +38,6 @@ struct Recipe: Codable {
         case estimatedCost = "estimated_cost"
         case ingredients
     }
-    
-    /*
-    init(
-        id: Int,
-        name: String,
-        description: String,
-        category: String,
-        steps: [String],
-        cookingTime: Int,
-        isLunch: Bool,
-        imagePath: String,
-        servings: Int,
-        userId: Int,
-        ingredients: [Ingredient]
-    ) {
-        self.id = id
-        self.name = name
-        self.description = description
-        self.category = category
-        self.steps = steps
-        self.cookingTime = cookingTime
-        self.isLunch = isLunch
-        self.imagePath = imagePath
-        self.servings = servings
-        self.userId = userId
-        self.ingredients = ingredients
-    }
-    */
 
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)

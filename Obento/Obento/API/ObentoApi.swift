@@ -281,12 +281,27 @@ class ObentoApi {
         }
     }
 
-    public static func getRecipesByCategory() -> [Recipe] {
-//        guard let url = URL(string: "\(Endpoint.recipe)")
-//        else {
-//            return []
-//        }
-        return []
+    public static func getRecipesByCategory(
+        category: Int
+    ) async -> [Recipe] {
+        guard let url = URL(string: "\(Endpoint.recipe)")
+        else {
+            return []
+        }
+        do {
+            // Prepare body request
+            let body = [
+                "category": category
+            ] as [String : Any]
+            
+            // Make request
+            let result: [Recipe] = try await ObentoApi.getAll(
+                from: url, data: body
+            ) as [Recipe]
+            return result
+        } catch {
+            return []
+        }
     }
     
     /**
