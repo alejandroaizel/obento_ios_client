@@ -380,16 +380,18 @@ class ObentoApi {
     - parameter id: menu ID.
     - returns: Menu with given ID, nil otherwise
     */
-    public static func getMenu(id: Int) async -> Menu? {
-        guard let url = URL(string: "\(Endpoint.menu)/\(id)") else {
-            return nil
+    public static func getMenu(userId: Int) async -> [MenuItem] {
+        guard let url = URL(string: "\(Endpoint.menu)?user=\(userId)") else {
+            return []
         }
         do {
             // Make request
-            let result: Menu = try await ObentoApi.get(from: url) as Menu
+            let result: [MenuItem] = try await ObentoApi.get(
+                from: url
+            ) as [MenuItem]
             return result
         } catch {
-            return nil
+            return []
         }
     }
     
@@ -400,13 +402,15 @@ class ObentoApi {
 
     - returns: Menu array with all menus, empty array otherwise
     */
-    public static func getMenus() async -> [Menu] {
+    public static func getMenus() async -> [MenuItem] {
         guard let url = URL(string: "\(Endpoint.menu)") else {
             return []
         }
         do {
             // Make request
-            let result: [Menu] = try await ObentoApi.getAll(from: url) as [Menu]
+            let result: [MenuItem] = try await ObentoApi.getAll(
+                from: url
+            ) as [MenuItem]
             return result
         } catch {
             return []
@@ -517,17 +521,8 @@ class ObentoApi {
             return []
         }
     }
-    
-    /*
-    public func getUser() -> [Response<User>] {}
-    public func getUsers() -> [Response<[User]>] {}
-    public func postUser() -> [Response<User>] {}
-    public func updateUser() -> [Response<User>] {}
-    public func deleteUser() -> [Response<User>] {}
-    */
-    
+
     // Score
-    
     public static func updateRateByUserAndRecipe(
         userId: Int,
         recipeId: Int,

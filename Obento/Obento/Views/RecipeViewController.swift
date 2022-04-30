@@ -57,13 +57,13 @@ class RecipeViewController: UIViewController {
     }
     
     func loadRecipeInformation() {
-        recipeStars = recipeInformation?.starts ?? 3
+        recipeStars = recipeInformation?.starts ?? 0
         recipeImage.image = UIImage(data: recipeInformation!.image)
         recipeName.text = recipeInformation?.name ?? ""
         recipeType.text = recipeInformation?.category ?? ""
         recipePuntuation.text = "\(recipeStars)"
         recipeDescription.text = recipeInformation?.description ?? ""
-        recipeKcal.text = String(recipeInformation?.kcalories ?? 0) + " kcal"
+        recipeKcal.text = "\(recipeInformation?.kcalories.rounded().clean ?? "0") kcal"
         recipeTime.text = String(recipeInformation?.cookingTime ?? 0) + " min"
         recipePrice.text = String(recipeInformation?.estimatedCost ?? 0) + " €"
         colorStars(numStars: recipeStars)
