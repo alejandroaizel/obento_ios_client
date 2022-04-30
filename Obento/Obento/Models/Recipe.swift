@@ -22,6 +22,7 @@ struct Recipe: Codable {
     var kcalories: Float
     var estimatedCost: Float
     var ingredients: [Ingredient]
+    var starts: Int
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -57,6 +58,11 @@ struct Recipe: Codable {
         kcalories = try values.decode(Float.self, forKey: .kcalories)
         estimatedCost = try values.decode(Float.self, forKey: .estimatedCost)
         ingredients = try values.decode([Ingredient].self, forKey: .ingredients)
+        
+        // Round values
+        kcalories = round(kcalories * 100) / 100.0
+        estimatedCost = round(estimatedCost * 100) / 100.0
+        starts = Int.random(in: 3..<6)
     }
     
     func encode(to encoder: Encoder) throws {
@@ -105,10 +111,27 @@ struct Recipe: Codable {
     }
     
     static func getImageData(imageURL: String) -> Data? {
-        let dataurl: String = "http://13.37.225.162:8000" + imageURL
-        let url = URL(string: dataurl)
-        let data = try? Data(contentsOf: url!)
-        return data
+        do {
+            let dataurl: String = "http://13.37.225.162:8000" + imageURL
+            let url = URL(string: dataurl)
+            let data = try Data(contentsOf: url!)
+            return data
+        } catch {
+            return UIImage(named: "default_recipe_image")!.pngData()
+        }
     }
+    
+    static func popularRecipes() async -> [Recipe] {
+        var popularRecipes:[Recipe] = []
+        await popularRecipes.append(ObentoApi.getRecipe(id: 75)!)
+        await popularRecipes.append(ObentoApi.getRecipe(id: 40)!)
+        await popularRecipes.append(ObentoApi.getRecipe(id: 63)!)
+        await popularRecipes.append(ObentoApi.getRecipe(id: 93)!)
+        await popularRecipes.append(ObentoApi.getRecipe(id: 42)!)
+        await popularRecipes.append(ObentoApi.getRecipe(id: 110)!)
+
+        return popularRecipes
+    }
+
 }
 

@@ -69,9 +69,7 @@ class RecipeCommonStep2ViewController: UIViewController {
     }
     
     @IBAction func nextButtonAction(_ sender: Any) {
-        if currentSelection == 0 {
-            return // TODO: ELIMINAR ESTO CUANDO PONGAMOS OCR
-            
+        if currentSelection == 0 {            
             let vc = storyboard?.instantiateViewController(withIdentifier: "RecipeOCRStep3ViewController") as! RecipeOCRStep3ViewController
             
             vc.currentRecipe = self.currentRecipe

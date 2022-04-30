@@ -30,6 +30,7 @@ class TodayViewController: UIViewController, UIGestureRecognizerDelegate {
     var featuredRecipe: Recipe?
     var categories: [String] = []
     var recipes: [Recipe] = []
+    var popularRecipes: [Recipe] = []
     
 
     override func viewDidLoad() {
@@ -37,18 +38,9 @@ class TodayViewController: UIViewController, UIGestureRecognizerDelegate {
         popularCollectionView.delegate = self
         popularCollectionView.dataSource = self
         registerCells()
-
-        let dateController = DateController()
-        let userId: Int = 1
         
         // Featured recipe
         Task {
-//            featuredRecipe = await ObentoApi.getFeaturedRecipe(
-//                id: 1,
-//                userId: userId,
-//                date: dateController.currentDay().toString(),
-//                isLunch: true
-//            )
             self.featuredRecipe = await ObentoApi.getRecipe(id: 50)
             if (featuredRecipe != nil) {
                 loadFeatureRecipe()
@@ -60,9 +52,7 @@ class TodayViewController: UIViewController, UIGestureRecognizerDelegate {
                 tapGesture.delegate = self
                 featuredRecipeView.addGestureRecognizer(tapGesture)
             } else {
-                // TODO: show placeholder, something like
-                // "Create your first menu to see here your recipe"
-                // For the moment load default values
+                
                 loadFeatureRecipe()
             }
         }
@@ -75,21 +65,19 @@ class TodayViewController: UIViewController, UIGestureRecognizerDelegate {
         
         // Recipes
         Task {
-            self.recipes = await ObentoApi.getRecipesByUser(userId: 1)
-            //self.recipes = await ObentoApi.getRecipesByCategory(category: 2)
-            DispatchQueue.main.async {
-                self.popularCollectionView.reloadData()
-            }
-            self.popularCollectionView.reloadData()
-            
+            self.recipes = await Recipe.popularRecipes()
+            await updatePopularRecipesByCategory(category: 0)
         }
     }
     
     // FEATURE RECIPE METHODS
 
     func loadFeatureRecipe() {
-        
-        featuredRecipeImage.image = UIImage(data: featuredRecipe!.image) //TODO: set default value
+        if (featuredRecipe != nil) {
+            featuredRecipeImage.image = UIImage(data: featuredRecipe!.image)
+        } else {
+            featuredRecipeImage.image = UIImage(named: "default_recipe_image")!
+        }
         featuredRecipeTitle.text = featuredRecipe?.name ?? "Receta destacada"
         featuredRecipekcal.text = "\(featuredRecipe?.kcalories ?? 0) kcal"
         featuredRecipeTime.text = "\(featuredRecipe?.cookingTime ?? 0) min"
@@ -174,8 +162,12 @@ class TodayViewController: UIViewController, UIGestureRecognizerDelegate {
         unselectLabel(tag: currentSelectedCategory)
         // Update selected category value
         currentSelectedCategory = viewTag
-
-        updatePopularRecipesByCategory(category: currentSelectedCategory)
+        
+        Task {
+            await updatePopularRecipesByCategory(
+                category: currentSelectedCategory
+            )
+        }
     }
 
     private func selectLabel(tag: Int) {
@@ -206,7 +198,10 @@ class TodayViewController: UIViewController, UIGestureRecognizerDelegate {
         _ collectionView: UICollectionView,
         didSelectItemAt indexPath: IndexPath
     ) {
-        let controller = RecipeViewController.instantiate()
+        //let controller = RecipeViewController.instantiate()
+        let controller = storyboard?.instantiateViewController(
+            withIdentifier: "RecipeViewController"
+        ) as! RecipeViewController
         controller.recipeInformation = recipes[indexPath.row]
         
         present(controller, animated: true, completion: nil)
@@ -222,47 +217,77 @@ class TodayViewController: UIViewController, UIGestureRecognizerDelegate {
         )
     }
     
-    private func updatePopularRecipesByCategory(category: Int) {
+    private func updatePopularRecipesByCategory(category: Int) async {
         switch category {
         // Arroz
         case 1:
+            self.recipes = await ObentoApi.getRecipesByCategory(category: 1)
+            self.popularCollectionView.reloadData()
             break
         // Bocadillos
         case 2:
+            self.recipes = await ObentoApi.getRecipesByCategory(category: 2)
+            self.popularCollectionView.reloadData()
             break
         // Carnes
         case 3:
+            self.recipes = await ObentoApi.getRecipesByCategory(category: 3)
+            self.popularCollectionView.reloadData()
             break
         // Ensaldas y bowls
         case 4:
+            self.recipes = await ObentoApi.getRecipesByCategory(category: 4)
+            self.popularCollectionView.reloadData()
             break
         // Guisos
         case 5:
+            self.recipes = await ObentoApi.getRecipesByCategory(category: 5)
+            self.popularCollectionView.reloadData()
             break
         // Legumbres
         case 6:
+            self.recipes = await ObentoApi.getRecipesByCategory(category: 6)
+            self.popularCollectionView.reloadData()
             break
         // Pastas
         case 7:
+            self.recipes = await ObentoApi.getRecipesByCategory(category: 7)
+            self.popularCollectionView.reloadData()
             break
         // Pescado
         case 8:
+            self.recipes = await ObentoApi.getRecipesByCategory(category: 8)
+            self.popularCollectionView.reloadData()
             break
         // Salteado
         case 9:
+            self.recipes = await ObentoApi.getRecipesByCategory(category: 9)
+            self.popularCollectionView.reloadData()
             break
         // Sandwich
         case 10:
+            self.recipes = await ObentoApi.getRecipesByCategory(category: 10)
+            self.popularCollectionView.reloadData()
             break
         // Sopa y crema
         case 11:
+            self.recipes = await ObentoApi.getRecipesByCategory(category: 11)
+            self.popularCollectionView.reloadData()
             break
         // Verduras
         case 12:
+            self.recipes = await ObentoApi.getRecipesByCategory(category: 12)
+            self.popularCollectionView.reloadData()
             break
         // Todo
         default:
+            self.recipes = await Recipe.popularRecipes()
+            self.popularCollectionView.reloadData()
             break
+        }
+
+        DispatchQueue.main.async {
+            self.popularCollectionView.reloadData()
         }
     }
     
