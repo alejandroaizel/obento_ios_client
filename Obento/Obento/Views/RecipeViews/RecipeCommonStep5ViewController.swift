@@ -14,30 +14,30 @@ class RecipeCommonStep5ViewController: UIViewController {
     @IBOutlet weak var finalImage: UIImageView!
     
     var currentRecipe: Recipe!
+    var recipe_id: Int!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+    
         finalStats()
-        
         finalImage.image = UIImage(named: "new_recipe_final_illustration_" + String(Int.random(in: 1...4)))
 
-        // TODO: GUARDAR EN BD LA RECETA
+        Task {
+            self.recipe_id: Int = await ObentoApi.postRecipe(recipe: currentRecipe)
+        }
     }
     
     func finalStats() {
-        var totalKcal: Int = 0
-        var totalPrice: Double = 0.0
+        var totalKcal: Float = 0
+        var totalPrice: Float = 0.0
         
         for ing in currentRecipe.ingredients {
-            totalKcal += ing.kcal * ing.quantity!
-            totalPrice += ing.unitaryPrice * Double(ing.quantity!)
+            totalKcal += ing.kcalories * ing.quantity!
+            totalPrice += ing.unitaryPrice * ing.quantity!
         }
         
-        currentRecipe.kcal = totalKcal
-        currentRecipe.price = totalPrice
-        
-        currentRecipe.puntuaction = 0
+        currentRecipe.kcalories = totalKcal.rounded()
+        currentRecipe.estimatedCost = totalPrice
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -50,16 +50,7 @@ class RecipeCommonStep5ViewController: UIViewController {
     }
     
     @IBAction func bottonCloseButtonAction(_ sender: Any) {
+        
         self.dismiss(animated: true, completion: nil)
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		19284068281B143700D7AFF2 /* OCRdata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19284067281B143700D7AFF2 /* OCRdata.swift */; };
+		195F706B27F8DE83004F638D /* ObentoAPITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195F706A27F8DE83004F638D /* ObentoAPITests.swift */; };
+		195F706D27F8E07E004F638D /* RecipeCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195F706C27F8E07E004F638D /* RecipeCategory.swift */; };
+		1975D17127F3A7DF0015A54C /* ObentoApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1975D17027F3A7DF0015A54C /* ObentoApi.swift */; };
 		530CD30627E7DECB0042A8FD /* NewStepTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530CD30427E7DECB0042A8FD /* NewStepTableViewCell.swift */; };
 		530CD30727E7DECB0042A8FD /* NewStepTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 530CD30527E7DECB0042A8FD /* NewStepTableViewCell.xib */; };
 		530CD30E27E821FB0042A8FD /* CategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530CD30C27E821FB0042A8FD /* CategoryCollectionViewCell.swift */; };
@@ -25,7 +29,6 @@
 		533A0F5A27E113BC007B94FE /* IngredientCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 533A0F5827E113BC007B94FE /* IngredientCollectionViewCell.xib */; };
 		534032B427DD84DC00D67625 /* CartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534032B227DD84DC00D67625 /* CartTableViewCell.swift */; };
 		534032B527DD84DC00D67625 /* CartTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 534032B327DD84DC00D67625 /* CartTableViewCell.xib */; };
-		534032B727DE1C0100D67625 /* HTTPRequest-example.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534032B627DE1C0100D67625 /* HTTPRequest-example.swift */; };
 		534D1B0127E7B8AA00FA736B /* NewIngredientTableViewCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534D1AFF27E7B8AA00FA736B /* NewIngredientTableViewCellTableViewCell.swift */; };
 		534D1B0227E7B8AA00FA736B /* NewIngredientTableViewCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 534D1B0027E7B8AA00FA736B /* NewIngredientTableViewCellTableViewCell.xib */; };
 		5359C50927E6262A005A7E8C /* DateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5359C50827E6262A005A7E8C /* DateController.swift */; };
@@ -43,7 +46,6 @@
 		536A185427E6B6D800E0614A /* RecipeManualStep3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536A185327E6B6D800E0614A /* RecipeManualStep3ViewController.swift */; };
 		536A185627E6B6E500E0614A /* RecipeManualStep4ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536A185527E6B6E500E0614A /* RecipeManualStep4ViewController.swift */; };
 		536A185827E6B6F000E0614A /* RecipeOCRStep3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536A185727E6B6F000E0614A /* RecipeOCRStep3ViewController.swift */; };
-		536A185A27E6B70C00E0614A /* RecipeOCRStep4ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536A185927E6B70C00E0614A /* RecipeOCRStep4ViewController.swift */; };
 		536A185C27E6B71D00E0614A /* RecipeCommonStep5ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536A185B27E6B71D00E0614A /* RecipeCommonStep5ViewController.swift */; };
 		536A185E27E6B83B00E0614A /* MenuNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536A185D27E6B83B00E0614A /* MenuNavigationController.swift */; };
 		536A186027E6B85100E0614A /* MenuCommonStep1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536A185F27E6B85100E0614A /* MenuCommonStep1ViewController.swift */; };
@@ -83,6 +85,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		19284067281B143700D7AFF2 /* OCRdata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCRdata.swift; sourceTree = "<group>"; };
+		195F706A27F8DE83004F638D /* ObentoAPITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObentoAPITests.swift; sourceTree = "<group>"; };
+		195F706C27F8E07E004F638D /* RecipeCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeCategory.swift; sourceTree = "<group>"; };
+		1975D17027F3A7DF0015A54C /* ObentoApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObentoApi.swift; sourceTree = "<group>"; };
 		530CD30427E7DECB0042A8FD /* NewStepTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewStepTableViewCell.swift; sourceTree = "<group>"; };
 		530CD30527E7DECB0042A8FD /* NewStepTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewStepTableViewCell.xib; sourceTree = "<group>"; };
 		530CD30C27E821FB0042A8FD /* CategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -101,7 +107,6 @@
 		533A0F5827E113BC007B94FE /* IngredientCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IngredientCollectionViewCell.xib; sourceTree = "<group>"; };
 		534032B227DD84DC00D67625 /* CartTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartTableViewCell.swift; sourceTree = "<group>"; };
 		534032B327DD84DC00D67625 /* CartTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CartTableViewCell.xib; sourceTree = "<group>"; };
-		534032B627DE1C0100D67625 /* HTTPRequest-example.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HTTPRequest-example.swift"; sourceTree = "<group>"; };
 		534D1AFF27E7B8AA00FA736B /* NewIngredientTableViewCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewIngredientTableViewCellTableViewCell.swift; sourceTree = "<group>"; };
 		534D1B0027E7B8AA00FA736B /* NewIngredientTableViewCellTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewIngredientTableViewCellTableViewCell.xib; sourceTree = "<group>"; };
 		5359C50827E6262A005A7E8C /* DateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateController.swift; sourceTree = "<group>"; };
@@ -119,7 +124,6 @@
 		536A185327E6B6D800E0614A /* RecipeManualStep3ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeManualStep3ViewController.swift; sourceTree = "<group>"; };
 		536A185527E6B6E500E0614A /* RecipeManualStep4ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeManualStep4ViewController.swift; sourceTree = "<group>"; };
 		536A185727E6B6F000E0614A /* RecipeOCRStep3ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeOCRStep3ViewController.swift; sourceTree = "<group>"; };
-		536A185927E6B70C00E0614A /* RecipeOCRStep4ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeOCRStep4ViewController.swift; sourceTree = "<group>"; };
 		536A185B27E6B71D00E0614A /* RecipeCommonStep5ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeCommonStep5ViewController.swift; sourceTree = "<group>"; };
 		536A185D27E6B83B00E0614A /* MenuNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuNavigationController.swift; sourceTree = "<group>"; };
 		536A185F27E6B85100E0614A /* MenuCommonStep1ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCommonStep1ViewController.swift; sourceTree = "<group>"; };
@@ -170,6 +174,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1975D16F27F3A72D0015A54C /* API */ = {
+			isa = PBXGroup;
+			children = (
+				1975D17027F3A7DF0015A54C /* ObentoApi.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
 		530CD30B27E821DC0042A8FD /* CategoryCollectionViewCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -278,6 +290,8 @@
 				53CBA36E27E172C20080422A /* Step.swift */,
 				5364A89927E8D03E000A8346 /* Menu.swift */,
 				5364A89B27E8D062000A8346 /* CustomDay.swift */,
+				195F706C27F8E07E004F638D /* RecipeCategory.swift */,
+				19284067281B143700D7AFF2 /* OCRdata.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -325,7 +339,6 @@
 				536A185327E6B6D800E0614A /* RecipeManualStep3ViewController.swift */,
 				536A185527E6B6E500E0614A /* RecipeManualStep4ViewController.swift */,
 				536A185727E6B6F000E0614A /* RecipeOCRStep3ViewController.swift */,
-				536A185927E6B70C00E0614A /* RecipeOCRStep4ViewController.swift */,
 				536A185B27E6B71D00E0614A /* RecipeCommonStep5ViewController.swift */,
 			);
 			path = RecipeViews;
@@ -371,6 +384,7 @@
 		53E50C6627C017FF000AA45F /* Obento */ = {
 			isa = PBXGroup;
 			children = (
+				1975D16F27F3A72D0015A54C /* API */,
 				5359C50727E62612005A7E8C /* Controllers */,
 				535E94D827D453D800C1A713 /* Extensions */,
 				535E94E127D45DBD00C1A713 /* Views */,
@@ -382,7 +396,6 @@
 				53E50C7227C01800000AA45F /* LaunchScreen.storyboard */,
 				53E50C7027C01800000AA45F /* Assets.xcassets */,
 				53E50C7527C01800000AA45F /* Info.plist */,
-				534032B627DE1C0100D67625 /* HTTPRequest-example.swift */,
 			);
 			path = Obento;
 			sourceTree = "<group>";
@@ -391,6 +404,7 @@
 			isa = PBXGroup;
 			children = (
 				53E50C7E27C01800000AA45F /* ObentoTests.swift */,
+				195F706A27F8DE83004F638D /* ObentoAPITests.swift */,
 			);
 			path = ObentoTests;
 			sourceTree = "<group>";
@@ -420,6 +434,8 @@
 			dependencies = (
 			);
 			name = Obento;
+			packageProductDependencies = (
+			);
 			productName = Obento;
 			productReference = 53E50C6427C017FF000AA45F /* Obento.app */;
 			productType = "com.apple.product-type.application";
@@ -495,6 +511,10 @@
 				Base,
 			);
 			mainGroup = 53E50C5B27C017FF000AA45F;
+			packageReferences = (
+				1975D17227F3AC2B0015A54C /* XCRemoteSwiftPackageReference "AnyCodable" */,
+				1975D17927F3B4AF0015A54C /* XCRemoteSwiftPackageReference "Get" */,
+			);
 			productRefGroup = 53E50C6527C017FF000AA45F /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -545,7 +565,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				536A185A27E6B70C00E0614A /* RecipeOCRStep4ViewController.swift in Sources */,
 				535E94E827D4ECB700C1A713 /* OnboardingViewController.swift in Sources */,
 				53CBA36C27E15A280080422A /* StepTableViewCell.swift in Sources */,
 				532B6A9227DBBF6100277BF4 /* UIViewController+Extension.swift in Sources */,
@@ -554,6 +573,7 @@
 				53E50C6C27C017FF000AA45F /* TodayViewController.swift in Sources */,
 				533A0F5927E113BC007B94FE /* IngredientCollectionViewCell.swift in Sources */,
 				536A186027E6B85100E0614A /* MenuCommonStep1ViewController.swift in Sources */,
+				1975D17127F3A7DF0015A54C /* ObentoApi.swift in Sources */,
 				532B6A9D27DBE3FA00277BF4 /* RecipeViewController.swift in Sources */,
 				5327055C27D39B5100394FFB /* MenuViewController.swift in Sources */,
 				536A186227E6B86700E0614A /* MenuCustomStep2ViewController.swift in Sources */,
@@ -572,18 +592,19 @@
 				532B6A9427DBC12200277BF4 /* UserDefaults+Extension.swift in Sources */,
 				535A5C5D27DCF3CA00D52BDB /* PopularRecipesCollectionViewCell.swift in Sources */,
 				536A185027E6B6B100E0614A /* RecipeCommonStep1ViewController.swift in Sources */,
+				195F706D27F8E07E004F638D /* RecipeCategory.swift in Sources */,
 				536A185227E6B6C500E0614A /* RecipeCommonStep2ViewController.swift in Sources */,
 				5327055E27D39B5A00394FFB /* AddViewController.swift in Sources */,
 				5327055A27D3988300394FFB /* TabBarController.swift in Sources */,
 				534032B427DD84DC00D67625 /* CartTableViewCell.swift in Sources */,
 				5364A89A27E8D03E000A8346 /* Menu.swift in Sources */,
 				5359C50927E6262A005A7E8C /* DateController.swift in Sources */,
+				19284068281B143700D7AFF2 /* OCRdata.swift in Sources */,
 				536A185427E6B6D800E0614A /* RecipeManualStep3ViewController.swift in Sources */,
 				536A185827E6B6F000E0614A /* RecipeOCRStep3ViewController.swift in Sources */,
 				534D1B0127E7B8AA00FA736B /* NewIngredientTableViewCellTableViewCell.swift in Sources */,
 				53E50C6827C017FF000AA45F /* AppDelegate.swift in Sources */,
 				5327056227D39B8B00394FFB /* ProfileViewController.swift in Sources */,
-				534032B727DE1C0100D67625 /* HTTPRequest-example.swift in Sources */,
 				535E94DA27D453EC00C1A713 /* UIViex+Extension.swift in Sources */,
 				53E50C6A27C017FF000AA45F /* SceneDelegate.swift in Sources */,
 				535E94DD27D454AB00C1A713 /* OnboardingSlide.swift in Sources */,
@@ -596,6 +617,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				53E50C7F27C01800000AA45F /* ObentoTests.swift in Sources */,
+				195F706B27F8DE83004F638D /* ObentoAPITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -758,9 +780,10 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = SUQAG7YT46;
+				DEVELOPMENT_TEAM = MJCK94CTT6;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Obento/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Obento use camera to read recipes";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIStatusBarHidden = NO;
@@ -787,9 +810,10 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = SUQAG7YT46;
+				DEVELOPMENT_TEAM = MJCK94CTT6;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Obento/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Obento use camera to read recipes";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIStatusBarHidden = NO;
@@ -925,6 +949,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		1975D17227F3AC2B0015A54C /* XCRemoteSwiftPackageReference "AnyCodable" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Flight-School/AnyCodable";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.6.3;
+			};
+		};
+		1975D17927F3B4AF0015A54C /* XCRemoteSwiftPackageReference "Get" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kean/Get";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.5.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
 	};
 	rootObject = 53E50C5C27C017FF000AA45F /* Project object */;
 }

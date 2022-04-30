@@ -26,7 +26,7 @@ class RecipeCommonStep1ViewController: UIViewController, UINavigationControllerD
     
     var imagePicker = UIImagePickerController()
     
-    var currentRecipe: Recipe = .init(id: -1, userId: -1, name: "", description: "", puntuaction: -1, kcal: -1, time: -1, price: -1, isLaunch: true, imagePath: "", type: "", servings: 1, ingredients: [], steps: [])
+    var currentRecipe: Recipe?
     var currentImage: UIImage?
     var categories: [String] = []
     var currentCategory: Int = 0
@@ -35,8 +35,11 @@ class RecipeCommonStep1ViewController: UIViewController, UINavigationControllerD
         super.viewDidLoad()
         
         minusServing.alpha = 0.3
-        
-        categories = ["Otro", "Pasta", "Carne", "Pescado", "Arroz", "Verduras", "Hortalizas"] // TODO: CAMBIAR
+
+        // Get categories
+        Task {
+            categories = await ObentoApi.getRecipeCategories()
+        }
         
         self.addDoneButtonOnKeyboard()
         
@@ -125,7 +128,7 @@ class RecipeCommonStep1ViewController: UIViewController, UINavigationControllerD
         lunchToggleButton.tintColor = .white
         lunchToggleButton.setImage(UIImage(systemName: "sun.max.fill"), for: .normal)
         
-        currentRecipe.isLaunch = true
+        currentRecipe?.isLunch = true
     }
     
     @IBAction func dinnerToggleAction(_ sender: Any) {
@@ -137,37 +140,37 @@ class RecipeCommonStep1ViewController: UIViewController, UINavigationControllerD
         dinnerToggleButton.tintColor = .white
         dinnerToggleButton.setImage(UIImage(systemName: "moon.fill"), for: .normal)
         
-        currentRecipe.isLaunch = false
+        currentRecipe?.isLunch = false
     }
 
     @IBAction func reduceServingAction(_ sender: Any) {
         plusServing.alpha = 1
         
-        if currentRecipe.servings > 1 {
-            currentRecipe.servings -= 1
+        if currentRecipe?.servings ?? 1 > 1 {
+            currentRecipe?.servings -= 1
             
-            if currentRecipe.servings == 1 {
+            if currentRecipe?.servings == 1 {
                 minusServing.alpha = 0.3
                 servingLabel.text = "1 ración"
                 
                 return
             }
             
-            servingLabel.text = String(currentRecipe.servings) + " raciones"
+            servingLabel.text = "\(currentRecipe?.servings ?? 1) raciones"
         }
     }
     
     @IBAction func addServingAction(_ sender: Any) {
         minusServing.alpha = 1
         
-        if currentRecipe.servings < 9 {
-            currentRecipe.servings += 1
+        if currentRecipe?.servings ?? 1 < 9 {
+            currentRecipe?.servings += 1
             
-            if currentRecipe.servings == 9 {
+            if currentRecipe?.servings == 9 {
                 plusServing.alpha = 0.3
             }
             
-            servingLabel.text = String(currentRecipe.servings) + " raciones"
+            servingLabel.text = "\(currentRecipe?.servings ?? 1) raciones"
         }
     }
     
@@ -190,13 +193,12 @@ class RecipeCommonStep1ViewController: UIViewController, UINavigationControllerD
         self.present(pickerViewController, animated: true, completion: nil)
     }
     
-    
     func storeCurrentData() {
-        currentRecipe.name = nameImput.text ?? "" // TODO: no permitir
-        currentRecipe.description = descriptionInput.text ?? ""
-        currentRecipe.imagePath = "recipe_1" // TODO: Subir imagen y guardar el id currentImage
-        currentRecipe.time = Int(timePicker.countDownDuration / 60)
-        currentRecipe.type = categories[currentCategory]
+        currentRecipe?.name = nameImput.text ?? "" // TODO: no permitir
+        currentRecipe?.description = descriptionInput.text ?? ""
+        //currentRecipe?.image = "recipe_1" // TODO: Subir imagen y guardar el id currentImage
+        currentRecipe?.cookingTime = Int(timePicker.countDownDuration / 60)
+        currentRecipe?.category = categories[currentCategory]
         
     }
     
@@ -225,7 +227,7 @@ extension UITextField {
 }
 
 extension RecipeCommonStep1ViewController: UITextFieldDelegate {
-    func textFieldShouldReturn(_ textField: UITextField!) -> Bool // called when 'return' key pressed. return NO to ignore.
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool // called when 'return' key pressed. return NO to ignore.
         {
             nameImput.resignFirstResponder()
             return true;

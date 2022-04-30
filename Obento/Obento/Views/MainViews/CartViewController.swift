@@ -16,15 +16,25 @@ class CartViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(notified(_:)), name: NSNotification.Name(rawValue: "updateCartTableView"), object: nil)
-        
-        registerCells()
+        Task {
+            let newItems = await ObentoApi.getIngredients()
+            
+            self.shoppingList = newItems
+            
+            NotificationCenter.default.addObserver(self, selector: #selector(notified(_:)), name: NSNotification.Name(rawValue: "updateCartTableView"), object: nil)
+            
+            registerCells()
+            cartTableView.reloadData()
+        }
     }
     
     @objc func notified(_ notification : Notification)  {
-        let newItems = notification.object as! [Ingredient]
+        Task {
+            let newItems = await ObentoApi.getIngredients()
+            
+            self.shoppingList = newItems
+        }
         
-        self.shoppingList.append(contentsOf: newItems)
         self.cartTableView.reloadData()
     }
 

@@ -32,58 +32,43 @@ class RecipeViewController: UIViewController {
     @IBOutlet weak var ingredientsCollection: UICollectionView!
     
     // Others
-    var recipeInformation: Recipe!
-    var recipeStars: Int = 3 // TODO: Cambiar
-    
-    let exampleRecipe: Recipe = .init(id: 8650, userId: 0, name: "Arroz con tomate", description: "Disfruta de este arroz con tomate para que comiences el día con una sonrisa que combine con todo. ¡No hay nada mejor!", puntuaction: 3.4, kcal: 235, time: 40, price: 2.5, isLaunch: true, imagePath: "recipe_1", type: "Sopas", servings: 1, ingredients: [
-        .init(id: 0, name: "Zanahorias", category: "", unitaryPrice: 0.32, unit: "uds", kcal: 20, iconPath: "ing_carrot", quantity: 3),
-        .init(id: 1, name: "Patatas", category: "", unitaryPrice: 0.61, unit: "uds", kcal: 35, iconPath: "ing_carrot", quantity: 10),
-        .init(id: 1, name: "Patatas", category: "", unitaryPrice: 0.61, unit: "uds", kcal: 35, iconPath: "ing_carrot", quantity: 10),
-        .init(id: 1, name: "Patjkkjhjkatas", category: "", unitaryPrice: 0.61, unit: "uds", kcal: 35, iconPath: "ing_carrot", quantity: 10),
-        .init(id: 1, name: "Patatas", category: "", unitaryPrice: 0.61, unit: "uds", kcal: 35, iconPath: "ing_carrot", quantity: 10),
-        .init(id: 1, name: "Patatas", category: "", unitaryPrice: 0.61, unit: "uds", kcal: 35, iconPath: "ing_carrot", quantity: 10),
-        .init(id: 1, name: "Pimentón de la Vera", category: "", unitaryPrice: 0.61, unit: "uds", kcal: 35, iconPath: "ing_carrot", quantity: 10),
-        .init(id: 2, name: "Macarrones", category: "", unitaryPrice: 0.002 , unit: "g", kcal: 10, iconPath: "ing_carrot", quantity: 100)
-    ], steps: [
-        "Lavamos el arroz con agua fria un par de veces.",
-        "Precalentamo el aceite con un diente de ajo hasta que coja color.",
-        "Una vez caliente el aceite, echamos el arroz una vez seco y lo removemos durante unos 30 segundos.",
-        "Echamos el agua y dejamos tapado durante 30 minutos.",
-        "Una vez pasado el tiempo, destapamos y dejamos reposar 5 minutos.",
-        "Presentamos juntos con un par de cucharadas de tomate frito."
-    ])
+    var recipeInformation: Recipe?
+    var recipeStars: Int = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        recipeInformation = exampleRecipe // TODO: ELIMINAR
-        
+
         loadRecipeInformation()
         registerCells()
-        
+
     }
     
     private func registerCells() {
-        ingredientsCollection.register(UINib(nibName: IngredientCollectionViewCell.identifier, bundle: nil), forCellWithReuseIdentifier: IngredientCollectionViewCell.identifier)
-        
-        stepsTableView.register(UINib(nibName: StepTableViewCell.identifier, bundle: nil), forCellReuseIdentifier: StepTableViewCell.identifier)
+        ingredientsCollection.register(
+            UINib(nibName: IngredientCollectionViewCell.identifier,
+                  bundle: nil
+                 ),
+            forCellWithReuseIdentifier: IngredientCollectionViewCell.identifier
+        )
+        stepsTableView.register(
+            UINib(nibName: StepTableViewCell.identifier, bundle: nil),
+            forCellReuseIdentifier: StepTableViewCell.identifier
+        )
     }
     
     func loadRecipeInformation() {
-        recipeImage.image = UIImage(named: recipeInformation.imagePath)
-        recipeName.text = recipeInformation.name
-        recipeType.text = recipeInformation.type
-        recipePuntuation.text = String(recipeInformation.puntuaction)
-        recipeDescription.text = recipeInformation.description
-        recipeKcal.text = String(recipeInformation.kcal) + " kcal"
-        recipeTime.text = String(recipeInformation.time) + " min"
-        recipePrice.text = String(recipeInformation.price) + " €"
-        
+        recipeStars = recipeInformation?.starts ?? 3
+        recipeImage.image = UIImage(data: recipeInformation!.image)
+        recipeName.text = recipeInformation?.name ?? ""
+        recipeType.text = recipeInformation?.category ?? ""
+        recipePuntuation.text = "\(recipeStars)"
+        recipeDescription.text = recipeInformation?.description ?? ""
+        recipeKcal.text = String(recipeInformation?.kcalories ?? 0) + " kcal"
+        recipeTime.text = String(recipeInformation?.cookingTime ?? 0) + " min"
+        recipePrice.text = String(recipeInformation?.estimatedCost ?? 0) + " €"
         colorStars(numStars: recipeStars)
-        
         let currentRecipesAdded = UserDefaults.standard.object(forKey: "addedToCart") as? [Int] ?? []
-        
-        if currentRecipesAdded.contains(recipeInformation.id) {
+        if currentRecipesAdded.contains(recipeInformation?.id ?? 0) {
             addCartButton.setImage(UIImage(systemName: "cart.fill.badge.plus"), for: .normal)
         }
     }
@@ -114,16 +99,35 @@ class RecipeViewController: UIViewController {
     }
     
     @IBAction func addCartAction(_ sender: Any) {
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "updateCartTableView"), object: recipeInformation.ingredients)
-        
-        addCartButton.setImage(UIImage(systemName: "cart.fill.badge.plus"), for: .normal)
-        
-        var currentRecipesAdded = UserDefaults.standard.object(forKey: "addedToCart") as? [Int] ?? []
-        
-        if !currentRecipesAdded.contains(recipeInformation.id) {
-            currentRecipesAdded.append(recipeInformation.id)
+        Task {
+            for ingredient in recipeInformation!.ingredients {
+                await ObentoApi.updateShoppingListByUser(
+                    userId: 0,
+                    ingredientId: ingredient.id,
+                    quantity: Double(ingredient.quantity!)
+                )
+            }
+            NotificationCenter.default.post(
+                name: NSNotification.Name(rawValue: "updateCartTableView"),
+                object: recipeInformation?.ingredients
+            )
             
-            UserDefaults.standard.set(currentRecipesAdded, forKey: "addedToCart")
+            addCartButton.setImage(
+                UIImage(systemName: "cart.fill.badge.plus"),
+                for: .normal
+            )
+            
+            var currentRecipesAdded = UserDefaults.standard.object(
+                forKey: "addedToCart"
+            ) as? [Int] ?? []
+            
+            if !currentRecipesAdded.contains(recipeInformation!.id) {
+                currentRecipesAdded.append(recipeInformation?.id ?? 0)
+                
+                UserDefaults.standard.set(
+                    currentRecipesAdded, forKey: "addedToCart"
+                )
+            }
         }
     }
     
@@ -191,29 +195,29 @@ class RecipeViewController: UIViewController {
 }
 
 extension RecipeViewController: UICollectionViewDelegate, UICollectionViewDataSource {
-    
+
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return recipeInformation.ingredients.count
+        return recipeInformation?.ingredients.count ?? 0
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: IngredientCollectionViewCell.identifier, for: indexPath) as! IngredientCollectionViewCell
-        
-        cell.setup(recipeInformation.ingredients[indexPath.row])
-        
+
+        cell.setup((recipeInformation?.ingredients[indexPath.row])!)
+
         return cell
     }
 }
 
 extension RecipeViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return recipeInformation.steps.count
+        return (recipeInformation?.steps.count)!
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = stepsTableView.dequeueReusableCell(withIdentifier: StepTableViewCell.identifier) as! StepTableViewCell
         
-        cell.setup(Step(number: indexPath.row + 1, description: recipeInformation.steps[indexPath.row]))
+        cell.setup(Step(number: indexPath.row + 1, description: (recipeInformation?.steps[indexPath.row])!))
         
         return cell
     }

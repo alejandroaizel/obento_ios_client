@@ -16,9 +16,9 @@ class CartTableViewCell: UITableViewCell {
     @IBOutlet weak var totalPrice: UILabel!
     
     func setup(_ ingredient: Ingredient) {
-        ingredientIcon.image = UIImage(named: ingredient.iconPath)
+        ingredientIcon.image = UIImage(named: ingredient.iconName)
         ingredientName.text = ingredient.name
         units.text = "x " + String(ingredient.quantity ?? -1) + ingredient.unit
-        totalPrice.text = String(Double((ingredient.quantity ?? -1)) * ingredient.unitaryPrice) + " €"
+        totalPrice.text = "\((ingredient.quantity ?? -1) * ingredient.unitaryPrice) €"
     }
 }

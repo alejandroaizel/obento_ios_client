@@ -21,6 +21,10 @@ class DateController {
         static func == (lhs: FormattedDate, rhs: FormattedDate) -> Bool {
             return lhs.numberDay == rhs.numberDay && lhs.numberMonth == rhs.numberMonth && lhs.numberYear == rhs.numberYear
         }
+        
+        func toString() -> String {
+            return "\(numberDay)-\(numberMonth)-\(nameYear.suffix(2))"
+        }
     }
     
     init() {
@@ -103,5 +107,9 @@ class DateController {
         let auxDate: FormattedDate = formatDay(day)
         
         return .init(day: auxDate.numberDay, month: auxDate.numberMonth, monthString: auxDate.nameMonth, year: auxDate.numberYear)
+    }
+    
+    public func currentDay() -> CustomDay {
+        return formatDay(currentDate())
     }
 }

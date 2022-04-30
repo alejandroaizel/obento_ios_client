@@ -16,9 +16,8 @@ class PopularRecipesCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var recipePuntuaction: UILabel!
     
     func setup(_ recipe: Recipe) {
-        recipeImage.image = UIImage(named: recipe.imagePath) // TODO: Cambiar a la imagen del path de la receta
+        recipeImage.image = UIImage(data: recipe.image)
         recipeTitle.text = recipe.name
-        recipePuntuaction.text = String(recipe.puntuaction)
-        
+        recipePuntuaction.text = "\(recipe.starts)"
     }
 }

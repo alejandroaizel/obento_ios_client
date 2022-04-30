@@ -17,7 +17,7 @@ class NewIngredientTableViewCellTableViewCell: UITableViewCell {
     @IBOutlet weak var deleteIngredientbutton: UIButton!
     
     func setup(_ ingredient: Ingredient) {
-        ingredientIcon.image = UIImage(named: "ing_carrot") // TODO: Cambiar
+        ingredientIcon.image = UIImage(named: ingredient.iconName)
         ingredientName.text = ingredient.name
         ingredientUnits.text = ingredient.unit
         ingredientInput.text = ingredient.quantity ?? -1 == -1 ? "" : String(ingredient.quantity!) == "0" ? "" : String(ingredient.quantity!)

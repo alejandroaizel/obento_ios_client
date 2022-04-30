@@ -37,7 +37,7 @@ class MenuViewController: UIViewController, UIGestureRecognizerDelegate {
     var dateController: DateController = DateController()
     var currentWeekNumber: Int = 0
     var currentWeek: [DateController.FormattedDate] = []
-    var currentRecipe: Recipe = Recipe(id: 0, userId: 0, name: "Sopa de çorba con chuletillas de cordero", description: "Disfruta de este exquisito plato de la cocina árabe tradicional muy ideal para estas épocas frias.", puntuaction: 4.7, kcal: 350, time: 140, price: 6.5, isLaunch: true, imagePath: "recipe_6", type: "", servings: 1, ingredients: [], steps: [])
+    var currentRecipe: Recipe?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,8 +47,14 @@ class MenuViewController: UIViewController, UIGestureRecognizerDelegate {
         
         selectedDay = dateController.currentDate()
         
-        loadWeek()
-        updateWeek()
+        // Load recipes
+        Task {
+            // TODO: change for selected recipe by day
+            currentRecipe = await ObentoApi.getRecipe(id: 25)
+            
+            loadWeek()
+            updateWeek()
+        }
     }
     
     func loadWeek() {
@@ -99,10 +105,10 @@ class MenuViewController: UIViewController, UIGestureRecognizerDelegate {
         
         date.text = month.capitalizingFirstLetter() + ", " + String(year)
         
-        recieTitle.text = currentRecipe.name
-        recipeImage.image = UIImage(named: currentRecipe.imagePath)
-        recipePuntuation.text = String(currentRecipe.puntuaction)
-        recipeDescription.text = currentRecipe.description
+        recieTitle.text = currentRecipe?.name ?? "Null"
+        recipeImage.image = UIImage(named: "recipe_1")
+        recipePuntuation.text = String(5) // TODO: score
+        recipeDescription.text = currentRecipe?.description ?? "Null"
         
         for i in 0..<7 {
             (daysOfWeek![i].subviews[0] as! UILabel).text = String(currentWeek[i].numberDay)

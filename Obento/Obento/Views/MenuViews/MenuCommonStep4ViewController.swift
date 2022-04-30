@@ -19,9 +19,12 @@ class MenuCommonStep4ViewController: UIViewController {
         super.viewDidLoad()
         
         processMenu()
-        
         rangeDays.text = String(currentMenu.startDay.day) + " " + currentMenu.startDay.monthString.prefix(3).lowercased() + " - " + String(currentMenu.endDay.day) + " " + currentMenu.endDay.monthString.prefix(3).lowercased()
         finalImage.image = UIImage(named: "new_recipe_final_illustration_" + String(Int.random(in: 1...4)))
+        
+        Task {
+            await ObentoApi.postMenu(menu: currentMenu)
+        }
     }
     
     func processMenu() {

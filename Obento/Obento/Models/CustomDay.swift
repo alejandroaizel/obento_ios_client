@@ -7,9 +7,13 @@
 
 import Foundation
 
-struct CustomDay {
+struct CustomDay: Codable {
     var day: Int
     var month: Int
     var monthString: String
     var year: Int
+    
+    func toString() -> String {
+        return "\(day)-\(month)-\(String(year).suffix(2))"
+    }
 }
