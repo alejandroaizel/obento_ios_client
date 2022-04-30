@@ -33,38 +33,41 @@ class RecipeViewController: UIViewController {
     
     // Others
     var recipeInformation: Recipe?
-    var recipeStars: Int = 3 // TODO: Cambiar
+    var recipeStars: Int = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        Task {
-            recipeInformation = await ObentoApi.getRecipe(id: 22)
-            loadRecipeInformation()
-            registerCells()
-        }
+
+        loadRecipeInformation()
+        registerCells()
+
     }
     
     private func registerCells() {
-        ingredientsCollection.register(UINib(nibName: IngredientCollectionViewCell.identifier, bundle: nil), forCellWithReuseIdentifier: IngredientCollectionViewCell.identifier)
-        
-        stepsTableView.register(UINib(nibName: StepTableViewCell.identifier, bundle: nil), forCellReuseIdentifier: StepTableViewCell.identifier)
+        ingredientsCollection.register(
+            UINib(nibName: IngredientCollectionViewCell.identifier,
+                  bundle: nil
+                 ),
+            forCellWithReuseIdentifier: IngredientCollectionViewCell.identifier
+        )
+        stepsTableView.register(
+            UINib(nibName: StepTableViewCell.identifier, bundle: nil),
+            forCellReuseIdentifier: StepTableViewCell.identifier
+        )
     }
     
     func loadRecipeInformation() {
-        recipeImage.image = UIImage(data: recipeInformation!.image) //TODO: create recipe_0 image with placeholder for empty or nil cases
+        recipeStars = recipeInformation?.starts ?? 3
+        recipeImage.image = UIImage(data: recipeInformation!.image)
         recipeName.text = recipeInformation?.name ?? ""
         recipeType.text = recipeInformation?.category ?? ""
-        recipePuntuation.text = "3" // TODO: String(recipeInformation.puntuaction)
+        recipePuntuation.text = "\(recipeStars)"
         recipeDescription.text = recipeInformation?.description ?? ""
         recipeKcal.text = String(recipeInformation?.kcalories ?? 0) + " kcal"
         recipeTime.text = String(recipeInformation?.cookingTime ?? 0) + " min"
         recipePrice.text = String(recipeInformation?.estimatedCost ?? 0) + " €"
-        
         colorStars(numStars: recipeStars)
-        
         let currentRecipesAdded = UserDefaults.standard.object(forKey: "addedToCart") as? [Int] ?? []
-        
         if currentRecipesAdded.contains(recipeInformation?.id ?? 0) {
             addCartButton.setImage(UIImage(systemName: "cart.fill.badge.plus"), for: .normal)
         }
@@ -96,23 +99,35 @@ class RecipeViewController: UIViewController {
     }
     
     @IBAction func addCartAction(_ sender: Any) {
-        for ingredient in recipeInformation!.ingredients {
-            Task {
-                await ObentoApi.updateShoppingListByUser(userId: 0, ingredientId: ingredient.id, quantity: Double(ingredient.quantity!))
+        Task {
+            for ingredient in recipeInformation!.ingredients {
+                await ObentoApi.updateShoppingListByUser(
+                    userId: 0,
+                    ingredientId: ingredient.id,
+                    quantity: Double(ingredient.quantity!)
+                )
             }
-        }
-        
-        // @Vic Esto se tiene que ejecutar despues del for anterior
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "updateCartTableView"), object: recipeInformation?.ingredients)
-        
-        addCartButton.setImage(UIImage(systemName: "cart.fill.badge.plus"), for: .normal)
-        
-        var currentRecipesAdded = UserDefaults.standard.object(forKey: "addedToCart") as? [Int] ?? []
-        
-        if !currentRecipesAdded.contains(recipeInformation!.id) {
-            currentRecipesAdded.append(recipeInformation?.id ?? 0)
+            NotificationCenter.default.post(
+                name: NSNotification.Name(rawValue: "updateCartTableView"),
+                object: recipeInformation?.ingredients
+            )
             
-            UserDefaults.standard.set(currentRecipesAdded, forKey: "addedToCart")
+            addCartButton.setImage(
+                UIImage(systemName: "cart.fill.badge.plus"),
+                for: .normal
+            )
+            
+            var currentRecipesAdded = UserDefaults.standard.object(
+                forKey: "addedToCart"
+            ) as? [Int] ?? []
+            
+            if !currentRecipesAdded.contains(recipeInformation!.id) {
+                currentRecipesAdded.append(recipeInformation?.id ?? 0)
+                
+                UserDefaults.standard.set(
+                    currentRecipesAdded, forKey: "addedToCart"
+                )
+            }
         }
     }
     
@@ -180,16 +195,16 @@ class RecipeViewController: UIViewController {
 }
 
 extension RecipeViewController: UICollectionViewDelegate, UICollectionViewDataSource {
-    
+
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return recipeInformation?.ingredients.count ?? 0
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: IngredientCollectionViewCell.identifier, for: indexPath) as! IngredientCollectionViewCell
-        
+
         cell.setup((recipeInformation?.ingredients[indexPath.row])!)
-        
+
         return cell
     }
 }

@@ -17,6 +17,7 @@ class ObentoApi {
 
         // Resources endpoints
         static let recipe = "\(baseURL)/recipes"
+        static let recipeOCR = "\(baseURL)/recipe_ocr"
         static let recipeCategories = "\(baseURL)/recipe_categories"
         static let ingredient = "\(baseURL)/ingredients"
         static let menu = "\(baseURL)/menus"
@@ -70,7 +71,7 @@ class ObentoApi {
     ) async throws -> [T] {
         // Decoder for request
         let decoder = JSONDecoder()
-        
+
         // Create URL Request
         var request = URLRequest(url: url)
         // Specify HTTP Method to use
@@ -80,8 +81,7 @@ class ObentoApi {
         if (!data.isEmpty) {
             do {
                 request.httpBody = try JSONSerialization.data(
-                    withJSONObject: data, options: []
-                )
+                    withJSONObject:data)
             } catch {
                 return []
             }
@@ -132,7 +132,7 @@ class ObentoApi {
         // Parse the result (generic JSON)
         let result = try JSONSerialization.jsonObject(
             with: data,
-            options: .allowFragments
+            options: .fragmentsAllowed
         ) as! [String: Any]
 
         return result
@@ -223,6 +223,39 @@ class ObentoApi {
         return -1
     }
     
+    public static func postRecipeOCR(imageData: String) async -> OCRData? {
+        guard let url = URL(string: "\(Endpoint.recipeOCR)")
+        else {
+            return nil
+        }
+        do {
+            let result = try await ObentoApi.post(
+                from: url, data: ["image": imageData]
+            )
+            // Check data
+            if result != nil {
+                // List of ingredients
+                var ingList: [Ingredient] = []
+                for ingredient in result!["ingredients"] as! [[String: Any]] {
+                    ingList.append(Ingredient(
+                        ingredient_id: ingredient["ingredient_id"] as! Int,
+                        ingredient_quantity: Float(ingredient["quantity"] as! String)!
+                        )
+                    )
+                }
+                // Create object
+                let ocrData: OCRData = OCRData(
+                    ingredients: ingList,
+                    steps: result!["steps"] as! [String]
+                )
+                return ocrData
+            }
+        } catch {
+            return nil
+        }
+        return nil
+    }
+    
     /**
     Delete an existing recipe in Obento
 
@@ -281,22 +314,15 @@ class ObentoApi {
         }
     }
 
-    public static func getRecipesByCategory(
-        category: Int
-    ) async -> [Recipe] {
-        guard let url = URL(string: "\(Endpoint.recipe)")
+    public static func getRecipesByCategory(category: Int) async -> [Recipe] {
+        guard let url = URL(string: "\(Endpoint.recipe)?category=\(category)")
         else {
             return []
         }
         do {
-            // Prepare body request
-            let body = [
-                "category": category
-            ] as [String : Any]
-            
             // Make request
             let result: [Recipe] = try await ObentoApi.getAll(
-                from: url, data: body
+                from: url
             ) as [Recipe]
             return result
         } catch {

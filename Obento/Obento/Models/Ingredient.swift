@@ -29,6 +29,17 @@ struct Ingredient: Codable {
         case quantity
     }
     
+    init(ingredient_id: Int, ingredient_quantity: Float){
+        id = ingredient_id
+        quantity = ingredient_quantity
+        name = ""
+        category = ""
+        unitaryPrice = 0.0
+        kcalories = 0.0
+        iconName = ""
+        unit = ""
+    }
+    
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         // ID key is different between recipes and ingredients resources
@@ -42,7 +53,10 @@ struct Ingredient: Codable {
         unit = try values.decode(String.self, forKey: .unit)
         unitaryPrice = try values.decode(Float.self, forKey: .unitaryPrice)
         kcalories = try values.decode(Float.self, forKey: .kcalories)
-        iconName = try values.decode(String.self, forKey: .iconName).replacingOccurrences(of: ".ico", with: "")
+        iconName = try values.decode(
+            String.self,
+            forKey: .iconName
+        ).replacingOccurrences(of: ".ico", with: "")
         // Quantity is optional
         do {
             quantity = try values.decode(Float.self, forKey: .quantity)
@@ -56,4 +70,6 @@ struct Ingredient: Codable {
         try container.encode(id, forKey: .ingredientId)
         try container.encode(quantity, forKey: .quantity)
     }
+    
+    
 }

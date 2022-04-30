@@ -18,6 +18,6 @@ class PopularRecipesCollectionViewCell: UICollectionViewCell {
     func setup(_ recipe: Recipe) {
         recipeImage.image = UIImage(data: recipe.image)
         recipeTitle.text = recipe.name
-        recipePuntuaction.text = "5"
+        recipePuntuaction.text = "\(recipe.starts)"
     }
 }
