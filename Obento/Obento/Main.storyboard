@@ -288,7 +288,7 @@
                                 <rect key="frame" x="0.0" y="44" width="375" height="685"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EHE-5f-1CK">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="716"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="792.33333333333337"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Menú semanal" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QVu-ef-FAB">
                                                 <rect key="frame" x="20" y="65" width="236" height="43"/>
@@ -666,15 +666,15 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9B9-qR-rJi">
-                                                <rect key="frame" x="20" y="428" width="335" height="238"/>
+                                                <rect key="frame" x="20" y="428" width="335" height="314.33333333333326"/>
                                                 <subviews>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="recipe_2" translatesAutoresizingMaskIntoConstraints="NO" id="hsL-qD-1c4">
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default_recipe_image" translatesAutoresizingMaskIntoConstraints="NO" id="hsL-qD-1c4">
                                                         <rect key="frame" x="0.0" y="0.0" width="335" height="100"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="100" id="Sea-XY-lC6"/>
                                                         </constraints>
                                                     </imageView>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recipe title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kUo-Jw-doS">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sin receta" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kUo-Jw-doS">
                                                         <rect key="frame" x="20" y="120.00000000000001" width="295" height="28.666666666666671"/>
                                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="24"/>
                                                         <color key="textColor" name="TextColor"/>
@@ -691,7 +691,7 @@
                                                                 </constraints>
                                                                 <preferredSymbolConfiguration key="preferredSymbolConfiguration" weight="heavy"/>
                                                             </imageView>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="stars" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QMN-YB-CZK">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QMN-YB-CZK">
                                                                 <rect key="frame" x="30" y="0.0" width="255" height="40"/>
                                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
                                                                 <color key="textColor" name="StarColor"/>
@@ -714,8 +714,9 @@
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                     </view>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SxK-it-tqi">
-                                                        <rect key="frame" x="20" y="198.66666666666663" width="295" height="19.333333333333343"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SxK-it-tqi">
+                                                        <rect key="frame" x="20" y="198.66666666666663" width="295" height="95.666666666666686"/>
+                                                        <string key="text">¡Vaya! Todavía no has creado un menú para este día. Crear un nuevo menú es muy sencillo: ¡Tan solo tienes que pulsar sobre el botón '+' y nosotros haremos el resto!</string>
                                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                                         <color key="textColor" name="TextColor"/>
                                                         <nil key="highlightedColor"/>
@@ -3262,8 +3263,8 @@
                                                 <color key="textColor" name="TextColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="María Cruz" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ug9-FP-0lZ">
-                                                <rect key="frame" x="20" y="118" width="175.33333333333334" height="43"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Víctor" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ug9-FP-0lZ">
+                                                <rect key="frame" x="19.999999999999993" y="118" width="97.333333333333314" height="43"/>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="36"/>
                                                 <color key="textColor" name="TextColor"/>
                                                 <nil key="highlightedColor"/>
@@ -3784,6 +3785,7 @@
         <image name="cart" catalog="system" width="128" height="102"/>
         <image name="cart.badge.plus" catalog="system" width="128" height="106"/>
         <image name="cart.fill" catalog="system" width="128" height="102"/>
+        <image name="default_recipe_image" width="1920" height="1080"/>
         <image name="eurosign.circle" catalog="system" width="128" height="121"/>
         <image name="flame" catalog="system" width="108" height="128"/>
         <image name="house" catalog="system" width="128" height="106"/>
@@ -3802,7 +3804,6 @@
         <image name="person.crop.circle.fill" catalog="system" width="128" height="121"/>
         <image name="plus" catalog="system" width="128" height="113"/>
         <image name="plus.viewfinder" catalog="system" width="128" height="115"/>
-        <image name="recipe_2" width="640" height="427"/>
         <image name="star" catalog="system" width="128" height="116"/>
         <image name="star.leadinghalf.filled" catalog="system" width="128" height="116"/>
         <image name="staroflife.fill" catalog="system" width="124" height="128"/>
