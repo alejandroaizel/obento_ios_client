@@ -23,7 +23,7 @@ class RecipeCommonStep5ViewController: UIViewController {
         finalImage.image = UIImage(named: "new_recipe_final_illustration_" + String(Int.random(in: 1...4)))
 
         Task {
-            self.recipe_id: Int = await ObentoApi.postRecipe(recipe: currentRecipe)
+            self.recipe_id = await ObentoApi.postRecipe(recipe: currentRecipe)
         }
     }
     
@@ -50,7 +50,13 @@ class RecipeCommonStep5ViewController: UIViewController {
     }
     
     @IBAction func bottonCloseButtonAction(_ sender: Any) {
-        
+        let controller = (
+            storyboard?.instantiateViewController(
+                withIdentifier: "RecipeViewController")
+        ) as! RecipeViewController
         self.dismiss(animated: true, completion: nil)
+        
+        controller.recipeInformation = self.currentRecipe
+        present(controller, animated: true, completion: nil)
     }
 }
