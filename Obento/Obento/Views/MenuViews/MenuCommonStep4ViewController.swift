@@ -26,17 +26,21 @@ class MenuCommonStep4ViewController: UIViewController {
             let is_simple_menu = currentMenu.maxTime == nil
             
             if is_simple_menu {
-                let menu_simple = processSimpleMenu(currentMenu: currentMenu)
+                let menu_simple: MenuSimple = processSimpleMenu(currentMenu: currentMenu)
                 
-                await ObentoApi.postMenu(menu: menu_simple)
+                await ObentoApi.postMenuSimple(menu: menu_simple)
                 
                 NotificationCenter.default.post(
                     name: NSNotification.Name(rawValue: "updateMenu"), object: nil
                 )
             } else {
-                let menu_complex = processComplexMenu(currentMenu: currentMenu)
+                let menu_complex: MenuComplex = processComplexMenu(currentMenu: currentMenu)
                 
-                // await ObentoApi.postMenu(menu: menu_complex)
+                await ObentoApi.postMenuComplex(menu: menu_complex)
+                
+                NotificationCenter.default.post(
+                    name: NSNotification.Name(rawValue: "updateMenu"), object: nil
+                )
             }
         }
     }
@@ -65,7 +69,14 @@ class MenuCommonStep4ViewController: UIViewController {
             discarded_ingredients.append(ingredient.id)
         }
         
-        return MenuComplex(user: 2, date: range_date, discarded_ingredients: discarded_ingredients, max_time: currentMenu.maxTime!, max_price: currentMenu.maxPrice!, is_lunch: is_lunch)
+        return MenuComplex(
+            user: 2,
+            date: range_date,
+            discarded_ingredients: discarded_ingredients,
+            max_time: currentMenu.maxTime!,
+            max_price: currentMenu.maxPrice!,
+            is_lunch: is_lunch
+        )
     }
     
     override func viewWillAppear(_ animated: Bool) {

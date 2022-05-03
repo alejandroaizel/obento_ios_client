@@ -41,7 +41,7 @@ class TodayViewController: UIViewController, UIGestureRecognizerDelegate {
         
         // Featured recipe
         Task {
-            self.featuredRecipe = await ObentoApi.getRecipe(id: 35)
+            self.featuredRecipe = await ObentoApi.getRecipe(id: 62)
             if (featuredRecipe != nil) {
                 loadFeatureRecipe()
                 // Add listener

@@ -224,7 +224,7 @@ class ObentoApi {
         return -1
     }
     
-    public static func postRecipeOCR(imageData: String) async -> OCRData? {
+    public static func postRecipeOCR(imageData: Data) async -> OCRData? {
         guard let url = URL(string: "\(Endpoint.recipeOCR)")
         else {
             return nil
@@ -423,7 +423,7 @@ class ObentoApi {
     - parameter menu: Menu.
     - returns: ID of menu created, -1 otherwise
     */
-    public static func postMenu(menu: MenuSimple) async -> Int {
+    public static func postMenuSimple(menu: MenuSimple) async -> Int {
         guard let url = URL(string: "\(Endpoint.menu)") else {
             return -1
         }
@@ -438,6 +438,23 @@ class ObentoApi {
         }
         return -1
     }
+    
+    public static func postMenuComplex(menu: MenuComplex) async -> Int {
+        guard let url = URL(string: "\(Endpoint.menu)") else {
+            return -1
+        }
+        do {
+            let result = try await ObentoApi.post(from: url, data: menu)
+            // Check data
+            if let menu_id = result?["id"] {
+                return 0
+            }
+        } catch {
+            return -1
+        }
+        return -1
+    }
+    
     
     public static func exportMenu(menu: WeeklyMenu) async -> Bool {
         guard let url = URL(string: "\(Endpoint.exportMenu)") else {

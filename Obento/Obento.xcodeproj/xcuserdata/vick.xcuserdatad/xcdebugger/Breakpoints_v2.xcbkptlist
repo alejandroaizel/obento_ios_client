@@ -361,8 +361,8 @@
             filePath = "Obento/API/ObentoApi.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "588"
-            endingLineNumber = "588"
+            startingLineNumber = "605"
+            endingLineNumber = "605"
             landmarkName = "getShoppingListByUser(userId:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -377,8 +377,8 @@
             filePath = "Obento/API/ObentoApi.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "590"
-            endingLineNumber = "590"
+            startingLineNumber = "607"
+            endingLineNumber = "607"
             landmarkName = "getShoppingListByUser(userId:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -393,8 +393,8 @@
             filePath = "Obento/API/ObentoApi.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "591"
-            endingLineNumber = "591"
+            startingLineNumber = "608"
+            endingLineNumber = "608"
             landmarkName = "getShoppingListByUser(userId:)"
             landmarkType = "7">
          </BreakpointContent>

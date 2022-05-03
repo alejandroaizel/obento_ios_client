@@ -234,12 +234,12 @@ class MenuViewController: UIViewController, UIGestureRecognizerDelegate {
     
     func addMenuItems() -> UIMenu {
         let menuItems = UIMenu(title: "", options: .displayInline, children: [
-            UIAction(title: "Crear menú", image: UIImage(systemName: "menubar.rectangle"), handler: { _ in
+            UIAction(title: "Menú sencillo", image: UIImage(systemName: "menubar.rectangle"), handler: { _ in
                 let vc = self.storyboard?.instantiateViewController(withIdentifier: "MenuNavigationController") as! MenuNavigationController
                 MenuNavigationController.optionSelected = 0
                 self.present(vc, animated: true, completion: nil)
             }),
-            UIAction(title: "Crear menú personalizado", image: UIImage(systemName: "filemenu.and.selection"), handler: { _ in
+            UIAction(title: "Menú personalizado", image: UIImage(systemName: "filemenu.and.selection"), handler: { _ in
                 let vc = self.storyboard?.instantiateViewController(withIdentifier: "MenuNavigationController") as! MenuNavigationController
                 MenuNavigationController.optionSelected = 1
                 self.present(vc, animated: true, completion: nil)

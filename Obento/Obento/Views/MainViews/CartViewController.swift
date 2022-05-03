@@ -101,6 +101,7 @@ extension CartViewController: UITableViewDataSource, UITableViewDelegate {
                     userId: 1,
                     ingredient: toRemove
                 )
+                updatePrice()
             }
         } else if editingStyle == .insert {
             cartTableView.reloadData()
