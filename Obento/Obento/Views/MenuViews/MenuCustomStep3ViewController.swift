@@ -42,7 +42,7 @@ class MenuCustomStep3ViewController: UIViewController {
     @IBAction func nextButtonAction(_ sender: Any) {
         let vc = storyboard?.instantiateViewController(withIdentifier: "MenuCommonStep4ViewController") as! MenuCommonStep4ViewController
 
-        vc.currentMenu = self.currentMenu
+        //vc.currentMenu = self.currentMenu
         
         if lunchPressed || dinnerPressed {
             self.navigationController?.pushViewController (vc, animated: true)

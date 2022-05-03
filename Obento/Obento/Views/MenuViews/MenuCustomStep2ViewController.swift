@@ -14,7 +14,7 @@ class MenuCustomStep2ViewController: UIViewController {
     @IBOutlet weak var ingredientsCollection: UICollectionView!
     @IBOutlet weak var scrollView: UIScrollView!
     
-    var currentMenu: Menu!
+    var currentMenu: MenuSimple!
     
     var currentRecipe: Recipe!
     var ingredientList: [Ingredient]!
@@ -27,8 +27,8 @@ class MenuCustomStep2ViewController: UIViewController {
         navigationController?.setNavigationBarHidden(false, animated: false)
         
         Task {
-            ingredientList = await ObentoApi.getIngredients()
-            filteredIngredients = ingredientList
+            self.ingredientList = await ObentoApi.getIngredients()
+            self.filteredIngredients = self.ingredientList
             
             self.addDoneButtonOnKeyboard()
             
@@ -41,7 +41,7 @@ class MenuCustomStep2ViewController: UIViewController {
             searchBar.addTarget(self, action: #selector(filterIngredients), for: .editingChanged)
             
             registerCells()
-            ingredientsCollection.reloadData()
+            self.ingredientsCollection.reloadData()
         }
     }
     
@@ -93,12 +93,12 @@ class MenuCustomStep2ViewController: UIViewController {
     }
     
     @IBAction func nextAction(_ sender: Any) {
-        let vc = storyboard?.instantiateViewController(withIdentifier: "MenuCustomStep3ViewController") as! MenuCustomStep3ViewController
+        let vc = storyboard?.instantiateViewController(withIdentifier: "MenuCommonStep4ViewController") as! MenuCommonStep4ViewController
 
         vc.currentMenu = self.currentMenu
         
         for ingredient in filteredIngredients {
-            currentMenu.bannedIngredients?.append(ingredient)
+            currentMenu.discarded_ingredients.append(ingredient.id)
         }
         
         self.navigationController?.pushViewController (vc, animated: true)
@@ -144,14 +144,14 @@ extension MenuCustomStep2ViewController: UICollectionViewDelegate, UICollectionV
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: IngredientCollectionViewCell.identifier, for: indexPath) as! IngredientCollectionViewCell
         
-        cell.setup(filteredIngredients[indexPath.row])
-        cell.tag = filteredIngredients[indexPath.row].id
+        cell.setup(self.filteredIngredients[indexPath.row])
+        cell.tag = self.filteredIngredients[indexPath.row].id
         
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        var selectedIngredient: Ingredient = filteredIngredients[indexPath.row]
+        var selectedIngredient: Ingredient = self.filteredIngredients[indexPath.row]
         
         for ing in currentIngredients {
             if selectedIngredient.id == ing.id {
@@ -162,6 +162,6 @@ extension MenuCustomStep2ViewController: UICollectionViewDelegate, UICollectionV
         selectedIngredient.quantity = 0
         nextButton.alpha = 1
         
-        currentIngredients.append(selectedIngredient)
+        self.currentIngredients.append(selectedIngredient)
     }
 }

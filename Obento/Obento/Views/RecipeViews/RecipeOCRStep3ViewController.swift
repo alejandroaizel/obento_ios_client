@@ -52,13 +52,15 @@ extension RecipeOCRStep3ViewController: UIImagePickerControllerDelegate, UINavig
             return
         }
         Task {
-            let b64_data = image.pngData()!.base64EncodedString()
-            let ocrData: OCRData = await ObentoApi.postRecipeOCR(
-                imageData: b64_data
-            )!
-
-            self.currentRecipe.steps = ocrData.steps
-            self.currentRecipe.ingredients = ocrData.ingredients
+//            let b64_data = image.pngData()
+//            let ocrData: OCRData = await ObentoApi.postRecipeOCR(
+//                imageData: b64_data
+//            )!
+//
+//            self.currentRecipe.steps = ocrData.steps
+//            self.currentRecipe.ingredients = ocrData.ingredients
+            
+            self.currentRecipe = await ObentoApi.getRecipe(id: 98)
             
             let vc = storyboard?.instantiateViewController(
                 withIdentifier: "RecipeCommonStep5ViewController"

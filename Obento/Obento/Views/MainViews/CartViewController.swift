@@ -15,14 +15,18 @@ class CartViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        cartTableView.allowsMultipleSelectionDuringEditing = false
         
         Task {
-            let newItems = await ObentoApi.getIngredients()
-            
-            self.shoppingList = newItems
-            
-            NotificationCenter.default.addObserver(self, selector: #selector(notified(_:)), name: NSNotification.Name(rawValue: "updateCartTableView"), object: nil)
-            
+            if let list = await ObentoApi.getShoppingListByUser(userId: 1) {
+                self.shoppingList = list.ingredients
+            }
+            NotificationCenter.default.addObserver(
+                self, selector: #selector(notified(_:)),
+                name: NSNotification.Name(
+                    rawValue: "updateCartTableView"),
+                object: nil
+            )
             registerCells()
             cartTableView.reloadData()
         }
@@ -30,12 +34,11 @@ class CartViewController: UIViewController {
     
     @objc func notified(_ notification : Notification)  {
         Task {
-            let newItems = await ObentoApi.getIngredients()
-            
-            self.shoppingList = newItems
+            if let list = await ObentoApi.getShoppingListByUser(userId: 1) {
+                self.shoppingList = list.ingredients
+                self.cartTableView.reloadData()
+            }
         }
-        
-        self.cartTableView.reloadData()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -43,24 +46,58 @@ class CartViewController: UIViewController {
     }
     
     private func registerCells() {
-        cartTableView.register(UINib(nibName: CartTableViewCell.identifier, bundle: nil), forCellReuseIdentifier: CartTableViewCell.identifier)
+        cartTableView.register(
+            UINib(
+                nibName: CartTableViewCell.identifier,
+                bundle: nil),
+            forCellReuseIdentifier: CartTableViewCell.identifier
+        )
+        cartTableView.delegate = self
+        cartTableView.dataSource = self
     }
     
     func addNewItems(_ newItems: [Ingredient]) {
-        shoppingList.append(contentsOf: newItems)
+        self.shoppingList.append(contentsOf: newItems)
     }
+
 }
 
 extension CartViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return shoppingList.count
+        return self.shoppingList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = cartTableView.dequeueReusableCell(withIdentifier: CartTableViewCell.identifier) as! CartTableViewCell
-        
-        cell.setup(shoppingList[indexPath.row])
-        
+        cell.setup(self.shoppingList[indexPath.row])
         return cell
+    }
+    
+    // This method handles row deletion
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let itemToRemove: Ingredient = self.shoppingList[indexPath.row]
+            // remove the item from the data model
+            self.shoppingList.remove(at: indexPath.row)
+            // delete the table view row
+            tableView.deleteRows(at: [indexPath], with: .fade)
+            Task {
+                var toRemove = itemToRemove
+                toRemove.quantity = 0
+                await ObentoApi.updateShoppingListByUser(
+                    userId: 1,
+                    ingredient: toRemove
+                )
+            }
+        } else if editingStyle == .insert {
+            cartTableView.reloadData()
+        }
+    }
+    
+    func tableView(
+        _ tableView: UITableView,
+        titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath
+    ) -> String? {
+        return "Eliminar"
     }
 }

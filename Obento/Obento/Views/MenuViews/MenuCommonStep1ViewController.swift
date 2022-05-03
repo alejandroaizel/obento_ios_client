@@ -16,7 +16,7 @@ class MenuCommonStep1ViewController: UIViewController {
     @IBOutlet weak var secondDate: UIDatePicker!
     
     var optionSelected: Int!
-    var currentMenu: Menu!
+    var currentMenu: MenuSimple!
     var dateController: DateController = DateController()
     var currentNumDays: Int = 1
     var isDateCorect: Bool = true
@@ -112,7 +112,9 @@ class MenuCommonStep1ViewController: UIViewController {
         let firstFormatedDay = dateController.formatDay(firstDate.date)
         let secondFormatedDay = dateController.formatDay(secondDate.date)
         
-        currentMenu = .init(numDays: currentNumDays, startDay: firstFormatedDay, endDay: secondFormatedDay, recipes: [])
+        currentMenu = MenuSimple(user: 2, date: "07-05-22|08-05-22", discarded_ingredients: [])
+        
+//        currentMenu = .init(numDays: currentNumDays, startDay: firstFormatedDay, endDay: secondFormatedDay, recipes: [])
     }
     
     @IBAction func nextButtonAction(_ sender: Any) {
@@ -123,14 +125,6 @@ class MenuCommonStep1ViewController: UIViewController {
         }
         
         if optionSelected == 0 { // Menú simple
-            let vc = storyboard?.instantiateViewController(withIdentifier: "MenuCommonStep4ViewController") as! MenuCommonStep4ViewController
-            
-            storeMenu()
-            
-            vc.currentMenu = self.currentMenu
-            
-            self.navigationController?.pushViewController (vc, animated: true)
-        } else {
             let vc = storyboard?.instantiateViewController(withIdentifier: "MenuCustomStep2ViewController") as! MenuCustomStep2ViewController
             
             storeMenu()
@@ -138,6 +132,14 @@ class MenuCommonStep1ViewController: UIViewController {
             vc.currentMenu = self.currentMenu
             
             self.navigationController?.pushViewController (vc, animated: true)
+        } else {
+//            let vc = storyboard?.instantiateViewController(withIdentifier: "MenuCustomStep3ViewController") as! MenuCustomStep3ViewController
+//
+//            storeMenu()
+//
+//            vc.currentMenu = self.currentMenu
+//            
+//            self.navigationController?.pushViewController (vc, animated: true)
         }
     }
     

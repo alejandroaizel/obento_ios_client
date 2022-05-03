@@ -13,13 +13,13 @@ class MenuCommonStep4ViewController: UIViewController {
     @IBOutlet weak var okButton: UIButton!
     @IBOutlet weak var finalImage: UIImageView!
     
-    var currentMenu: Menu!
+    var currentMenu: MenuSimple!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         processMenu()
-        rangeDays.text = String(currentMenu.startDay.day) + " " + currentMenu.startDay.monthString.prefix(3).lowercased() + " - " + String(currentMenu.endDay.day) + " " + currentMenu.endDay.monthString.prefix(3).lowercased()
+        rangeDays.text = "9/5 - 13/5"
         finalImage.image = UIImage(named: "new_recipe_final_illustration_" + String(Int.random(in: 1...4)))
         
         Task {

@@ -21,6 +21,7 @@ class ObentoApi {
         static let recipeCategories = "\(baseURL)/recipe_categories"
         static let ingredient = "\(baseURL)/ingredients"
         static let menu = "\(baseURL)/menus"
+        static let exportMenu = "\(baseURL)/export_menu"
         static let user = "\(baseURL)/user"
     }
 
@@ -394,7 +395,6 @@ class ObentoApi {
             return []
         }
     }
-    
 
     
     /**
@@ -423,7 +423,7 @@ class ObentoApi {
     - parameter menu: Menu.
     - returns: ID of menu created, -1 otherwise
     */
-    public static func postMenu(menu: Menu) async -> Int {
+    public static func postMenu(menu: MenuSimple) async -> Int {
         guard let url = URL(string: "\(Endpoint.menu)") else {
             return -1
         }
@@ -431,12 +431,47 @@ class ObentoApi {
             let result = try await ObentoApi.post(from: url, data: menu)
             // Check data
             if let menu_id = result?["id"] {
-                return menu_id as! Int
+                return 0
             }
         } catch {
             return -1
         }
         return -1
+    }
+    
+    public static func exportMenu(menu: WeeklyMenu) async -> Bool {
+        guard let url = URL(string: "\(Endpoint.exportMenu)") else {
+            return false
+        }
+        do {
+            // Create request and encoder
+            var request = URLRequest(url: url)
+            let encoder = JSONEncoder()
+            
+            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.httpBody = try! encoder.encode(menu)
+            request.httpMethod = "POST"
+            
+            // Make the request
+            let (data, response) = try await URLSession.shared.data(for: request)
+            
+            guard (response as? HTTPURLResponse)!.statusCode <= 300
+            else {
+                return false
+            }
+            
+            // Prepare filesystem
+            let documentDirectory = FileManager.default.urls(
+                for: .documentDirectory,
+                in: .userDomainMask
+            )[0]
+            
+            let fileName = documentDirectory.appendingPathComponent("obento_menu.ics")
+            try data.write(to: fileName)
+        } catch {
+            return false
+        }
+        return true
     }
     
     /**
@@ -541,17 +576,63 @@ class ObentoApi {
     
     // Shopping List
     
-    public static func getShoppingListByUser(userId: Int) async -> [String] {
-        //TODO: endpoint isn't working
-        return []
+    public static func getShoppingListByUser(
+        userId: Int
+    ) async -> ShoppingList? {
+        guard let url = URL(string: "\(Endpoint.user)/\(userId)/shopping_list")
+        else {
+            return nil
+        }
+        do {
+            // Make request
+            let result: ShoppingList = try await ObentoApi.get(
+                from: url
+            ) as ShoppingList
+            return result
+        } catch {
+            return nil
+        }
     }
     
     public static func updateShoppingListByUser(
         userId: Int,
-        ingredientId: Int,
-        quantity: Double
+        ingredient: Ingredient
     ) async -> Bool {
-        //TODO: endpoint isn't working
-        return false
+        guard let url = URL(string: "\(Endpoint.user)/\(userId)/shopping_list")
+        else {
+            return false
+        }
+        do {
+            // Make request
+            try await ObentoApi.post(
+                from: url,
+                data: ingredient,
+                update: true
+            )
+            return true
+        } catch {
+            return false
+        }
+    }
+    
+    public static func updateShoppingListByRecipe(
+        userId: Int,
+        recipeId: Int
+    ) async -> Bool {
+        guard let url = URL(string: "\(Endpoint.user)/\(userId)/shopping_list")
+        else {
+            return false
+        }
+        do {
+            // Make request
+            try await ObentoApi.post(
+                from: url,
+                data: ["recipe_id": recipeId],
+                update: true
+            )
+            return true
+        } catch {
+            return false
+        }
     }
 }

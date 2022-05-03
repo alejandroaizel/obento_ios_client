@@ -19,6 +19,7 @@ class CartTableViewCell: UITableViewCell {
         ingredientIcon.image = UIImage(named: ingredient.iconName)
         ingredientName.text = ingredient.name
         units.text = "x " + String(ingredient.quantity ?? -1) + ingredient.unit
-        totalPrice.text = "\((ingredient.quantity ?? -1) * ingredient.unitaryPrice) €"
+        let price = round(100 * ((ingredient.quantity ?? -1) * ingredient.unitaryPrice)) / 100
+        totalPrice.text = "\(price) €"
     }
 }
