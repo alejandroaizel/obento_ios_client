@@ -61,6 +61,21 @@ class MenuViewController: UIViewController, UIGestureRecognizerDelegate {
             loadWeek()
             updateWeek()
             loadCurrentRecipe()
+            
+            NotificationCenter.default.addObserver(
+                self, selector: #selector(notified(_:)),
+                name: NSNotification.Name(
+                    rawValue: "updateMenu"),
+                object: nil
+            )
+        }
+    }
+    
+    @objc func notified(_ notification : Notification)  {
+        Task {
+            currentMenu = await ObentoApi.getMenu(userId: 2)
+            
+            loadCurrentRecipe()
         }
     }
     
@@ -224,11 +239,11 @@ class MenuViewController: UIViewController, UIGestureRecognizerDelegate {
                 MenuNavigationController.optionSelected = 0
                 self.present(vc, animated: true, completion: nil)
             }),
-//            UIAction(title: "Nuevo menú personalizado", image: UIImage(systemName: "filemenu.and.selection"), handler: { _ in
-//                let vc = self.storyboard?.instantiateViewController(withIdentifier: "MenuNavigationController") as! MenuNavigationController
-//                MenuNavigationController.optionSelected = 1
-//                self.present(vc, animated: true, completion: nil)
-//            }),
+            UIAction(title: "Crear menú personalizado", image: UIImage(systemName: "filemenu.and.selection"), handler: { _ in
+                let vc = self.storyboard?.instantiateViewController(withIdentifier: "MenuNavigationController") as! MenuNavigationController
+                MenuNavigationController.optionSelected = 1
+                self.present(vc, animated: true, completion: nil)
+            }),
             UIAction(title: "Exportar menú", image: UIImage(systemName: "square.and.arrow.up"), handler: { _ in
                 Task {
                     //let weeklyMenu = WeeklyMenu(userId: 2, items: self.currentMenu)

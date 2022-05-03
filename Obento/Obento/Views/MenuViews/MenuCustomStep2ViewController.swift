@@ -14,7 +14,7 @@ class MenuCustomStep2ViewController: UIViewController {
     @IBOutlet weak var ingredientsCollection: UICollectionView!
     @IBOutlet weak var scrollView: UIScrollView!
     
-    var currentMenu: MenuSimple!
+    var currentMenu: Menu!
     
     var currentRecipe: Recipe!
     var ingredientList: [Ingredient]!
@@ -27,7 +27,7 @@ class MenuCustomStep2ViewController: UIViewController {
         navigationController?.setNavigationBarHidden(false, animated: false)
         
         Task {
-            self.ingredientList = await ObentoApi.getIngredients()
+            ingredientList = await ObentoApi.getIngredients()
             self.filteredIngredients = self.ingredientList
             
             self.addDoneButtonOnKeyboard()
@@ -41,6 +41,7 @@ class MenuCustomStep2ViewController: UIViewController {
             searchBar.addTarget(self, action: #selector(filterIngredients), for: .editingChanged)
             
             registerCells()
+            
             self.ingredientsCollection.reloadData()
         }
     }
@@ -93,13 +94,15 @@ class MenuCustomStep2ViewController: UIViewController {
     }
     
     @IBAction func nextAction(_ sender: Any) {
-        let vc = storyboard?.instantiateViewController(withIdentifier: "MenuCommonStep4ViewController") as! MenuCommonStep4ViewController
-
-        vc.currentMenu = self.currentMenu
+        let vc = storyboard?.instantiateViewController(withIdentifier: "MenuCustomStep3ViewController") as! MenuCustomStep3ViewController
         
-        for ingredient in filteredIngredients {
-            currentMenu.discarded_ingredients.append(ingredient.id)
+        currentMenu.bannedIngredients = []
+        
+        for ingredient in currentIngredients {
+            currentMenu.bannedIngredients!.append(ingredient)
         }
+        
+        vc.currentMenu = self.currentMenu
         
         self.navigationController?.pushViewController (vc, animated: true)
     }
@@ -153,10 +156,24 @@ extension MenuCustomStep2ViewController: UICollectionViewDelegate, UICollectionV
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         var selectedIngredient: Ingredient = self.filteredIngredients[indexPath.row]
         
+        var elementToRemove = 0
+        
         for ing in currentIngredients {
             if selectedIngredient.id == ing.id {
+                if let cell = collectionView.cellForItem(at: indexPath) {
+                    cell.contentView.backgroundColor = .white
+                }
+                
+                currentIngredients.remove(at: elementToRemove)
+                
                 return
             }
+            
+            elementToRemove += 1
+        }
+        
+        if let cell = collectionView.cellForItem(at: indexPath) {
+            cell.contentView.backgroundColor = UIColor(named: "SecondaryColor")
         }
         
         selectedIngredient.quantity = 0

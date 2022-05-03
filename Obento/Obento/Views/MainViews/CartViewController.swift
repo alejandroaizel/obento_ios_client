@@ -11,6 +11,7 @@ import UIKit
 class CartViewController: UIViewController {
     @IBOutlet weak var cartTableView: UITableView!
     
+    @IBOutlet weak var totalButton: UILabel!
     var shoppingList: [Ingredient] = []
     
     override func viewDidLoad() {
@@ -29,7 +30,18 @@ class CartViewController: UIViewController {
             )
             registerCells()
             cartTableView.reloadData()
+            updatePrice()
         }
+    }
+    
+    func updatePrice() {
+        var currentPrice: Float = 0.0
+        
+        for ingredient in shoppingList {
+            currentPrice += ingredient.quantity! * ingredient.unitaryPrice
+        }
+        
+        totalButton.text = String(format:"%.2f", currentPrice) + " €"
     }
     
     @objc func notified(_ notification : Notification)  {
@@ -37,6 +49,7 @@ class CartViewController: UIViewController {
             if let list = await ObentoApi.getShoppingListByUser(userId: 1) {
                 self.shoppingList = list.ingredients
                 self.cartTableView.reloadData()
+                updatePrice()
             }
         }
     }
@@ -91,6 +104,7 @@ extension CartViewController: UITableViewDataSource, UITableViewDelegate {
             }
         } else if editingStyle == .insert {
             cartTableView.reloadData()
+            updatePrice()
         }
     }
     
