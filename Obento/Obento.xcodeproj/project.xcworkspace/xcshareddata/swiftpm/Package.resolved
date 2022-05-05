@@ -1,0 +1,23 @@
+{
+  "pins" : [
+    {
+      "identity" : "anycodable",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Flight-School/AnyCodable",
+      "state" : {
+        "revision" : "11423ef0c756e8a1f6b4bb576dab9d97bc016c70",
+        "version" : "0.6.4"
+      }
+    },
+    {
+      "identity" : "get",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/kean/Get",
+      "state" : {
+        "revision" : "068b400e3850f0953ec25d11d3a3893c4538ffd5",
+        "version" : "0.5.0"
+      }
+    }
+  ],
+  "version" : 2
+}
