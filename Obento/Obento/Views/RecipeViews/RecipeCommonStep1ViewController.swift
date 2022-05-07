@@ -30,6 +30,7 @@ class RecipeCommonStep1ViewController: UIViewController, UINavigationControllerD
     var currentImage: UIImage?
     var categories: [String] = []
     var currentCategory: Int = 0
+    var categoryIndex: Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,7 +39,10 @@ class RecipeCommonStep1ViewController: UIViewController, UINavigationControllerD
 
         // Get categories
         Task {
-            categories = await ObentoApi.getRecipeCategories()
+            self.categories = await ObentoApi.getRecipeCategories()
+            self.currentRecipe = await ObentoApi.getRecipe(id: 50)
+            registerCells()
+            categoriesCollectionView.reloadData()
         }
         
         self.addDoneButtonOnKeyboard()
@@ -50,9 +54,6 @@ class RecipeCommonStep1ViewController: UIViewController, UINavigationControllerD
         nameImput.setRightPaddingPoints(40)
         
         descriptionInput.textContainerInset = UIEdgeInsets(top: 15, left: 10, bottom: 15, right: 10)
-
-        registerCells()
-        // Do any additional setup after loading the view.
     }
     
     private func registerCells() {
@@ -175,14 +176,6 @@ class RecipeCommonStep1ViewController: UIViewController, UINavigationControllerD
     }
     
     @IBAction func pickImageAction(_ sender: Any) {
-        /*if UIImagePickerController.isSourceTypeAvailable(.savedPhotosAlbum) {
-            imagePicker.delegate = self
-            imagePicker.sourceType = .camera
-            imagePicker.allowsEditing = false
-
-            present(imagePicker, animated: true, completion: nil)
-        }*/
-        
         var config = PHPickerConfiguration()
         config.selectionLimit = 1
         config.filter = PHPickerFilter.images
@@ -194,12 +187,11 @@ class RecipeCommonStep1ViewController: UIViewController, UINavigationControllerD
     }
     
     func storeCurrentData() {
-        currentRecipe?.name = nameImput.text ?? "" // TODO: no permitir
+        currentRecipe?.name = nameImput.text ?? ""
         currentRecipe?.description = descriptionInput.text ?? ""
-        //currentRecipe?.image = "recipe_1" // TODO: Subir imagen y guardar el id currentImage
+        currentRecipe?.image = currentImage?.pngData() ?? Data()
         currentRecipe?.cookingTime = Int(timePicker.countDownDuration / 60)
         currentRecipe?.category = categories[currentCategory]
-        
     }
     
     @IBAction func nextButtonAction(_ sender: Any) {
@@ -210,6 +202,34 @@ class RecipeCommonStep1ViewController: UIViewController, UINavigationControllerD
         vc.currentRecipe = self.currentRecipe
         
         self.navigationController?.pushViewController (vc, animated: true)
+    }
+    
+    @objc func tap(_ sender: UITapGestureRecognizer) {
+        let location = sender.location(in: self.categoriesCollectionView)
+        let indexPath = self.categoriesCollectionView.indexPathForItem(at: location)
+
+        if let index = indexPath {
+            print("Got clicked on index: \(index.row)!")
+            // Unselect label
+            let cellToUnselect = categoriesCollectionView.cellForItem(at: [0,currentCategory])
+            
+            if cellToUnselect != nil {
+                (cellToUnselect as! CategoryCollectionViewCell).categoryView.backgroundColor = UIColor.init(named: "SecondaryColor")
+                (cellToUnselect as! CategoryCollectionViewCell).categoryLabel.textColor = UIColor.init(named: "TextColor")
+            }
+            
+            // Select new label
+            let celltoSelect = categoriesCollectionView.cellForItem(at: index)
+            
+            if celltoSelect != nil {
+                (celltoSelect as! CategoryCollectionViewCell).categoryView.backgroundColor = UIColor.init(named: "ObentoGreen")
+                (celltoSelect as! CategoryCollectionViewCell).categoryLabel.textColor = .white
+                
+                currentCategory = celltoSelect!.tag
+                print("Current category: \(currentCategory)!")
+            }
+            
+        }
     }
 }
 
@@ -233,21 +253,6 @@ extension RecipeCommonStep1ViewController: UITextFieldDelegate {
             return true;
         }
 }
-
-/*extension RecipeCommonStep1ViewController: UIImagePickerControllerDelegate {
-    func imagePickerController(_ picker: UIImagePickerController,
-                                        didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        
-        self.dismiss(animated: true, completion: {
-            () -> Void
-            in
-        })
-
-        imagePreview.image = (info[.originalImage] as! UIImage)
-        currentImage = info[.originalImage] as? UIImage
-    }
-}*/
-
 
 extension RecipeCommonStep1ViewController: PHPickerViewControllerDelegate {
     
@@ -273,7 +278,7 @@ extension RecipeCommonStep1ViewController: PHPickerViewControllerDelegate {
 extension RecipeCommonStep1ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return categories.count
+        return self.categories.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -281,33 +286,9 @@ extension RecipeCommonStep1ViewController: UICollectionViewDelegate, UICollectio
         
         cell.setup(categories[indexPath.row])
         cell.tag = indexPath.row
-        
-        if indexPath.row == currentCategory {
-            cell.categoryLabel.textColor = .white
-            cell.categoryView.backgroundColor = UIColor(named: "ObentoGreen")
-        }
-        
+
+        cell.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tap(_:))))
         return cell
     }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        var i: Int = 1;
-        for indexPath in categoriesCollectionView.indexPathsForVisibleItems {
-            let cell = categoriesCollectionView.cellForItem(at: indexPath)
-            
-            if cell?.tag == indexPath.row {
-                (cell as! CategoryCollectionViewCell).categoryView.backgroundColor = UIColor.init(named: "ObentoGreen")
-                (cell as! CategoryCollectionViewCell).categoryLabel.textColor = .white
-                
-                currentCategory = indexPath.row
-                
-                continue
-            }
-            
-            (cell as! CategoryCollectionViewCell).categoryView.backgroundColor = UIColor.init(named: "SecondaryColor")
-            (cell as! CategoryCollectionViewCell).categoryLabel.textColor = UIColor.init(named: "TextColor")
-            
-            i += 1
-        }
-    }
+
 }

@@ -41,6 +41,19 @@ class MenuCustomStep3ViewController: UIViewController {
     
     @IBAction func nextButtonAction(_ sender: Any) {
         let vc = storyboard?.instantiateViewController(withIdentifier: "MenuCommonStep4ViewController") as! MenuCommonStep4ViewController
+        
+        self.currentMenu.maxTime = Int(maxTimePicker.countDownDuration / 60)
+        if self.currentMenu.maxPrice == nil {
+            self.currentMenu.maxPrice = 1
+        }
+                
+        if lunchPressed && dinnerPressed {
+            self.currentMenu.availableRecipesTime = 0
+        } else if lunchPressed && !dinnerPressed {
+            self.currentMenu.availableRecipesTime = 1
+        } else if !lunchPressed && dinnerPressed {
+            self.currentMenu.availableRecipesTime = 2
+        }
 
         vc.currentMenu = self.currentMenu
         
