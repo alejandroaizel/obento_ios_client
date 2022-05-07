@@ -21,10 +21,6 @@ class RecipeCommonStep2ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        nextButton.alpha = 0.4 // TODO: ELIMINAR ESTO CUANDO PONGAMOS OCR
-        
-        // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -61,7 +57,6 @@ class RecipeCommonStep2ViewController: UIViewController {
         
         imageExplanation.image = UIImage(named: "new_recipe_illustration_2")
         
-        nextButton.alpha = 1 // TODO: ELIMINAR ESTO CUANDO PONGAMOS OCR
     }
     
     @IBAction func backAction(_ sender: Any) {

@@ -33,10 +33,19 @@ class MenuViewController: UIViewController, UIGestureRecognizerDelegate {
     
     @IBOutlet var daysOfWeek: Array<UIView>?
     
-    var selectedDay: DateController.FormattedDate = .init(numberDay: -1, numberMonth: -1, numberYear: -1, nameDay: "", nameMonth: "", nameYear: "")
+    var selectedDay: DateController.FormattedDate = .init(
+        numberDay: -1,
+        numberMonth: -1,
+        numberYear: -1,
+        nameDay: "",
+        nameMonth: "",
+        nameYear: ""
+    )
     var dateController: DateController = DateController()
     var currentWeekNumber: Int = 0
     var currentWeek: [DateController.FormattedDate] = []
+    var currentMenu: [MenuItem] = []
+    var isLunchToogle: Bool = true
     var currentRecipe: Recipe?
     
     override func viewDidLoad() {
@@ -47,14 +56,57 @@ class MenuViewController: UIViewController, UIGestureRecognizerDelegate {
         
         selectedDay = dateController.currentDate()
         
-        // Load recipes
         Task {
-            // TODO: change for selected recipe by day
-            currentRecipe = await ObentoApi.getRecipe(id: 25)
-            
+            currentMenu = await ObentoApi.getMenu(userId: 2)
             loadWeek()
             updateWeek()
+            loadCurrentRecipe()
+            
+            NotificationCenter.default.addObserver(
+                self, selector: #selector(notified(_:)),
+                name: NSNotification.Name(
+                    rawValue: "updateMenu"),
+                object: nil
+            )
         }
+    }
+    
+    @objc func notified(_ notification : Notification)  {
+        Task {
+            currentMenu = await ObentoApi.getMenu(userId: 2)
+            
+            loadCurrentRecipe()
+        }
+    }
+    
+    func loadCurrentRecipe() {
+        if let currentMenuItem: MenuItem = MenuItem.getItem(
+            menuItems: self.currentMenu,
+            date: DateController.getDate(date: self.selectedDay),
+            isLunch: isLunchToogle
+        ) {
+            self.currentRecipe = currentMenuItem.recipe
+            loadCurrentRecipePreview()
+        } else {
+            self.currentRecipe = nil
+            loadDefaultRecipe()
+        }
+    }
+    
+    func loadCurrentRecipePreview(){
+        // Fill recipe data
+        recieTitle.text = self.currentRecipe!.name
+        recipeImage.image = UIImage(data: self.currentRecipe!.image)
+        recipePuntuation.text = "\(self.currentRecipe!.starts)"
+        recipeDescription.text = self.currentRecipe!.description
+    }
+    
+    func loadDefaultRecipe() {
+        // Fill recipe data
+        recieTitle.text = "Sin receta"
+        recipeImage.image = UIImage(named: "default_recipe_image")
+        recipePuntuation.text = "--"
+        recipeDescription.text = "¡Vaya! Todavía no has creado un menú para este día. Crear un nuevo menú es muy sencillo ¡Tan solo tienes que pulsar sobre el botón '+' y nosotros haremos el resto!"
     }
     
     func loadWeek() {
@@ -92,23 +144,21 @@ class MenuViewController: UIViewController, UIGestureRecognizerDelegate {
         
         selectedDay = currentWeek[viewTag]
         updateWeek()
-        
-        // TODO: Cambiar selectedRecipe
+        loadCurrentRecipe()
     }
     
     func updateWeek() {
         currentWeek = dateController.getWeek(for: currentWeekNumber)
         
         let month = dateController.winnerMonth(from: currentWeek)
-        
         let year = currentWeek[0].nameMonth == month ? currentWeek[0].numberYear : currentWeek[currentWeek.count - 1].numberYear
         
         date.text = month.capitalizingFirstLetter() + ", " + String(year)
         
-        recieTitle.text = currentRecipe?.name ?? "Null"
-        recipeImage.image = UIImage(named: "recipe_1")
-        recipePuntuation.text = String(5) // TODO: score
-        recipeDescription.text = currentRecipe?.description ?? "Null"
+//        recieTitle.text = currentRecipe?.name ?? "Null"
+//        recipeImage.image = UIImage(named: "recipe_1")
+//        recipePuntuation.text = String(5) // TODO: score
+//        recipeDescription.text = currentRecipe?.description ?? "Null"
         
         for i in 0..<7 {
             (daysOfWeek![i].subviews[0] as! UILabel).text = String(currentWeek[i].numberDay)
@@ -136,11 +186,11 @@ class MenuViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     @objc func clickView(_ sender: UIView) {
-        let controller = (storyboard?.instantiateViewController(withIdentifier: "RecipeViewController")) as! RecipeViewController
-        
-        controller.recipeInformation = currentRecipe
-        
-        present(controller, animated: true, completion: nil)
+        if self.currentRecipe != nil {
+            let controller = (storyboard?.instantiateViewController(withIdentifier: "RecipeViewController")) as! RecipeViewController
+            controller.recipeInformation = currentRecipe
+            present(controller, animated: true, completion: nil)
+        }
     }
     
     @IBAction func lunchToggleAction(_ sender: Any) {
@@ -152,7 +202,8 @@ class MenuViewController: UIViewController, UIGestureRecognizerDelegate {
         lunchToggleButton.tintColor = .white
         lunchToggleButton.setImage(UIImage(systemName: "sun.max.fill"), for: .normal)
         
-        // TODO: Cambiar selectedRecipe
+        isLunchToogle = true
+        loadCurrentRecipe()
     }
     
     @IBAction func dinnerToggleAction(_ sender: Any) {
@@ -164,9 +215,10 @@ class MenuViewController: UIViewController, UIGestureRecognizerDelegate {
         dinnerToggleButton.tintColor = .white
         dinnerToggleButton.setImage(UIImage(systemName: "moon.fill"), for: .normal)
         
-        // TODO: Cambiar selectedRecipe
+        isLunchToogle = false
+        loadCurrentRecipe()
     }
-    
+
     @IBAction func previousWeekAction(_ sender: Any) {
         currentWeekNumber -= 1
         updateWeek()
@@ -182,15 +234,49 @@ class MenuViewController: UIViewController, UIGestureRecognizerDelegate {
     
     func addMenuItems() -> UIMenu {
         let menuItems = UIMenu(title: "", options: .displayInline, children: [
-            UIAction(title: "Nuevo menú simple", image: UIImage(systemName: "menubar.rectangle"), handler: { _ in
+            UIAction(title: "Menú sencillo", image: UIImage(systemName: "menubar.rectangle"), handler: { _ in
                 let vc = self.storyboard?.instantiateViewController(withIdentifier: "MenuNavigationController") as! MenuNavigationController
                 MenuNavigationController.optionSelected = 0
                 self.present(vc, animated: true, completion: nil)
             }),
-            UIAction(title: "Nuevo menú personalizado", image: UIImage(systemName: "filemenu.and.selection"), handler: { _ in
+            UIAction(title: "Menú personalizado", image: UIImage(systemName: "filemenu.and.selection"), handler: { _ in
                 let vc = self.storyboard?.instantiateViewController(withIdentifier: "MenuNavigationController") as! MenuNavigationController
                 MenuNavigationController.optionSelected = 1
                 self.present(vc, animated: true, completion: nil)
+            }),
+            UIAction(title: "Exportar menú", image: UIImage(systemName: "square.and.arrow.up"), handler: { _ in
+                Task {
+                    //let weeklyMenu = WeeklyMenu(userId: 2, items: self.currentMenu)
+                    //let result = await ObentoApi.exportMenu(menu: weeklyMenu)
+                    // Notification
+                    let center = UNUserNotificationCenter.current()
+                    let content = UNMutableNotificationContent()
+                    content.title = "Menú exportado correctamente"
+                    content.body = "¡Vaya planes! Ya puedes encontrar tu menú en tu carpeta de Descargas"
+                    content.sound = .default
+                    content.userInfo = ["value": "Data with local notification"]
+                    let fireDate = Calendar.current.dateComponents(
+                        [.day, .month, .year, .hour, .minute, .second],
+                        from: Date().addingTimeInterval(1)
+                    )
+                    let trigger = UNCalendarNotificationTrigger(
+                        dateMatching: fireDate,
+                        repeats: false
+                    )
+                    let request = UNNotificationRequest(
+                        identifier: "reminder",
+                        content: content,
+                        trigger: trigger
+                    )
+                    center.add(request) { (error) in
+                        if error != nil {
+                            print("Error = \(error?.localizedDescription ?? "error local notification")")
+                        }
+                    }
+                }
+                
+                
+                
             })
         ])
         

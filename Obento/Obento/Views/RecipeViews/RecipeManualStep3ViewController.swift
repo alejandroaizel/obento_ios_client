@@ -97,24 +97,21 @@ class RecipeManualStep3ViewController: UIViewController {
             return
         }
     
-        let auxIngredients: [Ingredient] = []
+        var auxIngredients: [Ingredient] = []
         
-        let i: Int = 0
+        var i: Int = 0
         for rowPath in selectedIngredientsTableView.indexPathsForVisibleRows! {
             let cell = selectedIngredientsTableView.cellForRow(at: rowPath)
-            let _: Ingredient = currentIngredients[i]
+            var currentIngredient: Ingredient = currentIngredients[i]
 
             let ingredientQuantity: Int = Int((cell as! NewIngredientTableViewCellTableViewCell).ingredientInput.text ?? "-1") ?? -1
             
             if ingredientQuantity == -1 {
                 continue
             }
-            
-            /*
-             auxIngredients.append(.init(id: currentIngredient.id, name: currentIngredient.name, category: currentIngredient.category, unitaryPrice: currentIngredient.unitaryPrice, unit: currentIngredient.unit, kcal: currentIngredient.kcal, iconPath: currentIngredient.iconPath, quantity: ingredientQuantity))
-            
-            i += 1
-            */ //TODO: Use new Ingredient object
+            currentIngredient.quantity = Float(ingredientQuantity)
+            auxIngredients.append(currentIngredient)
+            i = i + 1
         }
         
         currentRecipe.ingredients = auxIngredients

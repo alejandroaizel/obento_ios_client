@@ -23,7 +23,7 @@ class RecipeCommonStep5ViewController: UIViewController {
         finalImage.image = UIImage(named: "new_recipe_final_illustration_" + String(Int.random(in: 1...4)))
 
         Task {
-            self.recipe_id: Int = await ObentoApi.postRecipe(recipe: currentRecipe)
+            self.recipe_id = await ObentoApi.postRecipe(recipe: self.currentRecipe)
         }
     }
     
@@ -37,7 +37,7 @@ class RecipeCommonStep5ViewController: UIViewController {
         }
         
         currentRecipe.kcalories = totalKcal.rounded()
-        currentRecipe.estimatedCost = totalPrice
+        currentRecipe.estimatedCost = round(totalPrice * 100) / 100.0
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -50,7 +50,12 @@ class RecipeCommonStep5ViewController: UIViewController {
     }
     
     @IBAction func bottonCloseButtonAction(_ sender: Any) {
-        
-        self.dismiss(animated: true, completion: nil)
+        let controller = (
+            storyboard?.instantiateViewController(
+                withIdentifier: "RecipeViewController")
+        ) as! RecipeViewController
+
+        controller.recipeInformation = self.currentRecipe
+        present(controller, animated: true, completion: nil)
     }
 }

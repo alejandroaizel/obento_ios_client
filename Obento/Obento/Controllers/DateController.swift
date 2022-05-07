@@ -25,6 +25,10 @@ class DateController {
         func toString() -> String {
             return "\(numberDay)-\(numberMonth)-\(nameYear.suffix(2))"
         }
+        
+        func toFormatString() -> String {
+            return "\(nameYear)-\(numberMonth)-\(numberDay)T00:00:00Z"
+        }
     }
     
     init() {
@@ -111,5 +115,9 @@ class DateController {
     
     public func currentDay() -> CustomDay {
         return formatDay(currentDate())
+    }
+    
+    public static func getDate(date: FormattedDate) -> Date {
+        return MenuItem.formatDate(date: date.toFormatString())
     }
 }

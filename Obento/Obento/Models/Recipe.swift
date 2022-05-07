@@ -123,12 +123,12 @@ struct Recipe: Codable {
     
     static func popularRecipes() async -> [Recipe] {
         var popularRecipes:[Recipe] = []
-        await popularRecipes.append(ObentoApi.getRecipe(id: 75)!)
-        await popularRecipes.append(ObentoApi.getRecipe(id: 40)!)
-        await popularRecipes.append(ObentoApi.getRecipe(id: 63)!)
-        await popularRecipes.append(ObentoApi.getRecipe(id: 93)!)
-        await popularRecipes.append(ObentoApi.getRecipe(id: 42)!)
-        await popularRecipes.append(ObentoApi.getRecipe(id: 110)!)
+        await popularRecipes.append(ObentoApi.getRecipe(id: 22)!)
+        await popularRecipes.append(ObentoApi.getRecipe(id: 44)!)
+        await popularRecipes.append(ObentoApi.getRecipe(id: 78)!)
+        await popularRecipes.append(ObentoApi.getRecipe(id: 55)!)
+        await popularRecipes.append(ObentoApi.getRecipe(id: 66)!)
+        await popularRecipes.append(ObentoApi.getRecipe(id: 89)!)
 
         return popularRecipes
     }

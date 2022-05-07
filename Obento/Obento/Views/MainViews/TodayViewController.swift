@@ -41,7 +41,7 @@ class TodayViewController: UIViewController, UIGestureRecognizerDelegate {
         
         // Featured recipe
         Task {
-            self.featuredRecipe = await ObentoApi.getRecipe(id: 50)
+            self.featuredRecipe = await ObentoApi.getRecipe(id: 62)
             if (featuredRecipe != nil) {
                 loadFeatureRecipe()
                 // Add listener
@@ -79,7 +79,7 @@ class TodayViewController: UIViewController, UIGestureRecognizerDelegate {
             featuredRecipeImage.image = UIImage(named: "default_recipe_image")!
         }
         featuredRecipeTitle.text = featuredRecipe?.name ?? "Receta destacada"
-        featuredRecipekcal.text = "\(featuredRecipe?.kcalories ?? 0) kcal"
+        featuredRecipekcal.text = "\(featuredRecipe?.kcalories.rounded().clean ?? "0") kcal"
         featuredRecipeTime.text = "\(featuredRecipe?.cookingTime ?? 0) min"
         featuredRecipePrice.text = "\(featuredRecipe?.estimatedCost ?? 0) €"
     }

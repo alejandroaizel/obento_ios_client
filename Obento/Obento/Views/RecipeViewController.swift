@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import UserNotifications
 
 class RecipeViewController: UIViewController {
     // Buttons
@@ -57,20 +58,17 @@ class RecipeViewController: UIViewController {
     }
     
     func loadRecipeInformation() {
-        recipeStars = recipeInformation?.starts ?? 3
+        recipeStars = recipeInformation?.starts ?? 0
         recipeImage.image = UIImage(data: recipeInformation!.image)
         recipeName.text = recipeInformation?.name ?? ""
         recipeType.text = recipeInformation?.category ?? ""
         recipePuntuation.text = "\(recipeStars)"
         recipeDescription.text = recipeInformation?.description ?? ""
-        recipeKcal.text = String(recipeInformation?.kcalories ?? 0) + " kcal"
+        recipeKcal.text = "\(recipeInformation?.kcalories.rounded().clean ?? "0") kcal"
         recipeTime.text = String(recipeInformation?.cookingTime ?? 0) + " min"
         recipePrice.text = String(recipeInformation?.estimatedCost ?? 0) + " €"
         colorStars(numStars: recipeStars)
         let currentRecipesAdded = UserDefaults.standard.object(forKey: "addedToCart") as? [Int] ?? []
-        if currentRecipesAdded.contains(recipeInformation?.id ?? 0) {
-            addCartButton.setImage(UIImage(systemName: "cart.fill.badge.plus"), for: .normal)
-        }
     }
     
     // Buton functions
@@ -100,21 +98,14 @@ class RecipeViewController: UIViewController {
     
     @IBAction func addCartAction(_ sender: Any) {
         Task {
-            for ingredient in recipeInformation!.ingredients {
-                await ObentoApi.updateShoppingListByUser(
-                    userId: 0,
-                    ingredientId: ingredient.id,
-                    quantity: Double(ingredient.quantity!)
-                )
-            }
+            await ObentoApi.updateShoppingListByRecipe(
+                userId: 1,
+                recipeId: recipeInformation!.id
+            )
+
             NotificationCenter.default.post(
                 name: NSNotification.Name(rawValue: "updateCartTableView"),
-                object: recipeInformation?.ingredients
-            )
-            
-            addCartButton.setImage(
-                UIImage(systemName: "cart.fill.badge.plus"),
-                for: .normal
+                object: recipeInformation!.ingredients
             )
             
             var currentRecipesAdded = UserDefaults.standard.object(
@@ -128,6 +119,50 @@ class RecipeViewController: UIViewController {
                     currentRecipesAdded, forKey: "addedToCart"
                 )
             }
+            addCartButton.setImage(UIImage(systemName: "cart.fill.badge.plus"), for: .normal)
+            
+            // Notification
+            let center = UNUserNotificationCenter.current()
+            let content = UNMutableNotificationContent()
+            content.title = "Lista de la compra actualizada"
+            content.body = "¡Se vienen cosas buenas! Se ha actualizado la lista de la compra"
+            content.sound = .default
+            content.userInfo = ["value": "Data with local notification"]
+            let fireDate = Calendar.current.dateComponents(
+                [.day, .month, .year, .hour, .minute, .second],
+                from: Date().addingTimeInterval(1)
+            )
+            let trigger = UNCalendarNotificationTrigger(
+                dateMatching: fireDate,
+                repeats: false
+            )
+            let request = UNNotificationRequest(
+                identifier: "reminder",
+                content: content,
+                trigger: trigger
+            )
+            center.add(request) { (error) in
+                if error != nil {
+                    print("Error = \(error?.localizedDescription ?? "error local notification")")
+                }
+            }
+            
+//            // Create new notifcation content instance
+//            let notificationContent = UNMutableNotificationContent()
+//
+//            // Add the content to the notification content
+//            notificationContent.title = "Lista de la compra actualizada"
+//            notificationContent.body = "¡Se vienen cosas buenas! Se ha actualizado la lista de la compra"
+//            notificationContent.sound = UNNotificationSound.default
+//
+//            // show this notification five seconds from now
+//            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
+//
+//            // choose a random identifier
+//            let request = UNNotificationRequest(identifier: UUID().uuidString, content: notificationContent, trigger: trigger)
+//
+//            // add our notification request
+//            try await UNUserNotificationCenter.current().add(request)
         }
     }
     

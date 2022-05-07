@@ -49,7 +49,11 @@ struct Ingredient: Codable {
             id = try values.decode(Int.self, forKey: .id)
         }
         name = try values.decode(String.self, forKey: .name)
-        category = try values.decode(String.self, forKey: .category)
+        do {
+            category = try values.decode(String.self, forKey: .category)
+        } catch {
+            category = ""
+        }
         unit = try values.decode(String.self, forKey: .unit)
         unitaryPrice = try values.decode(Float.self, forKey: .unitaryPrice)
         kcalories = try values.decode(Float.self, forKey: .kcalories)

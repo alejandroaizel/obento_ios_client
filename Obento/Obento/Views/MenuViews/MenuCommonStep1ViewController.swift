@@ -112,6 +112,8 @@ class MenuCommonStep1ViewController: UIViewController {
         let firstFormatedDay = dateController.formatDay(firstDate.date)
         let secondFormatedDay = dateController.formatDay(secondDate.date)
         
+        //currentMenu = Menu(user: 2, date: "07-05-22|08-05-22", discarded_ingredients: [])
+        
         currentMenu = .init(numDays: currentNumDays, startDay: firstFormatedDay, endDay: secondFormatedDay, recipes: [])
     }
     
@@ -132,9 +134,9 @@ class MenuCommonStep1ViewController: UIViewController {
             self.navigationController?.pushViewController (vc, animated: true)
         } else {
             let vc = storyboard?.instantiateViewController(withIdentifier: "MenuCustomStep2ViewController") as! MenuCustomStep2ViewController
-            
+
             storeMenu()
-            
+
             vc.currentMenu = self.currentMenu
             
             self.navigationController?.pushViewController (vc, animated: true)
